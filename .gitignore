@@ -1,0 +1,9 @@
+# Local data directory (contains massive raw trading data/CSV files)
+data/
+/data
+
+# Environment secrets (contains API keys, database credentials)
+.env
+
+# Python virtual environment (contains local packages, thousands of files)
+.venv/
