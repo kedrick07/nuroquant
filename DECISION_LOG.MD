@@ -55,3 +55,5 @@
 2026-10-13 | Warm-up data: 2018-07 prices (separate file ohlcv_warmup.csv) and untrimmed 2017+ macro are used only to compute rolling features, never for labels or evaluation. News stays 2019–2023 (no 2018 news exists in FNSPID/NYT pulls). Phase 1 QA window check on ohlcv_daily.csv unchanged.
 
 2026-10-13 | First ~60 trading days of 2019 dropped from ALL tiers (F0/F1/F2) because trailing-60-day sentiment features are not fully formed there; this keeps paired F1-vs-F0 tests on identical dates. Implemented as a single FIRST_MODEL_DATE (61st trading day of 2019), not a hard-coded calendar date.
+
+2026-10-14 | Warm-up data fetched and verified (ohlcv_warmup.csv: 30 tickers × 126 days; fred_daily_full.csv: 2018-07-01 → 2023-12-31, 0 NaN); boundary join checked (max |move| 3.91%); Phase 1 QA re-run 31/31; Phase 1 closed.
