@@ -7,3 +7,12 @@ data/
 
 # Python virtual environment (contains local packages, thousands of files)
 .venv/
+
+mlruns/
+mlflow.db
+__pycache__/
+*.pyc
+.ipynb checkpoints
+*.pt
+*.pth
+wandb/

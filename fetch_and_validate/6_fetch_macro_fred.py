@@ -90,6 +90,8 @@ def main():
 
     panel = build_panel(raw)
     panel.to_csv(OUT_DIR / "fred_daily.csv", index=False)
+    full = build_panel(raw, start="2018-07-01")
+    full.to_csv(OUT_DIR / "fred_daily_full.csv", index=False)
     n_nan = int(panel.drop(columns=["date"]).isna().sum().sum())
     print(f"\nWrote {OUT_DIR / 'fred_daily.csv'} ({len(panel)} days x {panel.shape[1]-1} indicators)")
     print(f"Remaining NaN cells: {n_nan}")
