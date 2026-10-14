@@ -6,7 +6,7 @@
 
 This document is the single source of truth for project scope. When a decision changes, update it here first — everything else (code, thesis chapters, Gantt chart) should follow this file, not the other way around.
 
-**Status (2026-10-13): Phase 1 complete (QA 31/31). Evaluation design frozen (see 2.6 and Decision Log). Next: Phase 2 (feature engineering).**
+**Status (2026-10-14): Phase 1 complete and closed (QA 31/31; warm-up data added and checked). Evaluation design frozen (see 2.6 and Decision Log). Next: Phase 2 (feature engineering).**
 
 ---
 
@@ -148,10 +148,10 @@ Composition: ~10 tech hardware/software, 3 communication services (GOOG, META, C
 - BAA10Y chosen over ICE BofA high-yield spread (BAMLH0A0HYM2), whose FRED history is a rolling ~3-year window.
 - Release lags are conservative approximations, not exact BLS dates. Values are as-currently-published (later revisions not reconstructed).
 
-#### 2.3.3 Warm-up Data (planned)
+#### 2.3.3 Warm-up Data (done)
 - **Why:** rolling features (60-day beta, SMA50, 60-day return, 20-day macro changes) need history before the first label date. Warm-up data is used only to compute features; it never creates labels or evaluation rows.
-- **Prices:** re-fetch from 2018-07 into a **separate file** (e.g. `data/prices/ohlcv_warmup.csv`) so the Phase 1 QA window check (2019-01-01..2023-12-31) on `ohlcv_daily.csv` stays valid.
-- **Macro:** keep an untrimmed copy from 2017 for the 20-day changes and the curve slope.
+- **Prices:** `data/prices/ohlcv_warmup.csv` (3,780 rows = 30 tickers × 126 trading days, 2018-07-02 → 2018-12-31), fetched with script 7 (`--start 2018-07-01 --end 2019-01-01`). Kept as a **separate file** so the Phase 1 QA window check (2019-01-01..2023-12-31) on `ohlcv_daily.csv` stays valid. Checked: no NaNs, duplicates, high<low or close<=0; no daily move >25%; boundary join (2018-12-31 → 2019-01-02) across all 30 tickers ranges -3.91% to +3.50%, none >10%.
+- **Macro:** `data/macro/fred_daily_full.csv` (2018-07-01 → 2023-12-31, 2,010 consecutive days, 9 indicators, 0 NaN; `cpi_yoy` is filled from the first row). Written by script 6 alongside the trimmed `fred_daily.csv`; the two files are identical on the overlapping 1,826 days.
 - **News:** FNSPID/NYT are pulled for 2019–2023 only; there is no 2018 news. Sentiment features that use a trailing 60-day window (z-score, abnormal count) are not fully formed in early 2019. **Decision (2026-10-13):** the first ~60 trading days of 2019 are dropped from all tiers (F0/F1/F2), using a single `FIRST_MODEL_DATE` (the 61st trading day of 2019). This keeps paired F1 vs F0 comparisons on identical dates.
 
 ### 2.4 Feature Set
@@ -223,7 +223,7 @@ No explicit sector cap — the market-cap ranking + coverage gate decide the fin
 
 | Phase | Focus | Status |
 |---|---|---|
-| 1 | Data collection & preprocessing | **Complete** (2026-10-07), QA 31/31 |
+| 1 | Data collection & preprocessing | **Complete** (2026-10-07; warm-up data added 2026-10-14), QA 31/31 |
 | 2 | Feature engineering (technical, FinBERT sentiment, macro) | **Next** |
 | 3 | Model development (ablation matrix, MLflow tracking) | Planned |
 | 4 | Evaluation (CPCV, IC, significance, SHAP) | Planned |
@@ -241,9 +241,8 @@ No explicit sector cap — the market-cap ranking + coverage gate decide the fin
 - [ ] Power simulation to confirm the minimum detectable IC difference
 - [ ] Set the end-of-Phase-3 deadline date for the LSTM fallback rule
 - [ ] Confirm Ken French factor data covers 2019-2023 and aligns to the trading calendar
-- [ ] Re-fetch prices from 2018-07 for rolling-window warm-up (separate file, see 2.3.3) and keep untrimmed macro
 
-Resolved: final 30 tickers; benchmark; target construction; CPCV configuration; NVDA robustness design; tracker; dashboard scope; first-60-day handling (dropped from all tiers).
+Resolved: final 30 tickers; benchmark; target construction; CPCV configuration; NVDA robustness design; tracker; dashboard scope; first-60-day handling (dropped from all tiers); 2018-07 warm-up prices and untrimmed macro (done, see 2.3.3).
 
 ---
 
@@ -258,7 +257,9 @@ Resolved: final 30 tickers; benchmark; target construction; CPCV configuration; 
 | `data/news/` | `news_clean_final30.csv`, `news_aligned_final30.csv`, **`news_final30.csv` / `.parquet` (final, 141,667 rows, unique `news_id`)**, `news_daily_coverage.csv`, `news_coverage_report.csv`, `cleaning_report.csv` |
 | `data/universe/` | `candidates.csv` (458 ranked survivors), `screening_report.csv`, `rescreen_report.csv`, `final_30_tickers.csv` (superseded), **`final_30_tickers_v2.csv` (final)** |
 | `data/prices/ohlcv_daily.csv` | 37,740 rows (30 tickers × 1,258 days) |
-| `data/macro/fred_daily.csv` | 1,826 days × 9 indicators |
+| `data/prices/ohlcv_warmup.csv` | 3,780 rows (30 tickers × 126 days, 2018-07-02 → 2018-12-31); feature warm-up only |
+| `data/macro/fred_daily.csv` | 1,826 days × 9 indicators (2019-2023, used by QA) |
+| `data/macro/fred_daily_full.csv` | 2,010 days × 9 indicators (2018-07-01 → 2023-12-31); feature warm-up only |
 
 **Final news table schema:** `news_id, feature_date, ticker, source, text_type, text, published_utc, outlet, url, match_tier, assignment_rule`.
 
@@ -267,8 +268,8 @@ Resolved: final 30 tickers; benchmark; target construction; CPCV configuration; 
 |---|---|
 | 1, 2, 3 | FNSPID coverage analysis; NYT Archive fetch; NYT availability check |
 | 4, 5 | Original NYT matching and coverage gate (**superseded**: substring matching inflated counts) |
-| 6 | FRED macro fetch (v4: CPI YoY + release lags) |
-| 7 | OHLCV fetch (takes `--tickers`, `--start`, `--end`, `--out`) |
+| 6 | FRED macro fetch (v4: CPI YoY + release lags); writes `fred_daily.csv` (2019-2023) and `fred_daily_full.csv` (from 2018-07-01) |
+| 7 | OHLCV fetch (takes `--tickers`, `--start`, `--end`, `--out`; also used for the 2018-07 warm-up file) |
 | 8 | FNSPID text-field fill-rate check |
 | 9 | FNSPID extraction for final tickers |
 | 10 | NYT extraction (curated patterns, tiered matching) |
@@ -327,3 +328,4 @@ The long-form log with reasoning lives in `DECISION_LOG.MD`. Summary:
 | 2026-10-13 | Limitations documented (2.1.3); claims scoped to this universe and period |
 | 2026-10-13 | Warm-up data: 2018-07 prices (separate file) and untrimmed 2017+ macro used only for rolling-feature warm-up; news stays 2019–2023 |
 | 2026-10-13 | First ~60 trading days of 2019 dropped from ALL tiers (F0/F1/F2) via a single FIRST_MODEL_DATE (61st trading day of 2019), so paired F1-vs-F0 tests use identical dates |
+| 2026-10-14 | Warm-up data fetched and verified (`ohlcv_warmup.csv`, `fred_daily_full.csv`); Phase 1 QA re-run 31/31; Phase 1 closed |
