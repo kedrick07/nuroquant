@@ -57,3 +57,21 @@
 2026-10-13 | First ~60 trading days of 2019 dropped from ALL tiers (F0/F1/F2) because trailing-60-day sentiment features are not fully formed there; this keeps paired F1-vs-F0 tests on identical dates. Implemented as a single FIRST_MODEL_DATE (61st trading day of 2019), not a hard-coded calendar date.
 
 2026-10-14 | Warm-up data fetched and verified (ohlcv_warmup.csv: 30 tickers × 126 days; fred_daily_full.csv: 2018-07-01 → 2023-12-31, 0 NaN); boundary join checked (max |move| 3.91%); Phase 1 QA re-run 31/31; Phase 1 closed.
+
+2026-10-15 | Phase 2 F0: 12 technical features built (returns 1/5/10/20/60, SMA20/50 ratios, MACD/close, RSI14, vol20, log volume ratio, beta60 vs equal-weight), rank-normalized per date. Correlation prune rule (>0.95) not triggered; max pairwise |corr| 0.945 (sma50_ratio vs macd_norm); all 12 kept. Adjusted close confirmed (AAPL 37.44 on 2019-01-02).
+
+2026-10-15 | FinBERT run once: ProsusAI/finbert revision 0bc2ac10dda6929bcb1f77ccc43c7ec5c424f031, fp16, max_length 160, 141,667 texts, 0 truncated. fp16 vs fp32 check on 500 texts: max score diff 0.0058, argmax agreement 100%. Observation: NYT scores are more negative than FNSPID (mean -0.33 vs +0.06; 50.4% vs 14.9% classed negative). META is 63% NYT, so source mix is a confound; handled by the per-ticker z-score and the existing META-excluded robustness run. No design change.
+
+2026-10-15 | Sentiment build details (within the frozen design): z-score over trailing 60 trading days using news days only, min 5 observations, std floor 0.10 (undefined -> 0; 6 rows from FIRST_MODEL_DATE onward). abn_count = z of log1p(n) over 60 days, min 20 days, std floor 0.10. sent_ewm5 = ewm halflife 3 on z (no-news = 0); sent_mom = ewm span 3 minus span 20; days_since_news capped at 10. Ranking: sent_mean ranked only among stocks with news that date, no-news stocks = 0 (centre); the other four ranked across all 30 with average ties; has_news unchanged.
+
+2026-10-15 | LSTM input window: features computed from 2019-03-04 (FIRST_LSTM_INPUT_DATE, 19 trading days before FIRST_MODEL_DATE 2019-03-29) as LSTM inputs only; those rows have model_row = False. FIRST_MODEL_DATE unchanged.
+
+2026-10-15 | Macro (F2) stored raw as 10 stationary signals: 5d change in VIX and 10Y, curve slope and its 5d change, 20d change in BAA10Y, 20d USD return, 21-trading-day changes in CPI YoY, UNRATE, FEDFUNDS. WTI uses the 20d DOLLAR change, not a percent return (price was negative on 2020-04-20), replacing the earlier "20-day return of WTI". Phase 3 transformer z-scores on training folds only, clips |z| at 5, then builds the 8 pre-specified interactions {dVIX5, d10Y5, dBAA20, WTI chg20} x rank-normalized {beta60, vol20}. Known outliers: WTI chg -56.5 (2020-04-20), UNRATE chg +10.4 (Apr 2020).
+
+2026-10-15 | Targets built from the main price file only (warm-up never used): target_ret5 (close t -> t+5), target_rank = (rank - 0.5)/30 - 0.5, target_ret5_xs = demeaned return / (vol20 x sqrt(5)). Last 5 trading days dropped. Panel: 35,790 model rows, 1,193 dates, 2019-03-29 to 2023-12-21.
+
+2026-10-15 | Target tails inspected: extremes are real events (QCOM Apr 2019 Apple settlement, +51.7% 5d; META Feb/Oct 2022; NEE Sep 2023 -22.7%). No data change. target_ret5_xs range -12.3 to +18.9, so it is clipped at +/-5 for the XGBoost robustness run only (Phase 3). Primary target_rank unaffected.
+
+2026-10-15 | Sample-size correction: 1,193 model dates = about 239 non-overlapping weekly cross-sections (docs said ~245). Power simulation (239 weeks, block bootstrap L=4, 500 resamples, 300 sims, seed 7; results/power_simulation.csv): 80% power needs a true IC gain of about 0.015-0.032 depending on F0/F1 IC correlation (0.7-0.9) and alpha (0.05-0.01). A null H1 is plausible and will be reported as a finding. Design unchanged.
+
+2026-10-15 | Phase 2 QA gate (07_phase2_qa.py): 23/24 passing; remaining check is the 200-headline FinBERT validation (labels pending).

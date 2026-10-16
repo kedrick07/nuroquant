@@ -1,0 +1,9 @@
+{
+  "model": "ProsusAI/finbert",
+  "revision": "0bc2ac10dda6929bcb1f77ccc43c7ec5c424f031",
+  "max_length": 160,
+  "n_scored": 141667,
+  "seconds": 28,
+  "torch": "2.14.1+cu130",
+  "transformers": "5.19.0"
+}

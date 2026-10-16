@@ -1,0 +1,50 @@
+{
+  "macro_feats": [
+    "d_vix_5",
+    "d_dgs10_5",
+    "slope",
+    "d_slope_5",
+    "d_baa10y_20",
+    "wti_chg_20",
+    "usd_ret_20",
+    "d_cpi_21",
+    "d_unrate_21",
+    "d_fedfunds_21"
+  ],
+  "interactions": [
+    [
+      "d_vix_5",
+      "beta60"
+    ],
+    [
+      "d_vix_5",
+      "vol20"
+    ],
+    [
+      "d_dgs10_5",
+      "beta60"
+    ],
+    [
+      "d_dgs10_5",
+      "vol20"
+    ],
+    [
+      "d_baa10y_20",
+      "beta60"
+    ],
+    [
+      "d_baa10y_20",
+      "vol20"
+    ],
+    [
+      "wti_chg_20",
+      "beta60"
+    ],
+    [
+      "wti_chg_20",
+      "vol20"
+    ]
+  ],
+  "stock_side": "rank-normalized beta60, vol20 from f0_ranked",
+  "scaling": "fit z-score on training fold only; clip |z| at 5; build products after scaling"
+}
