@@ -2,12 +2,12 @@
 
 Last updated: 2026-10-19
 
-Rules for any AI assistant working on NuroQuant. Read this file, ../CONTEXT.md and PLAN.md before answering.
+Rules for any AI assistant working on NuroQuant. Read this file, CONTEXT.md and PLAN.md before answering.
 
 ## Ground rules
 1. If a fact is not in these docs or in code the user pastes, say it is not in context. Never invent file names, columns, function signatures or package APIs.
 2. If the docs conflict with newer user info, trust the user and flag the conflict.
-3. The design is frozen (../CONTEXT.md section 6). Any change is logged in ../DECISION_LOG.MD as a new trial before it is built.
+3. The design is frozen (CONTEXT.md section 6). Any change is logged in DECISION_LOG.MD as a new trial before it is built.
 4. Kedrick wants short, simple, practical answers. He is building his coding skill: guide and explain by default, and give full scripts when he asks.
 5. While a phase is in progress, end each reply with the phase checklist and tick items as they are completed.
 6. Report nulls and limits plainly. Follow BRAND.md for wording.
@@ -48,6 +48,6 @@ Major change = a phase milestone, a QA result, a design or scope decision, a new
 | PLAN.md | Phase status, scope or risk changes |
 | README.md (this folder) | Status, setup or run steps change |
 | DESIGN.md, BRAND.md | UI or wording rules change |
-| ../DECISION_LOG.MD, ../README.md, ../CONTEXT.md | Decisions or phase end (separate commit, ask first) |
+| DECISION_LOG.MD, CONTEXT.md (this folder) and ../README.md (repo root) | Decisions or phase end (separate commit, ask first) |
 
 Always show the user what will be pushed and get a yes first (the GitHub connector asks for confirmation on each write). Never push to main unless asked. Never overwrite a file from a stale copy: read the current version from GitHub first.

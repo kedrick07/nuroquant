@@ -39,7 +39,7 @@ Among 30 well-covered, 2019-era large-cap survivors over 2019-2023, does FinBERT
 | 7 | Cloud deployment | Cut |
 
 ## Frozen design
-Hypotheses, features, targets, CPCV (N=8, k=2), significance, costs and backtest are frozen. See ../README.md section 2 and ../CONTEXT.md section 6. Any change is logged in ../DECISION_LOG.MD as a new trial first.
+Hypotheses, features, targets, CPCV (N=8, k=2), significance, costs and backtest are frozen. See ../README.md section 2 and CONTEXT.md section 6. Any change is logged in DECISION_LOG.MD as a new trial first.
 
 ## Phase 2 is done when
 - 07_phase2_qa.py passes 24/24 (needs labels; FinBERT macro F1 >= ~0.65 or a second scorer queued).

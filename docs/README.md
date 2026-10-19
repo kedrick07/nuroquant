@@ -25,8 +25,8 @@ The system turns 5-day forward return predictions into a weekly cross-sectional 
 | DESIGN.md | Dashboard design system (Phase 6) |
 | BRAND.md | Audience, voice and wording rules |
 | SESSIONS.md | Running log of sessions and active state |
-| ../DECISION_LOG.MD | Every design decision, dated |
-| ../CONTEXT.md | Ground-truth summary for AI assistants |
+| DECISION_LOG.MD | Every design decision, dated |
+| CONTEXT.md | Ground-truth summary for AI assistants |
 
 ## Tech stack
 Python 3.12, PyTorch, Hugging Face Transformers (FinBERT), XGBoost, scikit-learn, pandas, MLflow (SQLite, local). Planned for Phase 6: PostgreSQL, FastAPI, React (local, read-only).
