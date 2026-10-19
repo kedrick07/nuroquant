@@ -8,7 +8,7 @@
 > 4. Do not change the frozen design (Section 6). Any change = new logged trial.
 > 5. Style: user (Kedrick) wants short, simple, practical answers; he writes code himself, so guide and explain rather than dump full solutions unless asked.
 
-Last synced: 2026-10-14 (Phase 1 closed, Phase 2 next). Sources: README.md (+ merged update patch), PHASE_1_PROGRESS_REPORT.md, PROGRESS_REPORT_TEMPLATE.md.
+Last synced: 2026-10-19. Sources: docs/SESSIONS.md and docs/DECISION_LOG.MD.
 Update this file at the end of every phase.
 
 ---
@@ -21,17 +21,15 @@ Update this file at the end of every phase.
 - Claim scope: among 30 well-covered, 2019-era large-cap survivors over 2019–2023, does FinBERT headline sentiment improve weekly ranking beyond price features?
 
 ## 2. Current Status
-- Phase 1 (data): COMPLETE. QA `16_phase1_qa.py` = 31/31 pass. One documented exception: NVDA coverage (81.7%).
-- Git: `main` = `dev` at `ae19c97` ("fully completed phase 1"). Phase 2 work goes on `dev`; merge to `main` when tested. No tag `phase1-complete` yet.
-- Next: Phase 2 (feature engineering).
-- Still unchecked on Phase 1 sign-off: data backup + checksums; optional tag; hand-off notes review.
+- Phase 1 (data): complete. QA `16_phase1_qa.py` = 31/31 pass. Tag `phase1-complete` exists on `ae19c97`.
+- Phase 2 (features): built on `dev`. QA gate 23/24. The only open check is the 200-headline FinBERT label validation.
 
 ## 3. Phase Plan
 | Phase | Focus | Status |
 |---|---|---|
 | 1 | Data collection & preprocessing | Done |
-| 2 | Feature engineering (technical, FinBERT sentiment, macro) | Next |
-| 3 | Models (ablation matrix, MLflow) | Planned |
+| 2 | Feature engineering (technical, FinBERT sentiment, macro) | Built, QA 23/24, labels pending |
+| 3 | Models (ablation matrix, MLflow) | Next |
 | 4 | Evaluation (CPCV, IC, SHAP, significance) | Planned |
 | 5 | Backtesting (long-short vs baselines) | Planned |
 | 6 | Read-only results dashboard (FastAPI + React, local) | Planned, built last, first to cut |
@@ -64,12 +62,33 @@ Macro series known: fed funds, CPI (as YoY), unemployment (UNRATE), 10Y yield, V
 
 Pipeline scripts: `fetch_and_validate/` scripts 1–16 (tracked in git). Re-run order for a new ticker list: 7 -> 9 -> 10 -> 11 -> 12 -> 13 -> 14 -> 16.
 
+Phase 2 scripts: `features/00_snapshot.py` through `features/08_power_sim.py`.
+
+Phase 2 outputs:
+- Results: `results/phase2_snapshot.json`, `results/labels/headline_sample.csv`, and `results/power_simulation.csv`. Checksums and the FinBERT revision are also tracked in `results/`; their exact filenames are TODO.
+- `data/features/`: FinBERT scores, F0, F1, F2 raw macro features, and `panel_phase2` parquet outputs. Exact parquet filenames are TODO.
+
 ## 5. Commands (only ones documented)
 ```
 python fetch_and_validate/7_fetch_price_ohlcv.py --start 2018-07-01 --end 2019-01-01 --out data/prices/ohlcv_warmup.csv
 python fetch_and_validate/6_fetch_macro_fred.py      # writes fred_daily.csv AND fred_daily_full.csv
 python fetch_and_validate/16_phase1_qa.py            # expect 31/31
 ```
+
+Phase 2 run order, from the repository root:
+```
+python features/00_snapshot.py
+python features/01_finbert_score.py
+python features/01b_finbert_sanity.py
+python features/02_make_label_sample.py
+python features/03_f0_technical.py
+python features/04_sentiment_features.py
+python features/05_macro_features.py
+python features/06_targets_panel.py
+python features/07_phase2_qa.py
+python features/08_power_sim.py
+```
+
 Not recorded yet: Python/package versions, data checksums. Add in Phase 2 setup.
 
 ## 6. FROZEN Design (do not change without logging a new trial)
@@ -84,18 +103,18 @@ Not recorded yet: Python/package versions, data checksums. Add in Phase 2 setup.
 - F0 = technical (incl. beta, vol). F1 = F0 + sentiment. F2 = F1 + macro + 8 interactions.
 - Technical (stationary, scale-free; no raw price/volume levels): returns over 1/5/10/20/60 days; close/SMA20 - 1; close/SMA50 - 1; MACD/close; RSI; 20d realized vol; log(volume / 20d avg volume); rolling 60d beta to equal-weight universe return.
 - Sentiment (6): `sent_mean`, `sent_ewm5` (half-life ~3d), `sent_mom` (3d ewm - 20d ewm), `abn_count` (log(1+n) z-scored vs ticker's trailing 60d), `has_news`, `days_since_news` (cap 10). Article score = p_pos - p_neg. No synthetic imputation: no-news days score 0 with has_news=0.
-- Macro (stationary): 5d change VIX; 5d change 10Y; curve slope (10Y-2Y) and its change; 20d change BAA10Y; 20d return WTI and USD index; CPI, unemployment, fed funds changes. Z-scored over time on training folds only.
-- 8 interactions: {dVIX, d10Y, dBAA10Y, WTI 20d return} x {rolling beta, 20d vol}. No sector dummies.
+- Macro (stationary): 5d change VIX; 5d change 10Y; curve slope (10Y-2Y) and its change; 20d change BAA10Y; 20-day dollar change WTI and 20d return USD index; CPI, unemployment, fed funds changes. Z-scored over time on training folds only.
+- 8 interactions: {dVIX, d10Y, dBAA10Y, WTI 20-day dollar change} x {rolling beta, 20d vol}. No sector dummies.
 - Normalization: technical + sentiment rank-normalized per date across 30 stocks (centered, ~-0.5..+0.5); binary flags unchanged; sentiment scores first z-scored per ticker over trailing 60d. Macro NOT cross-sectionally ranked. Rolling windows past-only. Scalers fit inside training folds. Identical normalized inputs for every model.
 
 ### 6.3 Targets
 - `target_ret5`: adj close t -> t+5 trading days (evaluation and P&L only).
 - `target_rank`: per-date centered percentile rank, (rank - 0.5)/30 - 0.5. PRIMARY training target for all models.
-- `target_ret5_xs`: cross-sectionally demeaned, vol-scaled return (XGBoost robustness only).
+- `target_ret5_xs`: cross-sectionally demeaned return divided by (vol20 x sqrt(5)), clipped at +/-5 for the XGBoost robustness run only.
 - Drop last 5 days of 2023 and dates with <30 valid labels.
 
 ### 6.4 FinBERT
-`ProsusAI/finbert`, pinned revision, max_length 160, fp16, run once and cache, no fine-tuning. Text: FNSPID title only; NYT headline + abstract. Validate on 200 hand-labeled headlines (target macro F1 >= ~0.65; Cohen's kappa if two labelers). Second scorer only as robustness run if validation fails. `summary_extra` kept for F1-only robustness run.
+`ProsusAI/finbert`, pinned revision `0bc2ac10dda6929bcb1f77ccc43c7ec5c424f031`, max_length 160, fp16, run once and cache, no fine-tuning. Text: FNSPID title only; NYT headline + abstract. Validate on 200 hand-labeled headlines (target macro F1 >= ~0.65; Cohen's kappa if two labelers). Second scorer only as robustness run if validation fails. `summary_extra` kept for F1-only robustness run.
 
 ### 6.5 Models and ablation (9 core runs + optional TFT)
 | Model | F0 | F1 | F2 |
@@ -112,7 +131,7 @@ Tuning: nested, inner 4-fold purged blocks (LSTM: 2), metric = weekly rank IC, i
 ### 6.6 Evaluation
 - CPCV, date-based groups: N=8, k=2 (28 splits, 7 paths). Purge 5 trading days; embargo 20 trading days; 60-day embargo sensitivity on XGBoost. Same splits/seeds for all models and tiers. Unit test: no training label window overlaps a test date.
 - No separate holdout (2023 holds ~33% of FNSPID volume). Post-hoc runs logged as new trials; yearly results exploratory.
-- Significance: weekly non-overlapping rank IC; paired diff via block bootstrap (primary, 10,000 resamples) + HAC Diebold-Mariano with HLN (cross-check). Per-date IC averaged across 7 paths first. Primary family = 5 tests (H1 x 4 families + H2), BH q=0.05, BY as conservative check. Other tests = separate exploratory BH family. Power simulation BEFORE modeling (expected min detectable IC diff ~0.02–0.034, unconfirmed).
+- Significance: weekly non-overlapping rank IC; paired diff via block bootstrap (primary, 10,000 resamples) + HAC Diebold-Mariano with HLN (cross-check). Per-date IC averaged across 7 paths first. Primary family = 5 tests (H1 x 4 families + H2), BH q=0.05, BY as conservative check. Other tests = separate exploratory BH family. Power simulation BEFORE modeling (simulated minimum detectable IC gain at 80% power about 0.015-0.032).
 - Deflated Sharpe on weekly net Sharpe; N from tracker tags (core + robustness + variants; cost grids and nested tuning excluded); bar DSR >= 0.95.
 - Secondary metrics: ICIR, IC hit rate, quintile returns/spread, OOS R2 on target_rank, net Sharpe (bootstrap CI), max drawdown, Calmar, turnover, break-even cost, beta/alpha vs EW. Directional accuracy DROPPED.
 - Interpretability: group-level SHAP shares + group permutation importance.
@@ -137,17 +156,22 @@ Tuning: nested, inner 4-fold purged blocks (LSTM: 2), metric = weekly rank IC, i
 - Warm-up files: features only, never labels or evaluation.
 - All tiers filtered to the same dates from `FIRST_MODEL_DATE`.
 
-## 8. Phase 2 Hand-off (what to build next)
-Conventions:
-- Create `features/config.py` with `FIRST_MODEL_DATE` (61st trading day of 2019; ~first 60 days dropped), paths, ticker list. NEVER hard-code a calendar date.
-- Prices: concatenate `ohlcv_warmup.csv` + `ohlcv_daily.csv` on date+ticker. Macro: `fred_daily_full.csv`, calendar-daily, reindex to trading days. News: `news_final30.parquet` + `news_daily_coverage.csv`.
-- ~245 weekly cross-sections remain after the cut.
+## 8. Phase 2 Build Summary
+- Phase 2 scripts 00-08, FinBERT scoring, F0/F1/F2 features, targets, panel, QA gate and power simulation are built.
+- The panel has 35,790 model rows over 1,193 model dates, or about 239 weekly cross-sections.
+- `FIRST_MODEL_DATE` is 2019-03-29; `FIRST_LSTM_INPUT_DATE` is 2019-03-04.
+- The 80% power simulation needs an IC gain of about 0.015-0.032.
+- The only open Phase 2 QA check is validation of 200 hand-labeled headlines; the QA gate is currently 23/24.
 
-Suggested order: (1) `features/` + `config.py`; (2) technical features (F0) + rolling beta; (3) FinBERT scoring/caching (slowest) while hand-labeling 200 headlines; (4) sentiment features; (5) macro features + 8 interactions; (6) targets, then unit tests.
-
-Acceptance checks: no look-ahead; no NaNs on/after `FIRST_MODEL_DATE`; F0/F1/F2 share identical (date, ticker) rows; warm-up ends before 2019-01-02 with same 30 tickers; FinBERT macro F1 on 200 headlines >= ~0.65 (else queue 2nd scorer).
-
-Open decisions: hand-label 200 headlines (+ second labeler?); finalize technical list and drop features correlated > 0.95; power simulation; static sector mapping + snapshot date; LSTM fallback deadline; confirm Ken French factors cover 2019–2023 and align to trading calendar.
+Open items, matching `docs/BACKLOG.md`:
+- Label the 200 headlines in `results/labels/headline_sample.csv`.
+- Run `features/07_phase2_qa.py` and confirm 24/24 (macro F1 >= ~0.65; otherwise queue a second scorer).
+- Commit the updated root `README.md` (section 2.4.1) and refresh this context.
+- Back up `data/` outside git.
+- Set the LSTM fallback deadline date and log it.
+- Log the FinBERT validation result in `docs/DECISION_LOG.MD`.
+- Merge `dev` into `main` and tag `phase2-complete`.
+- Write `reports/PHASE_2_PROGRESS_REPORT.md`.
 
 ## 9. DO-NOT-DO List
 - No raw article counts as features (FNSPID volume grows by year: 2019 21,045; 2020 23,131; 2021 18,422; 2022 29,988; 2023 46,489). Use `has_news`, mean sentiment, per-ticker-normalized counts.
@@ -181,10 +205,10 @@ Survivorship; news ~98% FNSPID (say "headline sentiment from FNSPID"); universe 
 - 2026-10-11: macro/sentiment/FinBERT specs.
 - 2026-10-13: CPCV N=8,k=2; no holdout; costs; MLflow only; dashboard scope; LSTM spec; limitations; README rebuilt.
 - 2026-10-14: warm-up data fetched; Phase 1 closed; dev merged to main.
-Full log: `DECISION_LOG.MD` (not in this context; ask user to paste if needed).
+Full log: `DECISION_LOG.MD`.
 
 ## 13. Repo and Process
-- Tracked: `fetch_and_validate/`, `README.md`, `DECISION_LOG.MD`, `.gitignore` (308 bytes). Ignored: `data/`.
+- Tracked: `fetch_and_validate/`, `README.md`, `docs/CONTEXT.md`, `docs/DECISION_LOG.MD`, `.gitignore`. Ignored: `data/`.
 - Branches: `main`, `dev`. Key commits: `fbfc6d2` (data scripts pushed), `81743819`, `2d00696`, `920979b` (README rebuild/restores), `68341ea`, `e1e9cc4`, `ae19c97` (Phase 1 close).
 - README incident (E14): reverted twice via stale copy and patch overwrite. `README_update_patch.md` was merged and deleted.
 - Phase reports: copy `PROGRESS_REPORT_TEMPLATE.md` to `reports/PHASE_<N>_PROGRESS_REPORT.md`; fill every section (write "None" rather than deleting). 14 sections 0–13: header, summary, objectives, deliverables, scope changes, errors, quality, limitations, open decisions, hand-off, reproducibility, timeline, repo notes, sign-off.
