@@ -12,7 +12,7 @@ mlruns/
 mlflow.db
 __pycache__/
 *.pyc
-.ipynb checkpoints
+.ipynb_checkpoints/
 *.pt
 *.pth
 wandb/
