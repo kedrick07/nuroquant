@@ -1,5 +1,5 @@
 {
-  "python": "3.12.9",
+  "python": "3.14.8",
   "first_model_date": "2019-03-29",
   "first_lstm_input_date": "2019-03-04",
   "files": {

@@ -1,0 +1,9 @@
+{
+  "model": "yiyanghkust/finbert-tone",
+  "revision": "4921590d3c0c3832c0efea24c8381ce0bda7844b",
+  "max_length": 160,
+  "n_scored": 141667,
+  "seconds": 27,
+  "torch": "2.14.1+cu130",
+  "transformers": "5.19.0"
+}

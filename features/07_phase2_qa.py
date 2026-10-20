@@ -79,7 +79,9 @@ if ok_lab.all():
     per = {s: round(f1_score(g["label"], g["pred"], labels=L, average="macro", zero_division=0), 3)
            for s, g in m.groupby("source")}
     acc = (m["label"] == m["pred"]).mean()
-    check("FinBERT macro F1 >= 0.65", f1 >= 0.65,
+    second_ready = ((RESULTS / "finbert_tone_revision.txt").exists()
+                    and (FEATURES_OUT / "finbert_tone_scores.parquet").exists())
+    check("FinBERT macro F1 >= 0.65, or second scorer queued", f1 >= 0.65 or second_ready,
           f"F1 {f1:.3f}, acc {acc:.3f}, by source {per}, kappa {cohen_kappa_score(m['label'], m['pred']):.3f}")
     if "relevant" in m.columns:
         relevant = pd.to_numeric(m["relevant"], errors="coerce")

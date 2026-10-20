@@ -1,0 +1,22 @@
+{
+  "python": "3.12.9",
+  "first_model_date": "2019-03-29",
+  "first_lstm_input_date": "2019-03-04",
+  "files": {
+    "data/prices/ohlcv_daily.csv": "f7394c8da7e4cc1fc52da9bc28b357472849f0068908a9eb5e5697d703507cb3",
+    "data/prices/ohlcv_warmup.csv": "418574f039d82dcb49356e081f156078d42085443cad393d36bc2b8d3b6290bd",
+    "data/macro/fred_daily_full.csv": "49221fa15d4ffebd631e63c622a6e9e9c64660561e1d145b8725a0ba3477f6d5",
+    "data/news/news_final30.parquet": "441e773db0af5c9afd9fc3d437400d968df43577b029f870b2f26bdf152bd303",
+    "data/news/news_daily_coverage.csv": "08402f10599eaaeb8d88933daa2bdd0d7c6bd3ef08d906b1e1e44ef3804a32f4",
+    "data/universe/final_30_tickers_v2.csv": "b29b4b5e1c9fdcd00bf9b5950e9315fc6fcacf3f3ab509175062b3e8e3703fc2"
+  },
+  "packages": {
+    "torch": "2.14.1",
+    "transformers": "5.19.0",
+    "pandas": "3.0.6",
+    "numpy": "2.5.3",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.4.1",
+    "mlflow": "3.17.1"
+  }
+}
