@@ -1,24 +1,34 @@
 # SESSIONS
 
-Last updated: 2026-10-19
+Last updated: 2026-10-20
 
 Newest first. Each entry: what was done, findings, pending items.
 
 ## Active state (2026-10-20)
-- Branch dev is at the newest commit. main at ae19c97 (Phase 1 close, tag phase1-complete).
-- Phase 2 built. QA gate 23/24 at last run (2026-10-20). Open: 200 headline labels (blank on dev).
-- Root README.md and CONTEXT.md are no longer stale.
-- Labels are still blank.
-- LSTM fallback deadline not set. data/ backup not confirmed.
+- Branch dev holds all Phase 2 work (last code commit 285ae20, 2026-10-20). main is at ae19c97 (Phase 1 close, tag phase1-complete).
+- Phase 2 is complete on dev: QA gate 24/24. Merge to main and tag phase2-complete are pending.
+- Primary sentiment scorer: ProsusAI/finbert (validation macro F1 0.516). Second scorer queued as a robustness variant: yiyanghkust/finbert-tone, all articles scored.
+- Environment: Fedora, Python 3.14.8 (package versions unchanged from the 2026-10-15 snapshot).
+- No LSTM calendar deadline (logged 2026-10-20). data/ backup not confirmed.
+- Pending cleanup: remove duplicate 2026-10-20 entries in DECISION_LOG.MD (second scorer and environment each appear twice); refresh CONTEXT.md status.
 
-## 2026-10-19 - Repo review and docs setup
-- Reviewed dev: two commits ahead of main (CONTEXT.md added 2026-10-14; Phase 2 scripts, results and Decision Log pushed 2026-10-16).
-- Findings: labels blank; README stale; CONTEXT.md stale; .gitignore typo (.ipynb checkpoints should be .ipynb_checkpoints/).
-- Observation: many FNSPID headlines in the label sample are not about the tagged ticker (market wrap-ups, ETF flows, sector-update lists). Plan: add a relevant column while labeling to measure the off-topic rate.
-- Created the docs/ folder: README, AGENTS, PLAN, BACKLOG, DESIGN, BRAND, SESSIONS.
+## 2026-10-20 - Phase 2 closed on dev
+- Hand-labeled 200 headlines (101 neutral, 67 positive, 32 negative; 68 off-topic) in results/labels/headline_sample.csv; frozen copy in headline_sample_human.csv.
+- FinBERT validation: macro F1 0.516 (95% bootstrap CI 0.44-0.59), accuracy 0.545, kappa 0.230. Main miss: 44 of 67 positive headlines scored neutral. The extension rule was not triggered (CI entirely below 0.65).
+- Compared candidate second scorers on the labels: finbert-tone F1 0.581 (Spearman 0.564), ProsusAI 0.516 (0.449), distilroberta 0.502 (0.460). Chose yiyanghkust/finbert-tone (revision 4921590d3c0c3832c0efea24c8381ce0bda7844b) as a robustness variant; scored all 141,667 articles in 27 s. ProsusAI/finbert stays primary.
+- QA check 24 now follows the written acceptance rule (F1 >= 0.65 or a second scorer queued): 24/24.
+- Environment changed to Fedora, Python 3.14.8; old snapshot kept as results/phase2_snapshot_2026-10-15.json.
+- Decision: no LSTM calendar deadline; if LSTM is dropped, the fallback applies and is logged before Phase 4 significance results are viewed.
+- Added scripts 09-12 (labeling, F1 CI, scorer comparison, finbert-tone scoring). Root README (40,721 bytes) and CONTEXT.md refreshed. docs/README.md removed (root README is the README); setup and run steps moved to SETUP.md.
 
 ## 2026-10-19 to 2026-10-20 - Docs restructure
 - CONTEXT.md and DECISION_LOG.MD moved into docs/ (ed01f69), paths fixed (00c8858), CONTEXT.md refreshed (8fd994d), .gitignore fixed (9762d66), root README replaced.
+
+## 2026-10-19 - Repo review and docs setup
+- Reviewed dev: two commits ahead of main (CONTEXT.md added 2026-10-14; Phase 2 scripts, results and Decision Log pushed 2026-10-16).
+- Findings: labels blank; README stale; CONTEXT.md stale; .gitignore typo.
+- Observation: many FNSPID headlines in the label sample are not about the tagged ticker (market wrap-ups, ETF flows, sector-update lists); the relevant column measured this.
+- Created the docs/ folder: README, AGENTS, PLAN, BACKLOG, DESIGN, BRAND, SESSIONS.
 
 ## 2026-10-14 to 2026-10-15 - Phase 2 build
 - Reviewed the Phase 2 plan and refined it: LSTM pre-window (features from 2019-03-04, model rows from 2019-03-29), fold-wise macro scaling, news-day-only sentiment z-scores, blind labeling protocol.

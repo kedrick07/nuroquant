@@ -1,18 +1,15 @@
 # BACKLOG
 
-Last updated: 2026-10-19
+Last updated: 2026-10-20
 
 Order = priority. Move items between sections; never delete done items.
 
 ## Now
-- [ ] Label the 200 headlines in results/labels/headline_sample.csv (blind to model scores; off-topic headlines = neutral; add a relevant column, 1 or 0).
-- [ ] Run python features/07_phase2_qa.py and confirm 24/24 (macro F1 >= ~0.65, else queue a second scorer).
-- [x] Commit the updated root README.md (adds section 2.4.1; stale on dev) and refresh CONTEXT.md for Phase 2.
 - [ ] Back up data/ outside git (checksums are in results/phase2_snapshot.json).
-- [ ] Set the LSTM fallback deadline date (end of Phase 3) and log it.
-- [ ] Log the FinBERT validation result in DECISION_LOG.MD.
-- [ ] Merge dev into main and tag phase2-complete.
-- [ ] Write the Phase 2 progress report.
+- [ ] Remove duplicate 2026-10-20 entries in DECISION_LOG.MD (second scorer and environment each appear twice).
+- [ ] Refresh CONTEXT.md for the Phase 2 close (QA 24/24, second scorer, environment).
+- [ ] Merge dev into main and tag phase2-complete (git tag phase2-complete; git push --tags).
+- [ ] Write the Phase 2 progress report; add the Phase 1 report and the report template to docs/reports/.
 
 ## Next (Phase 3)
 - [ ] Add requirements.txt with pinned versions (see AGENTS.md environment).
@@ -21,7 +18,8 @@ Order = priority. Move items between sections; never delete done items.
 - [ ] MLflow setup: SQLite backend, tags trial_id, trial_family, counts_toward_N; log git hash and data checksums.
 - [ ] Run order: Ridge, XGBoost, Random Forest, LSTM; same splits and seeds for all.
 - [ ] Nested tuning (inner 4-fold purged blocks, LSTM 2), small grids, 3 seeds.
-- [ ] XGBoost robustness runs: mask NVDA gap, exclude META, target_ret5_xs clipped at +/-5, 60-day embargo, summary_extra.
+- [ ] Alt-sentiment features from finbert_tone_scores.parquet: parameterize 04_sentiment_features.py (scores file, output suffix) so the primary F1 files are never overwritten.
+- [ ] XGBoost robustness runs: mask NVDA gap, exclude META, target_ret5_xs clipped at +/-5, 60-day embargo, summary_extra, finbert-tone sentiment.
 - [ ] Milestone CSV export of MLflow runs to results/.
 
 ## Later
@@ -39,5 +37,11 @@ Order = priority. Move items between sections; never delete done items.
 - [x] F0, F1 and F2 features, targets and panel built (35,790 model rows) (2026-10-15).
 - [x] Power simulation saved (2026-10-15).
 - [x] Phase 2 scripts 00-08, results and Decision Log entries pushed to dev (2026-10-16).
-- [x] docs/ folder created (2026-10-19).
-- [x] Docs restructure and path fixes (2026-10-19).
+- [x] docs/ folder created; docs restructure and path fixes (2026-10-19).
+- [x] Root README and CONTEXT.md refreshed for Phase 2 (2026-10-20).
+- [x] 200 headlines hand-labeled and committed (2026-10-20).
+- [x] FinBERT validation: macro F1 0.516 (CI 0.44-0.59), below 0.65; logged (2026-10-20).
+- [x] Second scorer chosen (finbert-tone, F1 0.581) and run on all articles (2026-10-20).
+- [x] QA gate acceptance rule implemented; Phase 2 QA 24/24 (2026-10-20).
+- [x] Environment change and snapshot re-recorded; LSTM fallback decision logged (2026-10-20).
+- [x] Scripts 09-12 pushed to dev (2026-10-20).
