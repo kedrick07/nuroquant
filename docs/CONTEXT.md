@@ -23,6 +23,7 @@ Update this file at the end of every phase.
 ## 2. Current Status
 - Phase 1 (data): complete. QA `16_phase1_qa.py` = 31/31 pass. Tag `phase1-complete` exists on `ae19c97`.
 - Phase 2 (features): built on `dev`. QA gate 23/24. The only open check is the 200-headline FinBERT label validation.
+- Branches: main = ae19c97 (Phase 1 close); dev holds Phase 2 work and the docs/ folder.
 
 ## 3. Phase Plan
 | Phase | Focus | Status |
@@ -65,8 +66,8 @@ Pipeline scripts: `fetch_and_validate/` scripts 1–16 (tracked in git). Re-run 
 Phase 2 scripts: `features/00_snapshot.py` through `features/08_power_sim.py`.
 
 Phase 2 outputs:
-- Results: `results/phase2_snapshot.json`, `results/labels/headline_sample.csv`, and `results/power_simulation.csv`. Checksums and the FinBERT revision are also tracked in `results/`; their exact filenames are TODO.
-- `data/features/`: FinBERT scores, F0, F1, F2 raw macro features, and `panel_phase2` parquet outputs. Exact parquet filenames are TODO.
+- `results/`: `phase2_snapshot.json`, `finbert_revision.txt`, `finbert_run.json`, `macro_recipe.json`, `power_simulation.csv`, `labels/headline_sample.csv`.
+- `data/features/` (git-ignored): `finbert_scores.parquet`, `f0_raw.parquet`, `f0_ranked.parquet`, `f1_sent_raw.parquet`, `f1_sent_ranked.parquet`, `f2_macro_raw.parquet`, `panel_phase2.parquet`.
 
 ## 5. Commands (only ones documented)
 ```
@@ -89,7 +90,7 @@ python features/07_phase2_qa.py
 python features/08_power_sim.py
 ```
 
-Not recorded yet: Python/package versions, data checksums. Add in Phase 2 setup.
+Python/package versions and data checksums: `results/phase2_snapshot.json` (2026-10-15).
 
 ## 6. FROZEN Design (do not change without logging a new trial)
 
@@ -166,7 +167,6 @@ Tuning: nested, inner 4-fold purged blocks (LSTM: 2), metric = weekly rank IC, i
 Open items, matching `docs/BACKLOG.md`:
 - Label the 200 headlines in `results/labels/headline_sample.csv`.
 - Run `features/07_phase2_qa.py` and confirm 24/24 (macro F1 >= ~0.65; otherwise queue a second scorer).
-- Commit the updated root `README.md` (section 2.4.1) and refresh this context.
 - Back up `data/` outside git.
 - Set the LSTM fallback deadline date and log it.
 - Log the FinBERT validation result in `docs/DECISION_LOG.MD`.
@@ -205,10 +205,12 @@ Survivorship; news ~98% FNSPID (say "headline sentiment from FNSPID"); universe 
 - 2026-10-11: macro/sentiment/FinBERT specs.
 - 2026-10-13: CPCV N=8,k=2; no holdout; costs; MLflow only; dashboard scope; LSTM spec; limitations; README rebuilt.
 - 2026-10-14: warm-up data fetched; Phase 1 closed; dev merged to main.
+- 2026-10-15: Phase 2 build (WTI 20-day dollar change; target_ret5_xs clipped at +/-5 for the robustness run; about 239 weekly cross-sections; power simulation 0.015-0.032; NYT scores more negative than FNSPID).
+- 2026-10-19: docs/ restructure (CONTEXT.md and DECISION_LOG.MD moved into docs/; project docs added).
 Full log: `DECISION_LOG.MD`.
 
 ## 13. Repo and Process
-- Tracked: `fetch_and_validate/`, `README.md`, `docs/CONTEXT.md`, `docs/DECISION_LOG.MD`, `.gitignore`. Ignored: `data/`.
+- Tracked: `fetch_and_validate/`, `README.md`, `docs/`, `.gitignore`. Ignored: `data/`.
 - Branches: `main`, `dev`. Key commits: `fbfc6d2` (data scripts pushed), `81743819`, `2d00696`, `920979b` (README rebuild/restores), `68341ea`, `e1e9cc4`, `ae19c97` (Phase 1 close).
 - README incident (E14): reverted twice via stale copy and patch overwrite. `README_update_patch.md` was merged and deleted.
 - Phase reports: copy `PROGRESS_REPORT_TEMPLATE.md` to `reports/PHASE_<N>_PROGRESS_REPORT.md`; fill every section (write "None" rather than deleting). 14 sections 0–13: header, summary, objectives, deliverables, scope changes, errors, quality, limitations, open decisions, hand-off, reproducibility, timeline, repo notes, sign-off.
