@@ -75,3 +75,5 @@
 2026-10-15 | Sample-size correction: 1,193 model dates = about 239 non-overlapping weekly cross-sections (docs said ~245). Power simulation (239 weeks, block bootstrap L=4, 500 resamples, 300 sims, seed 7; results/power_simulation.csv): 80% power needs a true IC gain of about 0.015-0.032 depending on F0/F1 IC correlation (0.7-0.9) and alpha (0.05-0.01). A null H1 is plausible and will be reported as a finding. Design unchanged.
 
 2026-10-15 | Phase 2 QA gate (07_phase2_qa.py): 23/24 passing; remaining check is the 200-headline FinBERT validation (labels pending).
+
+2026-10-19 | Docs restructure: CONTEXT.md and DECISION_LOG.MD moved to docs/; root README.md stays as the scope reference; project docs added (README, AGENTS, PLAN, BACKLOG, DESIGN, BRAND, SESSIONS).

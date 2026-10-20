@@ -4,11 +4,11 @@ Last updated: 2026-10-19
 
 Newest first. Each entry: what was done, findings, pending items.
 
-## Active state (2026-10-19)
-- Branch dev at ae44484 (2026-10-16). main at ae19c97 (Phase 1 close, tag phase1-complete).
+## Active state (2026-10-20)
+- Branch dev is at the newest commit. main at ae19c97 (Phase 1 close, tag phase1-complete).
 - Phase 2 built. QA gate 23/24 at last run (2026-10-15). Open: 200 headline labels (blank on dev).
-- Root README.md on dev is stale (32,486 bytes). The updated version (adds section 2.4.1) is not yet committed.
-- CONTEXT.md still describes the 2026-10-14 state.
+- Root README.md and CONTEXT.md are no longer stale.
+- Labels are still blank.
 - LSTM fallback deadline not set. data/ backup not confirmed.
 
 ## 2026-10-19 - Repo review and docs setup
@@ -16,6 +16,9 @@ Newest first. Each entry: what was done, findings, pending items.
 - Findings: labels blank; README stale; CONTEXT.md stale; .gitignore typo (.ipynb checkpoints should be .ipynb_checkpoints/).
 - Observation: many FNSPID headlines in the label sample are not about the tagged ticker (market wrap-ups, ETF flows, sector-update lists). Plan: add a relevant column while labeling to measure the off-topic rate.
 - Created the docs/ folder: README, AGENTS, PLAN, BACKLOG, DESIGN, BRAND, SESSIONS.
+
+## 2026-10-19 to 2026-10-20 - Docs restructure
+- CONTEXT.md and DECISION_LOG.MD moved into docs/ (ed01f69), paths fixed (00c8858), CONTEXT.md refreshed (8fd994d), .gitignore fixed (9762d66), root README replaced.
 
 ## 2026-10-14 to 2026-10-15 - Phase 2 build
 - Reviewed the Phase 2 plan and refined it: LSTM pre-window (features from 2019-03-04, model rows from 2019-03-29), fold-wise macro scaling, news-day-only sentiment z-scores, blind labeling protocol.
