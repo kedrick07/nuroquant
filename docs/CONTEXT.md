@@ -8,7 +8,7 @@
 > 4. Do not change the frozen design (Section 6). Any change = new logged trial.
 > 5. Style: user (Kedrick) wants short, simple, practical answers; he writes code himself, so guide and explain rather than dump full solutions unless asked.
 
-Last synced: 2026-10-19. Sources: docs/SESSIONS.md and docs/DECISION_LOG.MD.
+Last synced: 2026-10-19. Sources: SESSIONS.md and DECISION_LOG.MD.
 Update this file at the end of every phase.
 
 ---
@@ -164,14 +164,14 @@ Tuning: nested, inner 4-fold purged blocks (LSTM: 2), metric = weekly rank IC, i
 - The 80% power simulation needs an IC gain of about 0.015-0.032.
 - The only open Phase 2 QA check is validation of 200 hand-labeled headlines; the QA gate is currently 23/24.
 
-Open items, matching `docs/BACKLOG.md`:
+Open items, matching `BACKLOG.md`:
 - Label the 200 headlines in `results/labels/headline_sample.csv`.
 - Run `features/07_phase2_qa.py` and confirm 24/24 (macro F1 >= ~0.65; otherwise queue a second scorer).
 - Back up `data/` outside git.
 - Set the LSTM fallback deadline date and log it.
-- Log the FinBERT validation result in `docs/DECISION_LOG.MD`.
+- Log the FinBERT validation result in `DECISION_LOG.MD`.
 - Merge `dev` into `main` and tag `phase2-complete`.
-- Write `reports/PHASE_2_PROGRESS_REPORT.md`.
+- Write the Phase 2 progress report.
 
 ## 9. DO-NOT-DO List
 - No raw article counts as features (FNSPID volume grows by year: 2019 21,045; 2020 23,131; 2021 18,422; 2022 29,988; 2023 46,489). Use `has_news`, mean sentiment, per-ticker-normalized counts.
@@ -212,8 +212,8 @@ Full log: `DECISION_LOG.MD`.
 ## 13. Repo and Process
 - Tracked: `fetch_and_validate/`, `README.md`, `docs/`, `.gitignore`. Ignored: `data/`.
 - Branches: `main`, `dev`. Key commits: `fbfc6d2` (data scripts pushed), `81743819`, `2d00696`, `920979b` (README rebuild/restores), `68341ea`, `e1e9cc4`, `ae19c97` (Phase 1 close).
-- README incident (E14): reverted twice via stale copy and patch overwrite. `README_update_patch.md` was merged and deleted.
-- Phase reports: copy `PROGRESS_REPORT_TEMPLATE.md` to `reports/PHASE_<N>_PROGRESS_REPORT.md`; fill every section (write "None" rather than deleting). 14 sections 0–13: header, summary, objectives, deliverables, scope changes, errors, quality, limitations, open decisions, hand-off, reproducibility, timeline, repo notes, sign-off.
+- README incident (E14): reverted twice via stale copy and patch overwrite. The README update patch was merged and deleted.
+- Phase reports have 14 sections (0–13): header, summary, objectives, deliverables, scope changes, errors, quality, limitations, open decisions, hand-off, reproducibility, timeline, repo notes, sign-off. Write "None" rather than deleting a section.
 
 ## 14. Gaps — Paste These Into Chat When Relevant
 This file has NO code. For accurate syntax/API help, paste: the relevant script, `requirements.txt` / package versions, the CSV headers, `features/config.py`, and any traceback. Otherwise the assistant must say it is unsure instead of guessing.

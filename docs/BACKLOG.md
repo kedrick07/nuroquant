@@ -12,7 +12,7 @@ Order = priority. Move items between sections; never delete done items.
 - [ ] Set the LSTM fallback deadline date (end of Phase 3) and log it.
 - [ ] Log the FinBERT validation result in DECISION_LOG.MD.
 - [ ] Merge dev into main and tag phase2-complete.
-- [ ] Write reports/PHASE_2_PROGRESS_REPORT.md from PROGRESS_REPORT_TEMPLATE.md.
+- [ ] Write the Phase 2 progress report.
 
 ## Next (Phase 3)
 - [ ] Add requirements.txt with pinned versions (see AGENTS.md environment).

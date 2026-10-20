@@ -6,7 +6,7 @@ Newest first. Each entry: what was done, findings, pending items.
 
 ## Active state (2026-10-20)
 - Branch dev is at the newest commit. main at ae19c97 (Phase 1 close, tag phase1-complete).
-- Phase 2 built. QA gate 23/24 at last run (2026-10-15). Open: 200 headline labels (blank on dev).
+- Phase 2 built. QA gate 23/24 at last run (2026-10-20). Open: 200 headline labels (blank on dev).
 - Root README.md and CONTEXT.md are no longer stale.
 - Labels are still blank.
 - LSTM fallback deadline not set. data/ backup not confirmed.
