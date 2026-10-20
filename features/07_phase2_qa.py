@@ -81,6 +81,21 @@ if ok_lab.all():
     acc = (m["label"] == m["pred"]).mean()
     check("FinBERT macro F1 >= 0.65", f1 >= 0.65,
           f"F1 {f1:.3f}, acc {acc:.3f}, by source {per}, kappa {cohen_kappa_score(m['label'], m['pred']):.3f}")
+    if "relevant" in m.columns:
+        relevant = pd.to_numeric(m["relevant"], errors="coerce")
+        if relevant.notna().all() and relevant.isin({0, 1}).all():
+            m["relevant"] = relevant
+            off_topic_by_source = {
+                source: round((group["relevant"] == 0).mean(), 3)
+                for source, group in m.groupby("source")
+            }
+            relevant_rows = m[m["relevant"] == 1]
+            relevant_f1 = f1_score(
+                relevant_rows["label"], relevant_rows["pred"],
+                labels=L, average="macro", zero_division=0
+            )
+            print(f"Relevant=0 share: {(m['relevant'] == 0).mean():.3f}, by source {off_topic_by_source}")
+            print(f"FinBERT macro F1 (relevant=1): {relevant_f1:.3f}")
     print(pd.crosstab(m["label"], m["pred"]))
 else:
     check("200 headlines labeled", False, f"{int(ok_lab.sum())}/{len(lab)} valid labels")
