@@ -6,7 +6,7 @@
 
 This document is the single source of truth for project scope. When a decision changes, update it here first — everything else (code, thesis chapters, Gantt chart) should follow this file, not the other way around.
 
-**Status (2026-10-14): Phase 1 complete and closed (QA 31/31; warm-up data added and checked). Evaluation design frozen (see 2.6 and Decision Log). Next: Phase 2 (feature engineering).**
+**Status (2026-10-20): Phase 1 complete and closed (QA 31/31). Phase 2 (feature engineering) is built: Phase 2 QA gate 23/24; the one open check is the 200-headline FinBERT label validation (labeling pending). Evaluation design frozen (see 2.6 and Decision Log). Next: finish labeling, close Phase 2, then Phase 3 (models).**
 Project docs (plan, backlog, agents, design, brand, sessions): see docs/.
 
 ---
@@ -100,7 +100,7 @@ Composition: ~10 tech hardware/software, 3 communication services (GOOG, META, C
 5. Uneven coverage: 18.6% of ticker-days have no news; low day coverage for META (42.1%), AMZN (49.2%), AAPL (52.7%); NVDA has 11 gap months; FNSPID volume rises by year (2019: 21,045; 2023: 46,489).
 6. Sector skew: ~10 tech names, 1 bank, 1 utility, no industrials/materials/real estate.
 7. Efficient mega caps only: a null result does not say sentiment is useless in smaller stocks.
-8. Short regime-specific sample: ~245 weekly cross-sections of 30 stocks (after dropping the first ~60 trading days of 2019); minimum detectable IC difference roughly 0.02-0.034 (to be confirmed by power simulation).
+8. Short regime-specific sample: ~239 non-overlapping weekly cross-sections of 30 stocks (1,193 model dates, after dropping the first ~60 trading days of 2019 and the last 5 days of 2023). Power simulation (2.4.1): 80% power needs a true IC gain of roughly 0.015-0.032, so a null H1 is plausible.
 9. FNSPID timestamps are date-only, assigned t+1 (conservative: understates sentiment value).
 10. Prices from yfinance (adjusted); macro series as-currently-published with approximate release lags; FinBERT trained on financial sentences, not headlines (validated on 200 hand-labeled headlines).
 11. Sector labels use one static GICS snapshot (V and PYPL were reclassified in 2023).
@@ -158,12 +158,24 @@ Composition: ~10 tech hardware/software, 3 communication services (GOOG, META, C
 ### 2.4 Feature Set
 - **Technical (all stationary, scale-free):** returns over 1/5/10/20/60 trading days; close/SMA20 - 1; close/SMA50 - 1; MACD/close; RSI; 20-day realized volatility; log(volume / 20-day average volume); rolling 60-day beta to the equal-weight universe return. No raw price or volume levels.
 - **Sentiment (6):** sent_mean, sent_ewm5 (half-life ~3 days), sent_mom (3-day ewm minus 20-day ewm), abn_count (log(1+n) z-scored vs the ticker's trailing 60 days), has_news, days_since_news (capped at 10). Article score = p_pos - p_neg. No synthetic imputation: no-news days keep score 0 and are flagged.
-- **Macro (stationary):** 5-day change in VIX; 5-day change in 10Y; curve slope (10Y - 2Y) and its change; 20-day change in BAA10Y; 20-day return of WTI and of the USD index; CPI, unemployment and fed funds changes. Z-scored over time on training folds only.
-- **Macro x stock interactions (8, pre-specified):** {dVIX, d10Y, dBAA10Y, WTI 20d return} x {rolling beta, 20d volatility}. No sector dummies.
+- **Macro (stationary):** 5-day change in VIX; 5-day change in 10Y; curve slope (10Y - 2Y) and its change; 20-day change in BAA10Y; 20-day dollar change of WTI (not a percent return: WTI was negative on 2020-04-20) and 20-day return of the USD index; 21-trading-day changes in CPI YoY, unemployment and fed funds. Stored raw; z-scored over time on training folds only (|z| clipped at 5), see 2.4.1.
+- **Macro x stock interactions (8, pre-specified):** {dVIX, d10Y, dBAA10Y, WTI 20d change} x {rolling beta, 20d volatility} (stock side rank-normalized; products built after fold-wise scaling). No sector dummies.
 - **Tiers:** F0 = technical (incl. beta, vol); F1 = F0 + sentiment; F2 = F1 + macro + 8 interactions.
 - **Normalization:** technical and sentiment features rank-normalized per date across the 30 stocks (centered, about -0.5 to +0.5); binary flags unchanged; sentiment score features first z-scored per ticker over a trailing 60 days. Macro is not cross-sectionally ranked. Rolling windows use past data only; prices fetched from 2018-07 for warm-up (see 2.3.3). Scalers are fit inside training folds. Identical normalized inputs for every model.
 - **Targets:** `target_ret5` = adj close t -> t+5 trading days (evaluation and P&L only). `target_rank` = per-date centered percentile rank, (rank - 0.5)/30 - 0.5 (primary training target, all models). `target_ret5_xs` = cross-sectionally demeaned, volatility-scaled return (XGBoost robustness only). Last 5 days of 2023 and dates with fewer than 30 valid labels are dropped.
 - **Sentiment model:** ProsusAI/finbert (pinned revision), max_length 160, fp16, run once and cached; no fine-tuning; validated on 200 hand-labeled headlines (target macro F1 about 0.65; Cohen's kappa if two labelers); a second scorer only as a robustness run if validation fails.
+
+#### 2.4.1 Phase 2 Build Notes (built 2026-10-15)
+- **Panel:** `data/features/panel_phase2.parquet` has 36,510 rows (1,217 dates x 30 tickers, 2019-03-04 to 2023-12-29). `model_row = True` for 35,790 rows (1,193 dates, 2019-03-29 to 2023-12-21), about 239 non-overlapping weekly cross-sections. The 19 trading days before `FIRST_MODEL_DATE` (2019-03-29) exist only as LSTM input (`FIRST_LSTM_INPUT_DATE` = 2019-03-04) and are never labeled or evaluated. Macro is a separate date-level file (`f2_macro_raw.parquet`).
+- **F0 (12 technical features):** returns 1/5/10/20/60, SMA20/SMA50 ratios, MACD/close, RSI14, vol20, log volume ratio, beta60 vs the equal-weight return; rank-normalized per date. Correlation prune rule (> 0.95) not triggered (max 0.945, sma50_ratio vs macd_norm); all 12 kept. `close` confirmed adjusted.
+- **FinBERT run (once):** ProsusAI/finbert, revision `0bc2ac10dda6929bcb1f77ccc43c7ec5c424f031`, fp16, max_length 160, 141,667 texts, 0 truncated. fp16 vs fp32 on 500 texts: max score diff 0.0058, argmax agreement 100%. Class shares 65.2% neutral, 19.3% positive, 15.5% negative; mean score +0.054.
+- **Source confound (logged, no design change):** NYT scores are more negative than FNSPID (mean -0.33 vs +0.06; 50.4% vs 14.9% classed negative). META is 63% NYT, so its source mix is a confound; the per-ticker z-score and the META-excluded robustness run address it.
+- **Sentiment build:** z-score over the trailing 60 trading days using news days only (min 5 observations, std floor 0.10; undefined -> 0, 6 rows from `FIRST_MODEL_DATE`). abn_count = z of log1p(n) over 60 days (min 20, std floor 0.10). sent_ewm5 = ewm half-life 3 on z (no-news = 0); sent_mom = ewm span 3 minus span 20; days_since_news capped at 10. sent_mean is ranked only among stocks with news that date (no-news = 0, the centre); the other four are ranked across all 30 with average ties; has_news unchanged. `has_news` rate 81.4% and 0 mismatches against `news_daily_coverage.csv`.
+- **Macro (F2) raw features (10):** 5d change in VIX and 10Y; curve slope and its 5d change; 20d change in BAA10Y; 20d WTI dollar change; 20d USD return; 21-trading-day changes in CPI YoY, UNRATE, FEDFUNDS. Phase 3 transformer: z-score on training folds only, clip |z| at 5, then build the 8 interactions (`results/macro_recipe.json`). Known outliers: WTI change -56.5 on 2020-04-20, UNRATE change +10.4 (April 2020). Macro is identical across stocks on a date, so only the interactions can help ranking (why H2 is likely null).
+- **Targets:** built from the main price file only (warm-up never used). `target_rank` = (rank - 0.5)/30 - 0.5 (range -0.4833 to +0.4833); `target_ret5_xs` = demeaned return / (vol20 x sqrt(5)). Tails checked and real (QCOM Apr 2019 Apple settlement +51.7%; META Feb and Oct 2022; NEE Sep 2023 -22.7%); `target_ret5_xs` spans -12.3 to +18.9, so it is clipped at +/-5 for the XGBoost robustness run only.
+- **Power simulation** (`results/power_simulation.csv`; 239 weeks, block bootstrap L=4, 500 resamples, 300 sims per cell, seed 7): 80% power needs a true F1-F0 IC gain of about 0.015-0.032, depending on the F0/F1 IC correlation (0.7-0.9) and alpha (0.05 to 0.01). If each family had 80% power, P(3+ of 4 significant) is about 82%; at 50% it is about 31%. A null H1 is plausible and will be reported as a finding.
+- **Label sample:** many FNSPID headlines in the 200-headline sample are not about the tagged ticker (market wrap-ups, ETF flows, sector-update lists). The sample file has a `relevant` column (1/0) so the off-topic rate and on-topic F1 can be reported.
+- **QA gate:** `features/07_phase2_qa.py` passes 23/24 (look-ahead, NaN, row-alignment, centering, warm-up, NVDA gap, checksum and FinBERT cache checks). Remaining: 200-headline validation, macro F1 >= ~0.65 or queue a second scorer.
 
 ### 2.5 Ablation Design
 
@@ -189,7 +201,7 @@ Two independent axes — feature tier (what information is available) and model 
 **Significance**
 - Unit: weekly non-overlapping rank IC. Paired difference d_t tested with a block bootstrap (primary, 10,000 resamples) and HAC Diebold-Mariano with HLN correction (cross-check). Per-date IC averaged across the 7 paths before testing; paths are not treated as independent samples.
 - Primary family: 5 tests (H1 x 4 families, H2), BH at q = 0.05, BY as conservative check. All other tests: separate exploratory BH family.
-- Power simulation before modeling.
+- Power simulation: done 2026-10-15 (see 2.4.1; `results/power_simulation.csv`).
 - Deflated Sharpe ratio on weekly net Sharpe; N counted from tracker tags (core + robustness + variants; cost grids and nested tuning excluded); effective-N sensitivity; bar DSR >= 0.95.
 
 **Metrics**
@@ -225,8 +237,8 @@ No explicit sector cap — the market-cap ranking + coverage gate decide the fin
 | Phase | Focus | Status |
 |---|---|---|
 | 1 | Data collection & preprocessing | **Complete** (2026-10-07; warm-up data added 2026-10-14), QA 31/31 |
-| 2 | Feature engineering (technical, FinBERT sentiment, macro) | **Next** |
-| 3 | Model development (ablation matrix, MLflow tracking) | Planned |
+| 2 | Feature engineering (technical, FinBERT sentiment, macro) | **Built 2026-10-15**; QA 23/24, pending 200-headline FinBERT label validation |
+| 3 | Model development (ablation matrix, MLflow tracking) | **Next** (after Phase 2 closes) |
 | 4 | Evaluation (CPCV, IC, significance, SHAP) | Planned |
 | 5 | Backtesting (long-short vs equal-weight 30, F0, random, reversal baselines) | Planned |
 | 6 | Read-only results dashboard (FastAPI + React, local) | Planned, built last, first to cut |
@@ -237,13 +249,15 @@ No explicit sector cap — the market-cap ranking + coverage gate decide the fin
 ## 4. Open Decisions
 
 - [ ] Static sector mapping for the 30 tickers (groups >= 3 stocks) and snapshot date
-- [ ] Hand-label the 200-headline FinBERT validation sample (and decide second labeler)
-- [ ] Finalize exact technical feature list and check correlations (drop > 0.95)
-- [ ] Power simulation to confirm the minimum detectable IC difference
+- [ ] Hand-label the 200-headline FinBERT validation sample (sample generated: `results/labels/headline_sample.csv`, with a `relevant` column; labeling pending; decide second labeler)
+- [x] Finalize exact technical feature list and check correlations (done 2026-10-15: max |corr| 0.945, none dropped)
+- [x] Power simulation to confirm the minimum detectable IC difference (done 2026-10-15: about 0.015-0.032, see 2.4.1)
 - [ ] Set the end-of-Phase-3 deadline date for the LSTM fallback rule
 - [ ] Confirm Ken French factor data covers 2019-2023 and aligns to the trading calendar
+- [ ] Back up `data/` outside git (checksums recorded in `results/phase2_snapshot.json`)
+- [ ] Phase 3 transformer: fold-wise macro z-score (clip |z| at 5), 8 interactions, and +/-5 clip of `target_ret5_xs` for the robustness run
 
-Resolved: final 30 tickers; benchmark; target construction; CPCV configuration; NVDA robustness design; tracker; dashboard scope; first-60-day handling (dropped from all tiers); 2018-07 warm-up prices and untrimmed macro (done, see 2.3.3).
+Resolved: final 30 tickers; benchmark; target construction; CPCV configuration; NVDA robustness design; tracker; dashboard scope; first-60-day handling (dropped from all tiers); 2018-07 warm-up prices and untrimmed macro (done, see 2.3.3); Phase 2 feature build, targets and panel (done, see 2.4.1).
 
 ---
 
@@ -261,6 +275,9 @@ Resolved: final 30 tickers; benchmark; target construction; CPCV configuration; 
 | `data/prices/ohlcv_warmup.csv` | 3,780 rows (30 tickers × 126 days, 2018-07-02 → 2018-12-31); feature warm-up only |
 | `data/macro/fred_daily.csv` | 1,826 days × 9 indicators (2019-2023, used by QA) |
 | `data/macro/fred_daily_full.csv` | 2,010 days × 9 indicators (2018-07-01 → 2023-12-31); feature warm-up only |
+| `data/features/` (git-ignored) | `finbert_scores.parquet`, `f0_raw.parquet`, `f0_ranked.parquet`, `f1_sent_raw.parquet`, `f1_sent_ranked.parquet`, `f2_macro_raw.parquet`, `panel_phase2.parquet` |
+| `results/` (git-tracked) | `phase2_snapshot.json` (data checksums, package versions), `finbert_revision.txt`, `finbert_run.json`, `macro_recipe.json`, `power_simulation.csv`, `labels/headline_sample.csv` |
+| `docs/` (git-tracked) | `README.md`, `AGENTS.md`, `PLAN.md`, `BACKLOG.md`, `DESIGN.md`, `BRAND.md`, `SESSIONS.md`, `CONTEXT.md`, `DECISION_LOG.MD` |
 
 **Final news table schema:** `news_id, feature_date, ticker, source, text_type, text, published_utc, outlet, url, match_tier, assignment_rule`.
 
@@ -282,6 +299,21 @@ Resolved: final 30 tickers; benchmark; target construction; CPCV configuration; 
 | 16 | Phase 1 QA (31 checks incl. independent no-lookahead re-check) |
 
 Re-run order for a new ticker list: 7 → 9 → 10 → 11 → 12 → 13 → 14 → 16.
+
+### Feature scripts (`features/`)
+| Script | Purpose |
+|---|---|
+| `config.py` | Paths, ticker list, `FIRST_MODEL_DATE` (61st trading day of 2019), `FIRST_LSTM_INPUT_DATE`, FinBERT settings |
+| `00_snapshot.py` | Data checksums and package versions to `results/phase2_snapshot.json` |
+| `01_finbert_score.py` | FinBERT scoring, run once and cached (pinned revision in `results/finbert_revision.txt`) |
+| `01b_finbert_sanity.py` | Cache integrity, per-source score stats, fp16 vs fp32 check |
+| `02_make_label_sample.py` | 200-headline blind labeling sample (no model scores in the file) |
+| `03_f0_technical.py` | F0 features, rank-normalization, look-ahead test |
+| `04_sentiment_features.py` | F1 sentiment features, tests, coverage cross-check |
+| `05_macro_features.py` | F2 raw macro signals and interaction recipe |
+| `06_targets_panel.py` | Targets and the combined panel (`model_row` flag) |
+| `07_phase2_qa.py` | Phase 2 QA gate (24 checks, incl. FinBERT macro F1 once labeled; reports off-topic rate if `relevant` is filled) |
+| `08_power_sim.py` | Power simulation for the paired IC test |
 
 ---
 
@@ -330,3 +362,13 @@ The long-form log with reasoning lives in `docs/DECISION_LOG.MD`. Summary:
 | 2026-10-13 | Warm-up data: 2018-07 prices (separate file) and untrimmed 2017+ macro used only for rolling-feature warm-up; news stays 2019–2023 |
 | 2026-10-13 | First ~60 trading days of 2019 dropped from ALL tiers (F0/F1/F2) via a single FIRST_MODEL_DATE (61st trading day of 2019), so paired F1-vs-F0 tests use identical dates |
 | 2026-10-14 | Warm-up data fetched and verified (`ohlcv_warmup.csv`, `fred_daily_full.csv`); Phase 1 QA re-run 31/31; Phase 1 closed |
+| 2026-10-15 | Phase 2 F0: 12 technical features built and rank-normalized; correlation prune rule (> 0.95) not triggered (max 0.945), all kept; adjusted close confirmed |
+| 2026-10-15 | FinBERT run once (revision 0bc2ac10, fp16, max_length 160, 141,667 texts, 0 truncated); fp16 vs fp32 agreement 100%; NYT scores more negative than FNSPID (META is 63% NYT), handled by per-ticker z-score and the META-excluded robustness run |
+| 2026-10-15 | Sentiment build details: news-day-only 60d z-score (min 5 obs, std floor 0.10), abn_count z (min 20 days), ewm half-life 3, mom span 3 minus 20, sent_mean ranked among stocks with news (no-news = 0) |
+| 2026-10-15 | LSTM input window: features from 2019-03-04 (19 trading days before `FIRST_MODEL_DATE`) as LSTM inputs only; `model_row = False` there |
+| 2026-10-15 | Macro (F2) stored raw as 10 stationary signals; WTI uses 20d dollar change (not percent return); fold-wise z-score with |z| clipped at 5, then 8 interactions in the Phase 3 transformer |
+| 2026-10-15 | Targets built from main prices only; panel 35,790 model rows, 1,193 dates, 2019-03-29 to 2023-12-21 |
+| 2026-10-15 | Target tails inspected (real events); `target_ret5_xs` clipped at +/-5 for the XGBoost robustness run only |
+| 2026-10-15 | Sample-size correction (~239 weekly cross-sections, not ~245); power simulation: 80% power needs an IC gain of about 0.015-0.032; null H1 plausible |
+| 2026-10-15 | Phase 2 QA gate 23/24; remaining check is the 200-headline FinBERT validation |
+| 2026-10-19 | Docs restructure: CONTEXT.md and DECISION_LOG.MD moved to docs/; root README.md stays as the scope reference; project docs added |
