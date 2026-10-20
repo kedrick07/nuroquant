@@ -1,201 +1,201 @@
 sample_id,news_id,ticker,source,text,label,relevant
-1,9fc0c18894a822f3,PEP,fnspid,4 Dividend Stocks to Buy as Uncertainty Looms,,
-2,e69a5fe8548a2b00,GOOG,nyt,"U.S. tech companies are stepping up office perks, hoping to make employees feel happier about returning.. When Google employees returned to their mostly empty offices this month, they were told to relax. Office time should be “not only productive but also fun.” Explore the place a little. Don’t book back-to-back meetings.",,
-3,8ede75043c3b9c89,TXN,fnspid,"Jim Cramer Gives His Opinion On Nokia, Salesforce And More",,
-4,f98e558cefff39cb,PEP,fnspid,Amazon’s HQ2 Saga Continues While Capitol Hill Targets Buybacks,,
-5,bb712d46343ceb5d,WMT,fnspid,Amazon launches air freight service in India,,
-6,b9a55ff9e737fed1,INTC,nyt,"Intel Fixes a Security Flaw It Said Was Repaired 6 Months Ago. The chip maker patched several problems in May. Now it is issuing another fix, and researchers say the company hasn’t been straight about its issues.",,
-7,f9787c25163fca2a,AAPL,nyt,"Can E-Bikes Go Mainstream?. VanMoof, the Dutch e-bike company taking inspiration from Apple and Tesla, is one of the world’s hottest brands in a bike market remade by the pandemic. Will it help reshape urban transportation?",,
-8,6cee3ecc6d5058cf,ABBV,fnspid,AbbVie Announces EC Approval Of RINVOQ In Treatment Of Moderate To Severe Atopic Dermatitis,,
-9,e109f3db30865759,AMZN,fnspid,"Twitter, Square Will Mark Juneteenth As Holiday To Honor African-American Culture",,
-10,08aad215d5090086,AMZN,fnspid,Does Amazon's Jeff Bezos Smoke Weed?,,
-11,83e95bdd3862094e,CRM,fnspid,Amazon and Nestle join public-private plan to save world's forests,,
-12,046dd6c0e4f3cd65,CRM,fnspid,"Dow Movers: MMM, CRM",,
-13,c0a8192308ec9370,ABBV,fnspid,3 Top Dividend Stocks to Buy and Hold in 2023,,
-14,1610bb6e8c329a2f,ORCL,fnspid,"Benzinga's Top Upgrades, Downgrades For March 31, 2020",,
-15,b09758d63b0bbead,INTC,fnspid,"Pre-Market Most Active for Apr 28, 2023 : SQQQ, AMZN, FRC, SNAP, TQQQ, NOK, PBR, HKD, QQQ, TSLA, INTC, NET",,
-16,a2b4b9f2f160aaa7,INTC,fnspid,"Technology Sector Update for 01/19/2022: BKKT, ASML, INTC, VMEO, XLK, SOXX",,
-17,c64c852efd5810de,XOM,fnspid,Exxon Mobil Remains On Track To More Than Double Earnings By 2025,,
-18,142c503494474554,CRM,fnspid,How and When to Buy a New and Improved ChargePoint Stock,,
-19,d8db6830911b9497,INTC,fnspid,Intel Becomes Oversold,,
-20,58b8c220d2343b9c,ABBV,fnspid,"Annex Advisory Services, LLC Buys ProShares Short S&P5……, PIMCO Enhanced Short Maturity ...",,
-21,de815cee77ba8e14,CVX,fnspid,"EXCLUSIVE-Shell cuts low-carbon jobs, scales back hydrogen in overhaul by CEO",,
-22,a2da5111a16c6f80,AMD,fnspid,"IWF, MA, AMD, QCOM: Large Outflows Detected at ETF",,
-23,39ba252be7e0cb02,NKE,fnspid,Avoid the Short-Term Risk Embedded in This Shoe Retailer,,
-24,1169d3353ff73bc1,MRK,fnspid,LYNPARZA® (olaparib) Receives Positive Opinion from EU CHMP for First-Line Maintenance ...,,
-25,d5fc15c24020924a,CRM,fnspid,FLEX Stock Soars 24.3% YTD: Will the Momentum Continue?,,
-26,6802cc540cb58a05,XOM,fnspid,Stocks Close Lower Ahead of Thursday’s U.S. CPI Report,,
-27,e54b44dd322ac4b0,ORCL,fnspid,"Technology Sector Update for 03/11/2021: ORCL, SCWX, AAPL, XLK, SOXX",,
-28,86fad002a86d4e1d,PYPL,fnspid,Australian regulator accepts PayPal unit's undertaking for money laundering laws,,
-29,7b6f8b7be72bd860,TXN,fnspid,Why Texas Instruments Is a Retiree's Dream Stock,,
-30,41799487ead58189,AMD,fnspid,You’ll Go Far With Chip-Market Superstar AMD Stock,,
-31,bc0a56943db43b6e,NKE,fnspid,"Weekly Preview: Earnings to Watch This Week (ACN, FDX, NKE)",,
-32,761e74e2da9db79d,CRM,fnspid,3 Reasons Salesforce.com Stock Is a Buy After Q2 Earnings,,
-33,da0938f12deca8e9,GOOG,nyt,"Google Updates Bard Chatbot With ‘Gemini’ A.I. as It Chases ChatGPT. After more than eight months of research and development, Google has unveiled its most powerful A.I. so far. But only parts of it are widely available.",,
-34,e65698aaad5d5575,GOOG,nyt,"Catch up: Jack Dorsey says Twitter played a role in U.S. Capitol riot.. Lawmakers grilled the leaders of Facebook, Google and Twitter on Thursday about the connection between online disinformation and the Jan. 6 riot at the Capitol.",,
-35,4e058f7a94c5a086,GOOG,nyt,"YouTube Reaches Deal for N.F.L. Sunday Ticket. Tech giants including Apple, Amazon and YouTube’s owner, Google, pursued the rights to stream the N.F.L. games.",,
-36,ad4bbe2a524ec9d5,META,nyt,How Fake News on Facebook Helped Fuel a Border Crisis in Europe. Social media worsened a migrant crisis on the border of Belarus and Poland and helped smugglers profit off desperate people trying to reach Europe.,,
-37,72c7333807986e35,PYPL,fnspid,One Cryptocurrency to Buy and Hold Forever,,
-38,709cbb8c5761feb3,NVDA,fnspid,3 AI Stocks for Getting Rich in 2023,,
-39,71a7fdecb4f04717,XOM,nyt,How Exxon Lost a Board Battle With a Small Hedge Fund. The oil giant’s unexpected boardroom defeat by an activist investor hinged on a few key moments.,,
-40,5f917197c3885092,AMD,fnspid,Advanced Micro Devices’s Additions to Free Cash Flow Will Push It Much Higher,,
-41,b1accebc2d38cc08,WMT,fnspid,Why Walmart's Sell-Off Could Be a Buying Opportunity,,
-42,c416181424bacb30,KO,fnspid,Coca-Cola (KO) Stock Moves -0.15%: What You Should Know,,
-43,0af2e7f4da720a2e,NVDA,fnspid,Spread of Coronavirus Beyond China to Impact 2020 Semiconductor Market,,
-44,684dc848a4d9fbfc,AAPL,nyt,Apple faces E.U. antitrust charges over Apple Pay.. Regulators said Apple had blocked PayPal and others from access to technology in the iPhone that lets people make a purchase with a quick tap.,,
-45,cd9e781a42e627b1,AMD,fnspid,The Main Drivers of Microsoft Stock Are Still Intact,,
-46,5826c4d5260befa2,GOOG,nyt,You Don’t Need Flying Cars to Save Lives. Technology with potentially the biggest impact is often humdrum stuff that drags businesses and government agencies into the age of Google Maps and Zoom.,,
-47,6200c4d2ecfd2d8a,META,nyt,"Fighting False News in Ukraine, Facebook Fact Checkers Tread a Blurry Line. Facebook hired a Ukrainian group battling Russian disinformation to flag misleading posts. But critics say the fact checkers’ work veers into activism.",,
-48,f6159233df87fa4c,WFC,fnspid,"US STOCKS-Futures rise on dovish Fed tone, Middle East tensions weigh",,
-49,e6dbc3df4cb99a05,KO,fnspid,Coca-Cola Co (KO) Q3 2019 Earnings Call Transcript,,
-50,d075fff00b81890f,WFC,fnspid,5 Stocks That Just Increased Their Dividends,,
-51,a5e94445956f8d91,CRM,fnspid,"Technology Sector Update for 03/05/2019: VNET, WB, CRM, MSFT, AAPL, IBM, CSCO, GOOG",,
-52,7b2cbe5f0d912d9e,NKE,fnspid,Daily Markets: Trump Warned on Tariffs; Now It's Powell's Turn,,
-53,69c7350bcb7779ca,TMO,fnspid,This Is the Stock Warren Buffett Should Have Been Buying,,
-54,7ed923dde8135f0c,DHR,fnspid,3 Recession-Proof Stocks to Buy in January,,
-55,b9893dccaf633fd7,AMD,fnspid,2 Semiconductor Growth Stocks Powering the Metaverse,,
-56,185507eeb5494216,MRK,fnspid,"Health Care Sector Update for 04/01/2019: ZIOP, MNKD, UTHR, AZN, MRK, JNJ, PFE, ABT, AMGN",,
-57,5302f1340b8ad3c2,TMO,fnspid,AMN Healthcare (AMN) Q3 Earnings and Revenues Top Estimates,,
-58,7f52281456bae72b,DHR,fnspid,Danaher (DHR) Dips More Than Broader Markets: What You Should Know,,
-59,69447056a146a5ca,NVDA,fnspid,Is iShares Semiconductor ETF (SOXX) a Strong ETF Right Now?,,
-60,ea282b1ede98009a,ORCL,fnspid,"Wall Street skids on Omicron worry, obstacle to Biden social-spending package",,
-61,eeefb93fcf97f860,QCOM,fnspid,Nvidia offers EU concessions over $54 billion Arm deal,,
-62,5d2ee958cf663652,CRM,fnspid,4 Underrated Tech Stocks,,
-63,43f9dd57360e32e5,TXN,fnspid,"Ex-Dividend Reminder: Simulations Plus, Texas Instruments and Brinks",,
-64,3cc48be3af513ab0,COST,fnspid,"The Zacks Analyst Blog Highlights Target Corp., Costco Wholesale Corp., The Buckle, and Williams-Sonoma",,
-65,7085ac9860952302,DHR,fnspid,"Brinker Capital Inc Buys iShares Core –-5 Year USD Bond ETF, iShares Core S&P 5…… ...",,
-66,9db404ea6dffe47c,CVX,fnspid,Why $60 Oil Is No Problem for Chevron,,
-67,471284034e6f1813,GOOG,fnspid,How Will Apple's Earnings Trend As iDevice Sales Slow,,
-68,83f5c7bfd185bea4,ABBV,fnspid,Validea Peter Lynch Strategy Daily Upgrade Report - 2/25/2020,,
-69,0661caf5c812f3ae,PYPL,fnspid,"US STOCKS-Wall Street ends lower, pausing rally as Powell testimony looms",,
-70,8885400a2e1edd74,ABBV,fnspid,1 Healthcare Stock That Could Fly Higher After a Strong Q4,,
-71,72c25246b5f1a78a,MRK,nyt,"How Merck, a Vaccine Titan, Lost the Covid Race. After ending its own Covid-19 vaccine trials, the company said that it was actively discussing with governments how to help its competitors make their shots.",,
-72,98e5464c8501b7ce,TMO,fnspid,"Notable ETF Inflow Detected - IWV, TMO, KO, ABBV",,
-73,e13d74fa0bc5cbc6,COST,fnspid,"Notable Wednesday Option Activity: SIX, CVM, COST",,
-74,844ef8651599c7ab,NKE,fnspid,"The Zacks Analyst Blog Highlights: Nike, 3M, Vertex, PepsiCo and Verisk",,
-75,97793b6d1fbc750c,XOM,fnspid,Buy Exxon Mobil Stock While It’s Still Great,,
-76,9404fb2e99c09b40,MRK,fnspid,"This Pharma Giant Lost the Vaccine Race, But Its COVID-19 Journey May Not Be Over",,
-77,026b68f898eead41,PEP,fnspid,Thousands rally in rainy Glasgow for COP26 climate action,,
-78,bcde3856776862db,V,fnspid,"BUZZ-U.S. STOCKS ON THE MOVE-Raytheon, Planet Fitness, Lands End",,
-79,0e0d92d4695d2796,WMT,nyt,"Armed Man Who Caused Panic at Missouri Walmart Said It Was 2nd Amendment Test, Authorities Say. Dmitriy N. Andreychenko, 20, was charged with making a terrorist threat. He had entered the store carrying a tactical rifle, a handgun and 100 rounds of ammunition, the police said.",,
-80,cdb7f589fde73ad4,NEE,fnspid,Stocks That Hit 52-Week Highs On Tuesday,,
-81,4c8e5481df2783b2,DHR,fnspid,"Crane (CR) Beats Q4 Earnings Estimates, Gives Promising View",,
-82,8f5352b9ed71972e,PYPL,fnspid,Paypal (PYPL) Dips More Than Broader Markets: What You Should Know,,
-83,513dc21e8f6a27e5,ACN,fnspid,Accenture (ACN) Stock Moves -0.48%: What You Should Know,,
-84,9698c058a9cc872c,AMZN,fnspid,5 Top-Performing ETFs of Last Week,,
-85,43f91d53cc88348e,XOM,fnspid,"Analysts Share Stocks They Would Buy In This Environment: Exxon Mobil, P&G And More",,
-86,a7f981311464015e,META,fnspid,Facebook Expects To Scale Its Headcount To Support Growth Initiatives Related To Coronavirus Pandemic,,
-87,2d25f4230d8a5695,WMT,fnspid,Dow Jones Today: It Was a Good Day…Finally,,
-88,34ab52d71e7a6c4d,WMT,fnspid,Inflation Is Burning This Burger Chain's Profits,,
-89,2d4d4f0f568a2ecc,AAPL,nyt,Apple Announces New Privacy Features. Apple says it will make it tougher for apps to track you. It will also help you wash your hands.,,
-90,d3b04f9cbc2be84c,DHR,fnspid,"Telos Capital Management, Inc. Buys Bristol-Myers Squibb Company, Mastercard Inc, Visa Inc, ...",,
-91,980571f8b17260d3,TXN,fnspid,3 Dividend ETFs to Consider Buying with Your Tax Return,,
-92,c3c941f74a37917e,MRK,nyt,"Merck’s Covid pill is cleared for high-risk adults.. The F.D.A. said the drug was not a preferred treatment, but could be used when alternate treatment options were “not accessible or clinically appropriate.”",,
-93,6ef20b257f8b5ce0,COST,fnspid,Does This Santa Claus Rally Still Have Legs?,,
-94,bc742b963fa8419d,WFC,fnspid,"PFF, DWFI: Big ETF Outflows",,
-95,58bc486cb4f75933,NKE,fnspid,3 Strong-Buy-Rated Retail Stocks to Play a Consumer Recovery,,
-96,d1330b01397d5dbb,TMO,fnspid,S&P 500 Analyst Moves: TMO,,
-97,8af55632a22266f9,XOM,fnspid,It’s Time to Take Advantage of the Weakness in Exxon Mobil Stock,,
-98,9e3eab6ffb79dcee,V,fnspid,Why Visa Stock Dropped Today,,
-99,a60ea6ef78a62026,V,fnspid,"Australia's central bank tells 'buy now, pay later' firms to drop surcharge ban",,
-100,4b558c809479576a,MRK,fnspid,iShares Edge MSCI USA Momentum Factor ETF Experiences Big Outflow,,
-101,010365463adae6a2,ADBE,fnspid,"S&P 500 Movers: GPS, NVDA",,
-102,07f052bd65390117,CRM,fnspid,US STOCKS-Wall St mixed as vaccine hopes collide with poor jobs data,,
-103,0058a6d96ab143fd,GOOG,nyt,Google Creates $100 Million Fund for Skills Training Program. The project is a big bet on scaling up programs that have proved effective in lifting low-income workers into middle-class jobs and careers.,,
-104,96b45ef856f0b161,META,nyt,"GoodRx Leaked User Health Data to Facebook and Google, F.T.C. Says. The popular drug discount app deceptively shared details on users’ illnesses and medicines with ad firms, regulators said in a legal complaint.",,
-105,d09d4dd03fca7a03,INTC,fnspid,"Technology Sector Update for 04/26/2019: INTC, TYPE, HBB, MSFT, AAPL, CSCO, IBM, GOOG",,
-106,1979eab92465ca0c,META,nyt,"Academic Behind Cambridge Analytica Data Mining Sues Facebook for Defamation. Aleksandr Kogan, a former psychology professor, said Facebook defamed him when it claimed he lied about how the data was going to be used.",,
-107,7096a9d3faacff1a,ACN,fnspid,"Cramer Gives His Opinion On Synopsys, Cisco And More",,
-108,c4a17a715e260b41,ABT,fnspid,3 Value Stocks to Buy if the Stock Market Implodes,,
-109,3e33632b12f8fd92,AMD,fnspid,Will Advanced Micro Devices Stock Recover From This Month’s Selloff?,,
-110,4073add8e82e8208,AMZN,nyt,"Amazon Plans to Lay Off Another 9,000 Employees. The cuts follow a round of layoffs announced several months ago that affected more than 18,000 jobs.",,
-111,d03d4d4e906d10c4,NVDA,fnspid,Why Nvidia Stock Jumped Today,,
-112,593e9b6cf0efe1d4,TMO,fnspid,"IVW, CRM, TMO, LIN: ETF Inflow Alert",,
-113,9486bcdebdb3fa62,WFC,fnspid,"At $53, U.S. Bancorp Stock Is Costly",,
-114,20f31777f318c48a,GOOG,nyt,"How Siri, Alexa and Google Assistant Lost the A.I. Race. The virtual assistants had more than a decade to become indispensable. But they were hampered by clunky design and miscalculations, leaving room for chatbots to rise.",,
-115,daa424053078f2fc,META,nyt,"Facebook will ban political ads indefinitely after polls close on Nov. 3, as alarm rises over the election.. Facebook is planning new steps to limit misinformation about the election and its results.",,
-116,fa62ea07793551a0,CRM,fnspid,Missed Out On Salesforce? My Best CRM Stock to Buy and Hold,,
-117,3f2bc4e5b86511bd,WFC,fnspid,Wells Fargo: Value or Value Trap?,,
-118,a7293e2247f19f6c,AMD,fnspid,"Notable Friday Option Activity: BAC, AMD, KMX",,
-119,2f6a2f9ded29cb02,AAPL,fnspid,"Shares of several technology, software and semiconductor companies are trading lower as equities sell off amid continued global coronavirus concerns. The virus has caused global economic disruption and negatively impacted stocks across sectors.",,
-120,ef5c8bcc615be83d,MRK,fnspid,Shares of several drug companies are trading higher after Senate Majority Leader McConnell suggested a new Democratic drug price reform proposal would be dead on arrival.,,
-121,714185da017fbc84,ORCL,fnspid,Adobe's Stock To Continue Growing?,,
-122,74d534c0ac2103f7,TMO,fnspid,Thermo Fisher Scientific declares $0.19 dividend,,
-123,2b8330836c10dd00,ADBE,fnspid,Shares of companies in the software space are trading higher in sympathy with the overall market.,,
-124,89942f3c9c94a82d,ABT,fnspid,"1 High-Flying Growth Stock With 19% Upside, According to Wall Street",,
-125,51ec444bd7079619,CVX,fnspid,GRAPHIC-U.S. equity funds lure inflows for third straight week,,
-126,00427cf4b19b52aa,QCOM,fnspid,"Rosenblatt Initiates Coverage On Qualcomm with Buy Rating, Announces Price Target of $105",,
-127,8ecf9d54f0edf5ce,AMD,fnspid,Advanced Micro Devices Stock Poised for More Gains,,
-128,e92c52b98edf4472,ABT,fnspid,3 Things to Cheer About in Abbott's Earnings Report,,
-129,c3f5afd5aac62b2f,PEP,fnspid,"A Look at GoodRx, Inari, and Amwell",,
-130,2239f31dd2c2dcb8,COST,fnspid,Burlington Stores (BURL) to Post Q4 Earnings: What's in Store?,,
-131,a9a5cb73b18dc332,ABT,fnspid,"Health Care Sector Update for 01/23/2019: BLPH, ATHX, JNJ, PFE, MRK, ABT, AMGN",,
-132,1cb906b79a30de06,WMT,fnspid,10 Stocks You Can Set and Forget (Even In This Market),,
-133,b98fbdbf9d6b7288,PYPL,fnspid,Was This Gap's Comeback Quarter?,,
-134,92848aa35cbc8a51,AMD,fnspid,"After Hours Most Active for Feb 16, 2022 : BABA, ZNGA, NVDA, DASH, PM, TWTR, LUMN, AAPL, V, CSCO, AMD, MSFT",,
-135,afee9eb1032210f2,TMO,fnspid,TMO Crosses Above Average Analyst Target,,
-136,eb34766ffdc22b93,DHR,fnspid,Danaher Prices 11M Share Offering @$123/Share,,
-137,29ee7e837490069f,AMZN,nyt,"Can We Put a Price Tag on Nature?. Oil is lucrative, protecting the Amazon is not. We visited a community that has to live with the consequences.",,
-138,09b9c54eb7634283,AMD,fnspid,7 Semiconductor Stocks to Buy as Deals Shake Up the Industry,,
-139,2e8b59325adfa31f,NKE,fnspid,GameStop (GME) Q4 Earnings and Revenues Surpass Estimates,,
-140,63e80368323bfb1f,AMZN,fnspid,"Hedge Fund Duquesne 13F Shows Increased Stakes In Facebook, Alibaba, Netflix, Amazon, Google, Alnylman",,
-141,9d39d9d1349acfd2,GOOG,fnspid,How Much Damage Will Departure of Top Executives Cause for Uber Stock?,,
-142,ca02dac69866d012,COST,fnspid,"Sprouts Farmers (SFM) Q2 Earnings Beat, Comps Up 2% Y/Y",,
-143,2ee9f0b2ca94ca68,PYPL,fnspid,5 Great Stocks to Buy in July,,
-144,8dadd1e0f57f5611,QCOM,fnspid,"Technology Sector Update for 04/13/2022: QCOM,S,CTS,MGGT.L,INFY",,
-145,f4060a6db0d6a067,AMZN,nyt,"Strains Emerge Inside the Union That Beat Amazon. Nearly a year after its victory on Staten Island, the Amazon Labor Union is grappling with election losses and internal conflict.",,
-146,cf0b5ef27f750208,PEP,fnspid,Why Celsius Holdings Stock Popped This Week,,
-147,1dca552ec16a02ea,GOOG,nyt,"Google Agrees to $392 Million Privacy Settlement With 40 States. Under the agreement, which state attorneys general said was the largest U.S. internet privacy settlement, Google must also make its location-tracking practices clearer to users.",,
-148,5c4393880d460881,ADBE,fnspid,"Notable Monday Option Activity: SYY, ADBE, ABBV",,
-149,de272f06ca3dc175,COST,fnspid,The Worst Mistake Costco Investors Can Make Right Now,,
-150,aacbfe664b34dd1a,DHR,fnspid,Interesting DHR Put And Call Options For October 21st,,
-151,623d324e3eb14472,AMD,fnspid,AMD Stock: Bear vs. Bull,,
-152,6f99daa724752825,TMO,fnspid,"Health Care Sector Update for 03/03/2020: CEMI,QGEN,TMO,KMPH,SPEX",,
-153,9f71190459ff570e,CRM,fnspid,ServiceNow CEO John Donahoe Chases Change,,
-154,95a9af951407a5d4,PEP,fnspid,"Company News For Feb 19, 2019",,
-155,3eb75d0cd11f668f,ORCL,fnspid,ORCL Factor-Based Stock Analysis,,
-156,937ac5f1771a6ba3,CRM,fnspid,How Is the Pandemic Affecting Commercial Real Estate,,
-157,cd95864c176280bd,ACN,fnspid,"OEF, ACN, DIS, NEE: ETF Outflow Alert",,
-158,1108fd4ef992e2eb,ADBE,fnspid,Adobe taps startup Bolt to add one-click checkouts to commerce sites,,
-159,6cd758ce1e959093,MRK,fnspid,TREASURIES-U.S. 10-year yield skids to three-week low on nagging virus woes,,
-160,ffe18e9542465343,AAPL,fnspid,"No, the Success of Top Gun: Maverick Isn’t Enough to Save AMC Stock",,
-161,fc2556a736598bfb,GOOG,nyt,"DealBook Briefing: Tech’s Cold War Just Started. Google, Qualcomm and Broadcom are among the companies that have reportedly frozen their supply of components and software to Huawei.",,
-162,46af48818a11cacb,AMZN,nyt,"Dozens of websites go down in a widespread internet outage.. American Express, Amazon and Delta Air Lines were among the affected companies.",,
-163,ae94d027abc69824,V,fnspid,"Before You Buy Capital One, Here's a Bank Stock I'd Buy First",,
-164,9b7f6a787206d2ac,CRM,fnspid,"Salesforce.com's Stock Fell By 13% Last Month, What Next?",,
-165,a206ca364a5ead0d,CRM,fnspid,Subscription Revenues to Boost NY Times' (NYT) Growth in 2023,,
-166,27ddd03bbd451a8e,META,nyt,"DealBook Briefing: Europe Deals a Big Blow to Facebook. The E.U.’s top court ruled that an individual country can order the social network to take down content worldwide, adding new burden to global internet companies.",,
-167,b59fcfc95f082b0c,QCOM,fnspid,"Nasdaq 100 Movers: QCOM, CMCSA",,
-168,8abe533a73ebe451,AMD,fnspid,Friday's ETF with Unusual Volume: IUS,,
-169,abefad0f150e20bb,XOM,fnspid,Exxon Mobil Q2 EPS $0.73 Beats $0.69 Estimate,,
-170,0443200cf36b2b05,ACN,fnspid,Accenture Boosts FY21 Outlook; Raises Dividend 10% - Quick Facts,,
-171,d96251351c013ad2,ACN,fnspid,"The Zacks Analyst Blog Highlights UnitedHealth Group, Accenture, Union Pacific, The Boeing Company and Prologis",,
-172,ba5e745cfd8671f8,QCOM,fnspid,"Noteworthy ETF Outflows: IWB, AMGN, LLY, QCOM",,
-173,fbfae07654c82d42,ABT,fnspid,3 Dividend Stocks I'd Buy Right Now,,
-174,316b29702a14de8b,AMZN,nyt,Amazon Makes No Promises on Bezos Testimony. The company said it would be happy to send someone to testify. But it never mentions Jeff Bezos.,,
-175,6c9ea4767aee5c20,INTC,fnspid,Big Intros For Model Y And Captain Marvel? (Stocks To Watch Podcast),,
-176,59102c72bc35c494,NVDA,fnspid,"You're Entering the ""Show-Me State"" As Chip Firms Get Ready To Report",,
-177,b6ede91646b0a764,WFC,fnspid,Wells Fargo Cuts Dividend by 80%,,
-178,cb9bcf97d2aaa6ab,TXN,fnspid,"Bridger Capital Management, Llc Buys Edwards Lifesciences Corp, KLA Corp, Thomson Reuters Corp, ...",,
-179,c6a03f995b1e86a8,ACN,nyt,"Julie Sweet to Run Accenture, Adding a Woman to the Ranks of Corporate C.E.O.s. Her appointment raises the number of women at the helm of the most valuable U.S. public companies to 27, but that is just slightly more than 5 percent of those firms.",,
-180,9c1dd6b67eae2607,QCOM,fnspid,"EXCLUSIVE-Renault, Nissan aim to announce deal on reshaped alliance on Feb 6 -sources",,
-181,876119be91e531dd,QCOM,fnspid,3 Chip Stocks With the Fundamentals to Survive the Bumpy Ride,,
-182,43c385e26b256c33,ORCL,fnspid,"Notable Friday Option Activity: STX, WBA, ORCL",,
-183,dde8366abce33e9a,ACN,fnspid,"Notable Wednesday Option Activity: ACN, WFC, F",,
-184,08e5804349a3c245,WFC,fnspid,3 Bank Stocks to Sleep Soundly Through the Pandemic,,
-185,0bf64af76816e215,NVDA,fnspid,Nvidia (NVDA) is a Top-Ranked Momentum Stock: Should You Buy?,,
-186,2b197a96e1868bc8,V,fnspid,"Noteworthy Monday Option Activity: RIOT, V, AEO",,
-187,95259984172cfb20,META,nyt,"QAnon Believers Say Being Banned From Facebook Is Proof of the Conspiracy. Hours after Facebook cracked down on all QAnon groups, pages, and Instagram accounts, conspiracists integrated the prohibition into their narrative.",,
-188,9ae223ab213028f7,ACN,fnspid,S&P 500 Analyst Moves: ACN,,
-189,66df0df2111f0579,CRM,fnspid,"Why Amazon, Nvidia, and Salesforce Stocks Popped Today",,
-190,7a4b6a13060477e6,KO,fnspid,Today Is a Great Day to Buy Coca-Cola Stock,,
-191,86d5faca4974e798,PYPL,fnspid,"Financial Sector Update for 07/10/2019: PYPL,MAA,RILY",,
-192,a29bc8f0b50c10f4,ABT,fnspid,Abbott's (ABT) Q1 Earnings and Revenues Exceed Estimates,,
-193,310bd2a03d0a31ad,CVX,fnspid,Chevron (CVX) Q1 2023 Earnings Call Transcript,,
-194,2a8f9df54f3cb6ee,ABBV,fnspid,7 Dividend Aristocrats That Will Outlive Us All,,
-195,df7be6ebd7f4eb92,INTC,fnspid,5 Best Nanotech Stocks To Snap Up for 10X Potential,,
-196,d113aae813ce2c60,NVDA,fnspid,US STOCKS-Wall St set to open lower as jobs growth boosts rate hike bets,,
-197,e78a2c38d01e5429,CRM,fnspid,Calendar Apps Can Do Wonders And Not Only For Your Schedule,,
-198,b337e01f907c0484,INTC,fnspid,"Marvell Technology Group Ltd. (MRVL) Ex-Dividend Date Scheduled for April 02, 2019",,
-199,78e1ae5782c24dc2,ADBE,fnspid,"Take the Zacks Approach to Beat the Markets: Celsius, Adobe, Curtiss-Wright in Focus",,
-200,9bbd2af557d9b692,WMT,fnspid,"Consumer Sector Update for 09/14/2023: F, GM, STLA, WMT, SG, SJM, TWNK",,
+1,9fc0c18894a822f3,PEP,fnspid,4 Dividend Stocks to Buy as Uncertainty Looms,neutral,0
+2,e69a5fe8548a2b00,GOOG,nyt,"U.S. tech companies are stepping up office perks, hoping to make employees feel happier about returning.. When Google employees returned to their mostly empty offices this month, they were told to relax. Office time should be “not only productive but also fun.” Explore the place a little. Don’t book back-to-back meetings.",positive,1
+3,8ede75043c3b9c89,TXN,fnspid,"Jim Cramer Gives His Opinion On Nokia, Salesforce And More",neutral,0
+4,f98e558cefff39cb,PEP,fnspid,Amazon’s HQ2 Saga Continues While Capitol Hill Targets Buybacks,neutral,0
+5,bb712d46343ceb5d,WMT,fnspid,Amazon launches air freight service in India,neutral,0
+6,b9a55ff9e737fed1,INTC,nyt,"Intel Fixes a Security Flaw It Said Was Repaired 6 Months Ago. The chip maker patched several problems in May. Now it is issuing another fix, and researchers say the company hasn’t been straight about its issues.",negative,1
+7,f9787c25163fca2a,AAPL,nyt,"Can E-Bikes Go Mainstream?. VanMoof, the Dutch e-bike company taking inspiration from Apple and Tesla, is one of the world’s hottest brands in a bike market remade by the pandemic. Will it help reshape urban transportation?",neutral,0
+8,6cee3ecc6d5058cf,ABBV,fnspid,AbbVie Announces EC Approval Of RINVOQ In Treatment Of Moderate To Severe Atopic Dermatitis,positive,1
+9,e109f3db30865759,AMZN,fnspid,"Twitter, Square Will Mark Juneteenth As Holiday To Honor African-American Culture",neutral,0
+10,08aad215d5090086,AMZN,fnspid,Does Amazon's Jeff Bezos Smoke Weed?,negative,1
+11,83e95bdd3862094e,CRM,fnspid,Amazon and Nestle join public-private plan to save world's forests,neutral,0
+12,046dd6c0e4f3cd65,CRM,fnspid,"Dow Movers: MMM, CRM",positive,1
+13,c0a8192308ec9370,ABBV,fnspid,3 Top Dividend Stocks to Buy and Hold in 2023,positive,1
+14,1610bb6e8c329a2f,ORCL,fnspid,"Benzinga's Top Upgrades, Downgrades For March 31, 2020",neutral,1
+15,b09758d63b0bbead,INTC,fnspid,"Pre-Market Most Active for Apr 28, 2023 : SQQQ, AMZN, FRC, SNAP, TQQQ, NOK, PBR, HKD, QQQ, TSLA, INTC, NET",positive,1
+16,a2b4b9f2f160aaa7,INTC,fnspid,"Technology Sector Update for 01/19/2022: BKKT, ASML, INTC, VMEO, XLK, SOXX",positive,1
+17,c64c852efd5810de,XOM,fnspid,Exxon Mobil Remains On Track To More Than Double Earnings By 2025,positive,1
+18,142c503494474554,CRM,fnspid,How and When to Buy a New and Improved ChargePoint Stock,neutral,0
+19,d8db6830911b9497,INTC,fnspid,Intel Becomes Oversold,neutral,1
+20,58b8c220d2343b9c,ABBV,fnspid,"Annex Advisory Services, LLC Buys ProShares Short S&P5……, PIMCO Enhanced Short Maturity ...",neutral,0
+21,de815cee77ba8e14,CVX,fnspid,"EXCLUSIVE-Shell cuts low-carbon jobs, scales back hydrogen in overhaul by CEO",neutral,0
+22,a2da5111a16c6f80,AMD,fnspid,"IWF, MA, AMD, QCOM: Large Outflows Detected at ETF",negative,1
+23,39ba252be7e0cb02,NKE,fnspid,Avoid the Short-Term Risk Embedded in This Shoe Retailer,neutral,0
+24,1169d3353ff73bc1,MRK,fnspid,LYNPARZA® (olaparib) Receives Positive Opinion from EU CHMP for First-Line Maintenance ...,positive,1
+25,d5fc15c24020924a,CRM,fnspid,FLEX Stock Soars 24.3% YTD: Will the Momentum Continue?,neutral,0
+26,6802cc540cb58a05,XOM,fnspid,Stocks Close Lower Ahead of Thursday’s U.S. CPI Report,neutral,0
+27,e54b44dd322ac4b0,ORCL,fnspid,"Technology Sector Update for 03/11/2021: ORCL, SCWX, AAPL, XLK, SOXX",neutral,1
+28,86fad002a86d4e1d,PYPL,fnspid,Australian regulator accepts PayPal unit's undertaking for money laundering laws,positive,1
+29,7b6f8b7be72bd860,TXN,fnspid,Why Texas Instruments Is a Retiree's Dream Stock,positive,1
+30,41799487ead58189,AMD,fnspid,You’ll Go Far With Chip-Market Superstar AMD Stock,positive,1
+31,bc0a56943db43b6e,NKE,fnspid,"Weekly Preview: Earnings to Watch This Week (ACN, FDX, NKE)",positive,1
+32,761e74e2da9db79d,CRM,fnspid,3 Reasons Salesforce.com Stock Is a Buy After Q2 Earnings,positive,1
+33,da0938f12deca8e9,GOOG,nyt,"Google Updates Bard Chatbot With ‘Gemini’ A.I. as It Chases ChatGPT. After more than eight months of research and development, Google has unveiled its most powerful A.I. so far. But only parts of it are widely available.",positive,1
+34,e65698aaad5d5575,GOOG,nyt,"Catch up: Jack Dorsey says Twitter played a role in U.S. Capitol riot.. Lawmakers grilled the leaders of Facebook, Google and Twitter on Thursday about the connection between online disinformation and the Jan. 6 riot at the Capitol.",negative,1
+35,4e058f7a94c5a086,GOOG,nyt,"YouTube Reaches Deal for N.F.L. Sunday Ticket. Tech giants including Apple, Amazon and YouTube’s owner, Google, pursued the rights to stream the N.F.L. games.",positive,1
+36,ad4bbe2a524ec9d5,META,nyt,How Fake News on Facebook Helped Fuel a Border Crisis in Europe. Social media worsened a migrant crisis on the border of Belarus and Poland and helped smugglers profit off desperate people trying to reach Europe.,negative,1
+37,72c7333807986e35,PYPL,fnspid,One Cryptocurrency to Buy and Hold Forever,positive,1
+38,709cbb8c5761feb3,NVDA,fnspid,3 AI Stocks for Getting Rich in 2023,positive,1
+39,71a7fdecb4f04717,XOM,nyt,How Exxon Lost a Board Battle With a Small Hedge Fund. The oil giant’s unexpected boardroom defeat by an activist investor hinged on a few key moments.,negative,1
+40,5f917197c3885092,AMD,fnspid,Advanced Micro Devices’s Additions to Free Cash Flow Will Push It Much Higher,positive,1
+41,b1accebc2d38cc08,WMT,fnspid,Why Walmart's Sell-Off Could Be a Buying Opportunity,positive,1
+42,c416181424bacb30,KO,fnspid,Coca-Cola (KO) Stock Moves -0.15%: What You Should Know,negative,1
+43,0af2e7f4da720a2e,NVDA,fnspid,Spread of Coronavirus Beyond China to Impact 2020 Semiconductor Market,negative,1
+44,684dc848a4d9fbfc,AAPL,nyt,Apple faces E.U. antitrust charges over Apple Pay.. Regulators said Apple had blocked PayPal and others from access to technology in the iPhone that lets people make a purchase with a quick tap.,negative,1
+45,cd9e781a42e627b1,AMD,fnspid,The Main Drivers of Microsoft Stock Are Still Intact,positive,1
+46,5826c4d5260befa2,GOOG,nyt,You Don’t Need Flying Cars to Save Lives. Technology with potentially the biggest impact is often humdrum stuff that drags businesses and government agencies into the age of Google Maps and Zoom.,neutral,0
+47,6200c4d2ecfd2d8a,META,nyt,"Fighting False News in Ukraine, Facebook Fact Checkers Tread a Blurry Line. Facebook hired a Ukrainian group battling Russian disinformation to flag misleading posts. But critics say the fact checkers’ work veers into activism.",negative,1
+48,f6159233df87fa4c,WFC,fnspid,"US STOCKS-Futures rise on dovish Fed tone, Middle East tensions weigh",neutral,0
+49,e6dbc3df4cb99a05,KO,fnspid,Coca-Cola Co (KO) Q3 2019 Earnings Call Transcript,neutral,1
+50,d075fff00b81890f,WFC,fnspid,5 Stocks That Just Increased Their Dividends,positive,1
+51,a5e94445956f8d91,CRM,fnspid,"Technology Sector Update for 03/05/2019: VNET, WB, CRM, MSFT, AAPL, IBM, CSCO, GOOG",positive,1
+52,7b2cbe5f0d912d9e,NKE,fnspid,Daily Markets: Trump Warned on Tariffs; Now It's Powell's Turn,negative,1
+53,69c7350bcb7779ca,TMO,fnspid,This Is the Stock Warren Buffett Should Have Been Buying,positive,1
+54,7ed923dde8135f0c,DHR,fnspid,3 Recession-Proof Stocks to Buy in January,positive,1
+55,b9893dccaf633fd7,AMD,fnspid,2 Semiconductor Growth Stocks Powering the Metaverse,positive,1
+56,185507eeb5494216,MRK,fnspid,"Health Care Sector Update for 04/01/2019: ZIOP, MNKD, UTHR, AZN, MRK, JNJ, PFE, ABT, AMGN",positive,1
+57,5302f1340b8ad3c2,TMO,fnspid,AMN Healthcare (AMN) Q3 Earnings and Revenues Top Estimates,neutral,0
+58,7f52281456bae72b,DHR,fnspid,Danaher (DHR) Dips More Than Broader Markets: What You Should Know,negative,1
+59,69447056a146a5ca,NVDA,fnspid,Is iShares Semiconductor ETF (SOXX) a Strong ETF Right Now?,neutral,0
+60,ea282b1ede98009a,ORCL,fnspid,"Wall Street skids on Omicron worry, obstacle to Biden social-spending package",neutral,0
+61,eeefb93fcf97f860,QCOM,fnspid,Nvidia offers EU concessions over $54 billion Arm deal,neutral,0
+62,5d2ee958cf663652,CRM,fnspid,4 Underrated Tech Stocks,positive,1
+63,43f9dd57360e32e5,TXN,fnspid,"Ex-Dividend Reminder: Simulations Plus, Texas Instruments and Brinks",neutral,1
+64,3cc48be3af513ab0,COST,fnspid,"The Zacks Analyst Blog Highlights Target Corp., Costco Wholesale Corp., The Buckle, and Williams-Sonoma",neutral,1
+65,7085ac9860952302,DHR,fnspid,"Brinker Capital Inc Buys iShares Core –-5 Year USD Bond ETF, iShares Core S&P 5…… ...",neutral,0
+66,9db404ea6dffe47c,CVX,fnspid,Why $60 Oil Is No Problem for Chevron,positive,1
+67,471284034e6f1813,GOOG,fnspid,How Will Apple's Earnings Trend As iDevice Sales Slow,neutral,0
+68,83f5c7bfd185bea4,ABBV,fnspid,Validea Peter Lynch Strategy Daily Upgrade Report - 2/25/2020,positive,1
+69,0661caf5c812f3ae,PYPL,fnspid,"US STOCKS-Wall Street ends lower, pausing rally as Powell testimony looms",neutral,0
+70,8885400a2e1edd74,ABBV,fnspid,1 Healthcare Stock That Could Fly Higher After a Strong Q4,positive,1
+71,72c25246b5f1a78a,MRK,nyt,"How Merck, a Vaccine Titan, Lost the Covid Race. After ending its own Covid-19 vaccine trials, the company said that it was actively discussing with governments how to help its competitors make their shots.",negative,1
+72,98e5464c8501b7ce,TMO,fnspid,"Notable ETF Inflow Detected - IWV, TMO, KO, ABBV",positive,1
+73,e13d74fa0bc5cbc6,COST,fnspid,"Notable Wednesday Option Activity: SIX, CVM, COST",positive,1
+74,844ef8651599c7ab,NKE,fnspid,"The Zacks Analyst Blog Highlights: Nike, 3M, Vertex, PepsiCo and Verisk",positive,1
+75,97793b6d1fbc750c,XOM,fnspid,Buy Exxon Mobil Stock While It’s Still Great,positive,1
+76,9404fb2e99c09b40,MRK,fnspid,"This Pharma Giant Lost the Vaccine Race, But Its COVID-19 Journey May Not Be Over",negative,1
+77,026b68f898eead41,PEP,fnspid,Thousands rally in rainy Glasgow for COP26 climate action,neutral,0
+78,bcde3856776862db,V,fnspid,"BUZZ-U.S. STOCKS ON THE MOVE-Raytheon, Planet Fitness, Lands End",neutral,0
+79,0e0d92d4695d2796,WMT,nyt,"Armed Man Who Caused Panic at Missouri Walmart Said It Was 2nd Amendment Test, Authorities Say. Dmitriy N. Andreychenko, 20, was charged with making a terrorist threat. He had entered the store carrying a tactical rifle, a handgun and 100 rounds of ammunition, the police said.",negative,1
+80,cdb7f589fde73ad4,NEE,fnspid,Stocks That Hit 52-Week Highs On Tuesday,neutral,0
+81,4c8e5481df2783b2,DHR,fnspid,"Crane (CR) Beats Q4 Earnings Estimates, Gives Promising View",positive,1
+82,8f5352b9ed71972e,PYPL,fnspid,Paypal (PYPL) Dips More Than Broader Markets: What You Should Know,negative,1
+83,513dc21e8f6a27e5,ACN,fnspid,Accenture (ACN) Stock Moves -0.48%: What You Should Know,neutral,1
+84,9698c058a9cc872c,AMZN,fnspid,5 Top-Performing ETFs of Last Week,neutral,0
+85,43f91d53cc88348e,XOM,fnspid,"Analysts Share Stocks They Would Buy In This Environment: Exxon Mobil, P&G And More",positive,1
+86,a7f981311464015e,META,fnspid,Facebook Expects To Scale Its Headcount To Support Growth Initiatives Related To Coronavirus Pandemic,neutral,1
+87,2d25f4230d8a5695,WMT,fnspid,Dow Jones Today: It Was a Good Day…Finally,neutral,0
+88,34ab52d71e7a6c4d,WMT,fnspid,Inflation Is Burning This Burger Chain's Profits,neutral,0
+89,2d4d4f0f568a2ecc,AAPL,nyt,Apple Announces New Privacy Features. Apple says it will make it tougher for apps to track you. It will also help you wash your hands.,positive,1
+90,d3b04f9cbc2be84c,DHR,fnspid,"Telos Capital Management, Inc. Buys Bristol-Myers Squibb Company, Mastercard Inc, Visa Inc, ...",neutral,0
+91,980571f8b17260d3,TXN,fnspid,3 Dividend ETFs to Consider Buying with Your Tax Return,neutral,0
+92,c3c941f74a37917e,MRK,nyt,"Merck’s Covid pill is cleared for high-risk adults.. The F.D.A. said the drug was not a preferred treatment, but could be used when alternate treatment options were “not accessible or clinically appropriate.”",positive,1
+93,6ef20b257f8b5ce0,COST,fnspid,Does This Santa Claus Rally Still Have Legs?,neutral,0
+94,bc742b963fa8419d,WFC,fnspid,"PFF, DWFI: Big ETF Outflows",neutral,0
+95,58bc486cb4f75933,NKE,fnspid,3 Strong-Buy-Rated Retail Stocks to Play a Consumer Recovery,positive,1
+96,d1330b01397d5dbb,TMO,fnspid,S&P 500 Analyst Moves: TMO,neutral,1
+97,8af55632a22266f9,XOM,fnspid,It’s Time to Take Advantage of the Weakness in Exxon Mobil Stock,positive,1
+98,9e3eab6ffb79dcee,V,fnspid,Why Visa Stock Dropped Today,negative,1
+99,a60ea6ef78a62026,V,fnspid,"Australia's central bank tells 'buy now, pay later' firms to drop surcharge ban",negative,1
+100,4b558c809479576a,MRK,fnspid,iShares Edge MSCI USA Momentum Factor ETF Experiences Big Outflow,neutral,0
+101,010365463adae6a2,ADBE,fnspid,"S&P 500 Movers: GPS, NVDA",neutral,0
+102,07f052bd65390117,CRM,fnspid,US STOCKS-Wall St mixed as vaccine hopes collide with poor jobs data,neutral,0
+103,0058a6d96ab143fd,GOOG,nyt,Google Creates $100 Million Fund for Skills Training Program. The project is a big bet on scaling up programs that have proved effective in lifting low-income workers into middle-class jobs and careers.,positive,1
+104,96b45ef856f0b161,META,nyt,"GoodRx Leaked User Health Data to Facebook and Google, F.T.C. Says. The popular drug discount app deceptively shared details on users’ illnesses and medicines with ad firms, regulators said in a legal complaint.",negative,1
+105,d09d4dd03fca7a03,INTC,fnspid,"Technology Sector Update for 04/26/2019: INTC, TYPE, HBB, MSFT, AAPL, CSCO, IBM, GOOG",neutral,1
+106,1979eab92465ca0c,META,nyt,"Academic Behind Cambridge Analytica Data Mining Sues Facebook for Defamation. Aleksandr Kogan, a former psychology professor, said Facebook defamed him when it claimed he lied about how the data was going to be used.",negative,1
+107,7096a9d3faacff1a,ACN,fnspid,"Cramer Gives His Opinion On Synopsys, Cisco And More",neutral,1
+108,c4a17a715e260b41,ABT,fnspid,3 Value Stocks to Buy if the Stock Market Implodes,positive,1
+109,3e33632b12f8fd92,AMD,fnspid,Will Advanced Micro Devices Stock Recover From This Month’s Selloff?,neutral,1
+110,4073add8e82e8208,AMZN,nyt,"Amazon Plans to Lay Off Another 9,000 Employees. The cuts follow a round of layoffs announced several months ago that affected more than 18,000 jobs.",negative,1
+111,d03d4d4e906d10c4,NVDA,fnspid,Why Nvidia Stock Jumped Today,positive,1
+112,593e9b6cf0efe1d4,TMO,fnspid,"IVW, CRM, TMO, LIN: ETF Inflow Alert",neutral,0
+113,9486bcdebdb3fa62,WFC,fnspid,"At $53, U.S. Bancorp Stock Is Costly",neutral,0
+114,20f31777f318c48a,GOOG,nyt,"How Siri, Alexa and Google Assistant Lost the A.I. Race. The virtual assistants had more than a decade to become indispensable. But they were hampered by clunky design and miscalculations, leaving room for chatbots to rise.",negative,1
+115,daa424053078f2fc,META,nyt,"Facebook will ban political ads indefinitely after polls close on Nov. 3, as alarm rises over the election.. Facebook is planning new steps to limit misinformation about the election and its results.",negative,1
+116,fa62ea07793551a0,CRM,fnspid,Missed Out On Salesforce? My Best CRM Stock to Buy and Hold,positive,1
+117,3f2bc4e5b86511bd,WFC,fnspid,Wells Fargo: Value or Value Trap?,neutral,1
+118,a7293e2247f19f6c,AMD,fnspid,"Notable Friday Option Activity: BAC, AMD, KMX",neutral,0
+119,2f6a2f9ded29cb02,AAPL,fnspid,"Shares of several technology, software and semiconductor companies are trading lower as equities sell off amid continued global coronavirus concerns. The virus has caused global economic disruption and negatively impacted stocks across sectors.",neutral,0
+120,ef5c8bcc615be83d,MRK,fnspid,Shares of several drug companies are trading higher after Senate Majority Leader McConnell suggested a new Democratic drug price reform proposal would be dead on arrival.,positive,1
+121,714185da017fbc84,ORCL,fnspid,Adobe's Stock To Continue Growing?,neutral,0
+122,74d534c0ac2103f7,TMO,fnspid,Thermo Fisher Scientific declares $0.19 dividend,neutral,1
+123,2b8330836c10dd00,ADBE,fnspid,Shares of companies in the software space are trading higher in sympathy with the overall market.,neutral,1
+124,89942f3c9c94a82d,ABT,fnspid,"1 High-Flying Growth Stock With 19% Upside, According to Wall Street",positive,1
+125,51ec444bd7079619,CVX,fnspid,GRAPHIC-U.S. equity funds lure inflows for third straight week,neutral,0
+126,00427cf4b19b52aa,QCOM,fnspid,"Rosenblatt Initiates Coverage On Qualcomm with Buy Rating, Announces Price Target of $105",positive,1
+127,8ecf9d54f0edf5ce,AMD,fnspid,Advanced Micro Devices Stock Poised for More Gains,positive,1
+128,e92c52b98edf4472,ABT,fnspid,3 Things to Cheer About in Abbott's Earnings Report,positive,1
+129,c3f5afd5aac62b2f,PEP,fnspid,"A Look at GoodRx, Inari, and Amwell",neutral,0
+130,2239f31dd2c2dcb8,COST,fnspid,Burlington Stores (BURL) to Post Q4 Earnings: What's in Store?,neutral,0
+131,a9a5cb73b18dc332,ABT,fnspid,"Health Care Sector Update for 01/23/2019: BLPH, ATHX, JNJ, PFE, MRK, ABT, AMGN",neutral,1
+132,1cb906b79a30de06,WMT,fnspid,10 Stocks You Can Set and Forget (Even In This Market),neutral,1
+133,b98fbdbf9d6b7288,PYPL,fnspid,Was This Gap's Comeback Quarter?,neutral,0
+134,92848aa35cbc8a51,AMD,fnspid,"After Hours Most Active for Feb 16, 2022 : BABA, ZNGA, NVDA, DASH, PM, TWTR, LUMN, AAPL, V, CSCO, AMD, MSFT",neutral,0
+135,afee9eb1032210f2,TMO,fnspid,TMO Crosses Above Average Analyst Target,positive,1
+136,eb34766ffdc22b93,DHR,fnspid,Danaher Prices 11M Share Offering @$123/Share,neutral,1
+137,29ee7e837490069f,AMZN,nyt,"Can We Put a Price Tag on Nature?. Oil is lucrative, protecting the Amazon is not. We visited a community that has to live with the consequences.",neutral,0
+138,09b9c54eb7634283,AMD,fnspid,7 Semiconductor Stocks to Buy as Deals Shake Up the Industry,positive,1
+139,2e8b59325adfa31f,NKE,fnspid,GameStop (GME) Q4 Earnings and Revenues Surpass Estimates,neutral,0
+140,63e80368323bfb1f,AMZN,fnspid,"Hedge Fund Duquesne 13F Shows Increased Stakes In Facebook, Alibaba, Netflix, Amazon, Google, Alnylman",neutral,1
+141,9d39d9d1349acfd2,GOOG,fnspid,How Much Damage Will Departure of Top Executives Cause for Uber Stock?,neutral,0
+142,ca02dac69866d012,COST,fnspid,"Sprouts Farmers (SFM) Q2 Earnings Beat, Comps Up 2% Y/Y",neutral,0
+143,2ee9f0b2ca94ca68,PYPL,fnspid,5 Great Stocks to Buy in July,positive,1
+144,8dadd1e0f57f5611,QCOM,fnspid,"Technology Sector Update for 04/13/2022: QCOM,S,CTS,MGGT.L,INFY",neutral,1
+145,f4060a6db0d6a067,AMZN,nyt,"Strains Emerge Inside the Union That Beat Amazon. Nearly a year after its victory on Staten Island, the Amazon Labor Union is grappling with election losses and internal conflict.",negative,1
+146,cf0b5ef27f750208,PEP,fnspid,Why Celsius Holdings Stock Popped This Week,positive,1
+147,1dca552ec16a02ea,GOOG,nyt,"Google Agrees to $392 Million Privacy Settlement With 40 States. Under the agreement, which state attorneys general said was the largest U.S. internet privacy settlement, Google must also make its location-tracking practices clearer to users.",negative,1
+148,5c4393880d460881,ADBE,fnspid,"Notable Monday Option Activity: SYY, ADBE, ABBV",neutral,0
+149,de272f06ca3dc175,COST,fnspid,The Worst Mistake Costco Investors Can Make Right Now,neutral,1
+150,aacbfe664b34dd1a,DHR,fnspid,Interesting DHR Put And Call Options For October 21st,neutral,0
+151,623d324e3eb14472,AMD,fnspid,AMD Stock: Bear vs. Bull,neutral,1
+152,6f99daa724752825,TMO,fnspid,"Health Care Sector Update for 03/03/2020: CEMI,QGEN,TMO,KMPH,SPEX",neutral,1
+153,9f71190459ff570e,CRM,fnspid,ServiceNow CEO John Donahoe Chases Change,neutral,0
+154,95a9af951407a5d4,PEP,fnspid,"Company News For Feb 19, 2019",neutral,1
+155,3eb75d0cd11f668f,ORCL,fnspid,ORCL Factor-Based Stock Analysis,neutral,1
+156,937ac5f1771a6ba3,CRM,fnspid,How Is the Pandemic Affecting Commercial Real Estate,neutral,0
+157,cd95864c176280bd,ACN,fnspid,"OEF, ACN, DIS, NEE: ETF Outflow Alert",neutral,0
+158,1108fd4ef992e2eb,ADBE,fnspid,Adobe taps startup Bolt to add one-click checkouts to commerce sites,positive,1
+159,6cd758ce1e959093,MRK,fnspid,TREASURIES-U.S. 10-year yield skids to three-week low on nagging virus woes,neutral,0
+160,ffe18e9542465343,AAPL,fnspid,"No, the Success of Top Gun: Maverick Isn’t Enough to Save AMC Stock",negative,1
+161,fc2556a736598bfb,GOOG,nyt,"DealBook Briefing: Tech’s Cold War Just Started. Google, Qualcomm and Broadcom are among the companies that have reportedly frozen their supply of components and software to Huawei.",negative,1
+162,46af48818a11cacb,AMZN,nyt,"Dozens of websites go down in a widespread internet outage.. American Express, Amazon and Delta Air Lines were among the affected companies.",negative,1
+163,ae94d027abc69824,V,fnspid,"Before You Buy Capital One, Here's a Bank Stock I'd Buy First",neutral,1
+164,9b7f6a787206d2ac,CRM,fnspid,"Salesforce.com's Stock Fell By 13% Last Month, What Next?",negative,1
+165,a206ca364a5ead0d,CRM,fnspid,Subscription Revenues to Boost NY Times' (NYT) Growth in 2023,neutral,0
+166,27ddd03bbd451a8e,META,nyt,"DealBook Briefing: Europe Deals a Big Blow to Facebook. The E.U.’s top court ruled that an individual country can order the social network to take down content worldwide, adding new burden to global internet companies.",negative,1
+167,b59fcfc95f082b0c,QCOM,fnspid,"Nasdaq 100 Movers: QCOM, CMCSA",neutral,0
+168,8abe533a73ebe451,AMD,fnspid,Friday's ETF with Unusual Volume: IUS,neutral,0
+169,abefad0f150e20bb,XOM,fnspid,Exxon Mobil Q2 EPS $0.73 Beats $0.69 Estimate,positive,1
+170,0443200cf36b2b05,ACN,fnspid,Accenture Boosts FY21 Outlook; Raises Dividend 10% - Quick Facts,positive,1
+171,d96251351c013ad2,ACN,fnspid,"The Zacks Analyst Blog Highlights UnitedHealth Group, Accenture, Union Pacific, The Boeing Company and Prologis",neutral,1
+172,ba5e745cfd8671f8,QCOM,fnspid,"Noteworthy ETF Outflows: IWB, AMGN, LLY, QCOM",neutral,0
+173,fbfae07654c82d42,ABT,fnspid,3 Dividend Stocks I'd Buy Right Now,positive,1
+174,316b29702a14de8b,AMZN,nyt,Amazon Makes No Promises on Bezos Testimony. The company said it would be happy to send someone to testify. But it never mentions Jeff Bezos.,neutral,1
+175,6c9ea4767aee5c20,INTC,fnspid,Big Intros For Model Y And Captain Marvel? (Stocks To Watch Podcast),neutral,0
+176,59102c72bc35c494,NVDA,fnspid,"You're Entering the ""Show-Me State"" As Chip Firms Get Ready To Report",neutral,1
+177,b6ede91646b0a764,WFC,fnspid,Wells Fargo Cuts Dividend by 80%,negative,1
+178,cb9bcf97d2aaa6ab,TXN,fnspid,"Bridger Capital Management, Llc Buys Edwards Lifesciences Corp, KLA Corp, Thomson Reuters Corp, ...",neutral,0
+179,c6a03f995b1e86a8,ACN,nyt,"Julie Sweet to Run Accenture, Adding a Woman to the Ranks of Corporate C.E.O.s. Her appointment raises the number of women at the helm of the most valuable U.S. public companies to 27, but that is just slightly more than 5 percent of those firms.",positive,1
+180,9c1dd6b67eae2607,QCOM,fnspid,"EXCLUSIVE-Renault, Nissan aim to announce deal on reshaped alliance on Feb 6 -sources",neutral,0
+181,876119be91e531dd,QCOM,fnspid,3 Chip Stocks With the Fundamentals to Survive the Bumpy Ride,positive,1
+182,43c385e26b256c33,ORCL,fnspid,"Notable Friday Option Activity: STX, WBA, ORCL",neutral,0
+183,dde8366abce33e9a,ACN,fnspid,"Notable Wednesday Option Activity: ACN, WFC, F",neutral,0
+184,08e5804349a3c245,WFC,fnspid,3 Bank Stocks to Sleep Soundly Through the Pandemic,positive,1
+185,0bf64af76816e215,NVDA,fnspid,Nvidia (NVDA) is a Top-Ranked Momentum Stock: Should You Buy?,positive,1
+186,2b197a96e1868bc8,V,fnspid,"Noteworthy Monday Option Activity: RIOT, V, AEO",neutral,0
+187,95259984172cfb20,META,nyt,"QAnon Believers Say Being Banned From Facebook Is Proof of the Conspiracy. Hours after Facebook cracked down on all QAnon groups, pages, and Instagram accounts, conspiracists integrated the prohibition into their narrative.",negative,1
+188,9ae223ab213028f7,ACN,fnspid,S&P 500 Analyst Moves: ACN,neutral,1
+189,66df0df2111f0579,CRM,fnspid,"Why Amazon, Nvidia, and Salesforce Stocks Popped Today",positive,1
+190,7a4b6a13060477e6,KO,fnspid,Today Is a Great Day to Buy Coca-Cola Stock,positive,1
+191,86d5faca4974e798,PYPL,fnspid,"Financial Sector Update for 07/10/2019: PYPL,MAA,RILY",neutral,1
+192,a29bc8f0b50c10f4,ABT,fnspid,Abbott's (ABT) Q1 Earnings and Revenues Exceed Estimates,positive,1
+193,310bd2a03d0a31ad,CVX,fnspid,Chevron (CVX) Q1 2023 Earnings Call Transcript,neutral,1
+194,2a8f9df54f3cb6ee,ABBV,fnspid,7 Dividend Aristocrats That Will Outlive Us All,positive,1
+195,df7be6ebd7f4eb92,INTC,fnspid,5 Best Nanotech Stocks To Snap Up for 10X Potential,positive,1
+196,d113aae813ce2c60,NVDA,fnspid,US STOCKS-Wall St set to open lower as jobs growth boosts rate hike bets,neutral,0
+197,e78a2c38d01e5429,CRM,fnspid,Calendar Apps Can Do Wonders And Not Only For Your Schedule,neutral,0
+198,b337e01f907c0484,INTC,fnspid,"Marvell Technology Group Ltd. (MRVL) Ex-Dividend Date Scheduled for April 02, 2019",neutral,0
+199,78e1ae5782c24dc2,ADBE,fnspid,"Take the Zacks Approach to Beat the Markets: Celsius, Adobe, Curtiss-Wright in Focus",positive,1
+200,9bbd2af557d9b692,WMT,fnspid,"Consumer Sector Update for 09/14/2023: F, GM, STLA, WMT, SG, SJM, TWNK",neutral,1

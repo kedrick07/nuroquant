@@ -77,3 +77,5 @@
 2026-10-15 | Phase 2 QA gate (07_phase2_qa.py): 23/24 passing; remaining check is the 200-headline FinBERT validation (labels pending).
 
 2026-10-19 | Docs restructure: CONTEXT.md and DECISION_LOG.MD moved to docs/; root README.md stays as the scope reference; project docs added (README, AGENTS, PLAN, BACKLOG, DESIGN, BRAND, SESSIONS).
+
+2026-10-20 | FinBERT validation: 200 headlines hand-labeled by the author (blind to scores; label p/n/u, relevant 1/0). Pre-declared extension rule: if the 95% bootstrap CI of macro F1 includes 0.65, label 200 more (new seed, no overlap). No LLM labels used for validation.
