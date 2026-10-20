@@ -7,6 +7,7 @@
 This document is the single source of truth for project scope. When a decision changes, update it here first — everything else (code, thesis chapters, Gantt chart) should follow this file, not the other way around.
 
 **Status (2026-10-14): Phase 1 complete and closed (QA 31/31; warm-up data added and checked). Evaluation design frozen (see 2.6 and Decision Log). Next: Phase 2 (feature engineering).**
+Project docs (plan, backlog, agents, design, brand, sessions): see docs/.
 
 ---
 
@@ -286,7 +287,7 @@ Re-run order for a new ticker list: 7 → 9 → 10 → 11 → 12 → 13 → 14 �
 
 ## 6. Decision Log
 
-The long-form log with reasoning lives in `DECISION_LOG.MD`. Summary:
+The long-form log with reasoning lives in `docs/DECISION_LOG.MD`. Summary:
 
 | Date | Change |
 |---|---|
