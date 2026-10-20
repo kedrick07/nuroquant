@@ -1,6 +1,6 @@
 # AGENTS
 
-Last updated: 2026-10-19
+Last updated: 2026-10-20
 
 Rules for any AI assistant working on NuroQuant. Read this file, CONTEXT.md and PLAN.md before answering.
 
@@ -21,11 +21,14 @@ Rules for any AI assistant working on NuroQuant. Read this file, CONTEXT.md and 
 - Change alignment rules (FNSPID t+1, NYT 16:00 ET) without a logged trial.
 - Print tokens or commit .env. The Hugging Face token lives in the HUGGINGFACE_TOKEN environment variable.
 - Commit anything under data/ (git-ignored).
+- Re-run features/02_make_label_sample.py after labeling (it overwrites the labels file).
+- Edit results/labels/headline_sample_human.csv (frozen human labels).
 
 ## Conventions
 - FIRST_MODEL_DATE (2019-03-29) and FIRST_LSTM_INPUT_DATE (2019-03-04) come from features/config.py. Never hard-code dates.
 - Features at date t use data up to t only. Scalers are fit inside training folds.
 - Primary target is target_rank. Primary metric is weekly rank IC.
+- Primary sentiment scorer is ProsusAI/finbert. yiyanghkust/finbert-tone is a robustness variant only.
 - Every new run gets a trial_id (MLflow tag).
 
 ## Git rules
@@ -33,8 +36,8 @@ Rules for any AI assistant working on NuroQuant. Read this file, CONTEXT.md and 
 - Run git pull before editing. Check the first line of README.md after any merge.
 - Commit messages say what changed, for example: docs: update BACKLOG after Phase 2 QA.
 
-## Environment (from results/phase2_snapshot.json, 2026-10-15)
-Python 3.12.9, torch 2.14.1+cu130, transformers 5.19.0, pandas 3.0.6, numpy 2.5.3, scikit-learn 1.9.1, xgboost 3.4.1, mlflow 3.17.1. GPU: RTX 4050 Laptop, 6.1 GB VRAM.
+## Environment (from results/phase2_snapshot.json, 2026-10-20)
+Python 3.14.8 on Fedora, torch 2.14.1+cu130, transformers 5.19.0, pandas 3.0.6, numpy 2.5.3, scikit-learn 1.9.1, xgboost 3.4.1, mlflow 3.17.1. GPU: RTX 4050 Laptop, 6.1 GB VRAM (as of 2026-10-15). The original Python 3.12.9 snapshot is results/phase2_snapshot_2026-10-15.json.
 
 ## Doc update protocol
 At the end of any major change, update the docs and push them to the dev branch (docs/ folder) in one commit.
@@ -46,7 +49,7 @@ Major change = a phase milestone, a QA result, a design or scope decision, a new
 | SESSIONS.md | Every major change (what was done, findings, active state) |
 | BACKLOG.md | Every major change (move items, add new ones) |
 | PLAN.md | Phase status, scope or risk changes |
-| README.md (this folder) | Status, setup or run steps change |
+| SETUP.md | Setup or run steps change |
 | DESIGN.md, BRAND.md | UI or wording rules change |
 | DECISION_LOG.MD, CONTEXT.md (this folder) and ../README.md (repo root) | Decisions or phase end (separate commit, ask first) |
 
