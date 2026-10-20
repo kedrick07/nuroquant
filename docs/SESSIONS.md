@@ -5,12 +5,16 @@ Last updated: 2026-10-20
 Newest first. Each entry: what was done, findings, pending items.
 
 ## Active state (2026-10-20)
-- Branch dev holds all Phase 2 work (last code commit 285ae20, 2026-10-20). main is at ae19c97 (Phase 1 close, tag phase1-complete).
-- Phase 2 is complete on dev: QA gate 24/24. Merge to main and tag phase2-complete are pending.
-- Primary sentiment scorer: ProsusAI/finbert (validation macro F1 0.516). Second scorer queued as a robustness variant: yiyanghkust/finbert-tone, all articles scored.
+- Branch dev holds all Phase 2 work (merge commit 3a9af53, 2026-10-20). main is at ae19c97 (Phase 1 close, tag phase1-complete).
+- Phase 2 is complete on dev: QA gate 24/24, docs and Decision Log up to date. Merge to main and tag phase2-complete are pending (author).
+- Primary sentiment scorer: ProsusAI/finbert (validation macro F1 0.516). Robustness variant: yiyanghkust/finbert-tone, all articles scored.
 - Environment: Fedora, Python 3.14.8 (package versions unchanged from the 2026-10-15 snapshot).
 - No LSTM calendar deadline (logged 2026-10-20). data/ backup not confirmed.
-- Pending cleanup: remove duplicate 2026-10-20 entries in DECISION_LOG.MD (second scorer and environment each appear twice); refresh CONTEXT.md status.
+
+## 2026-10-20 (late) - Phase 2 close-out docs
+- Pushed SETUP.md and updated SESSIONS, BACKLOG, PLAN, AGENTS (78b6a0e). The author removed the duplicate Decision Log entries (25ac6da) and merged (3a9af53); nothing was lost in the merge.
+- Updated the root README (status, phase table, open decisions, validation result, scripts 09-12, 10-20 decision rows) and CONTEXT.md to the Phase 2 complete state; added a closing Decision Log entry.
+- Phase progress reports are kept outside the repo (no docs/reports/).
 
 ## 2026-10-20 - Phase 2 closed on dev
 - Hand-labeled 200 headlines (101 neutral, 67 positive, 32 negative; 68 off-topic) in results/labels/headline_sample.csv; frozen copy in headline_sample_human.csv.
@@ -19,7 +23,7 @@ Newest first. Each entry: what was done, findings, pending items.
 - QA check 24 now follows the written acceptance rule (F1 >= 0.65 or a second scorer queued): 24/24.
 - Environment changed to Fedora, Python 3.14.8; old snapshot kept as results/phase2_snapshot_2026-10-15.json.
 - Decision: no LSTM calendar deadline; if LSTM is dropped, the fallback applies and is logged before Phase 4 significance results are viewed.
-- Added scripts 09-12 (labeling, F1 CI, scorer comparison, finbert-tone scoring). Root README (40,721 bytes) and CONTEXT.md refreshed. docs/README.md removed (root README is the README); setup and run steps moved to SETUP.md.
+- Added scripts 09-12 (labeling, F1 CI, scorer comparison, finbert-tone scoring). docs/README.md removed (root README is the README); setup and run steps moved to SETUP.md.
 
 ## 2026-10-19 to 2026-10-20 - Docs restructure
 - CONTEXT.md and DECISION_LOG.MD moved into docs/ (ed01f69), paths fixed (00c8858), CONTEXT.md refreshed (8fd994d), .gitignore fixed (9762d66), root README replaced.

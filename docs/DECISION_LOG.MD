@@ -89,3 +89,5 @@
 2026-10-20 | Phase 2 QA gate check 24 now implements the written acceptance rule: macro F1 >= 0.65 OR a second scorer queued (finbert_tone_revision.txt and finbert_tone_scores.parquet present). F1 is still printed. QA gate 24/24.
 
 2026-10-20 | LSTM fallback: no calendar deadline set; LSTM F0/F1 are committed to be completed. If LSTM is ever dropped, the time-based fallback (H1 needs 2 of 3 families, BH over 4 tests) applies and the decision must be made and logged before any Phase 4 significance results are viewed.
+
+2026-10-20 | Phase 2 closed on dev: QA gate 24/24 and all acceptance checks met (no look-ahead, no NaNs, identical F0/F1/F2 rows, warm-up separation; FinBERT validation fallback satisfied by the queued second scorer). Primary scorer ProsusAI/finbert (F1 0.516); finbert-tone robustness scores ready. Merge of dev into main and the phase2-complete tag are done separately by the author; the merge commit is recorded in docs/SESSIONS.md. Phase 3 (models) is next. Phase progress reports are kept outside the repo.
