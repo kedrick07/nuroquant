@@ -6,15 +6,12 @@ Order = priority. Move items between sections; never delete done items.
 
 ## Now
 - [ ] Back up data/ outside git (checksums are in results/phase2_snapshot.json).
-- [ ] Remove duplicate 2026-10-20 entries in DECISION_LOG.MD (second scorer and environment each appear twice).
-- [ ] Refresh CONTEXT.md for the Phase 2 close (QA 24/24, second scorer, environment).
-- [ ] Merge dev into main and tag phase2-complete (git tag phase2-complete; git push --tags).
-- [ ] Write the Phase 2 progress report; add the Phase 1 report and the report template to docs/reports/.
+- [ ] Merge dev into main and tag phase2-complete (git tag phase2-complete; git push --tags); then record the merge commit in SESSIONS.md.
 
 ## Next (Phase 3)
 - [ ] Add requirements.txt with pinned versions (see AGENTS.md environment).
-- [ ] Fold-wise transformer: macro z-score on training folds, clip |z| at 5, build the 8 interactions (results/macro_recipe.json).
 - [ ] CPCV splitter (N=8, k=2, purge 5, embargo 20) with a unit test for label-window overlap.
+- [ ] Fold-wise transformer: macro z-score on training folds, clip |z| at 5, build the 8 interactions (results/macro_recipe.json).
 - [ ] MLflow setup: SQLite backend, tags trial_id, trial_family, counts_toward_N; log git hash and data checksums.
 - [ ] Run order: Ridge, XGBoost, Random Forest, LSTM; same splits and seeds for all.
 - [ ] Nested tuning (inner 4-fold purged blocks, LSTM 2), small grids, 3 seeds.
@@ -45,3 +42,7 @@ Order = priority. Move items between sections; never delete done items.
 - [x] QA gate acceptance rule implemented; Phase 2 QA 24/24 (2026-10-20).
 - [x] Environment change and snapshot re-recorded; LSTM fallback decision logged (2026-10-20).
 - [x] Scripts 09-12 pushed to dev (2026-10-20).
+- [x] Duplicate Decision Log entries removed (2026-10-20).
+- [x] Root README and CONTEXT.md updated to the Phase 2 complete state; closing Decision Log entry added (2026-10-20).
+- [x] Phase progress reports are kept outside the repo, not in docs/reports/ (decided 2026-10-20).
+- [x] Phase 2 closed on dev (2026-10-20).
