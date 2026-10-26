@@ -1,23 +1,22 @@
 # BACKLOG
 
-Last updated: 2026-10-20
+Last updated: 2026-10-26
 
 Order = priority. Move items between sections; never delete done items.
 
-## Now
-- [ ] Back up data/ outside git (checksums are in results/phase2_snapshot.json).
-- [ ] Merge dev into main and tag phase2-complete (git tag phase2-complete; git push --tags); then record the merge commit in SESSIONS.md.
+## Now (3.1)
+- [ ] CPCV splitter (N=8, k=2, purge 5, embargo 20) with a unit test for label-window overlap.
 
 ## Next (Phase 3)
-- [ ] Add requirements.txt with pinned versions (see AGENTS.md environment).
-- [ ] CPCV splitter (N=8, k=2, purge 5, embargo 20) with a unit test for label-window overlap.
-- [ ] Fold-wise transformer: macro z-score on training folds, clip |z| at 5, build the 8 interactions (results/macro_recipe.json).
-- [ ] MLflow setup: SQLite backend, tags trial_id, trial_family, counts_toward_N; log git hash and data checksums.
-- [ ] Run order: Ridge, XGBoost, Random Forest, LSTM; same splits and seeds for all.
-- [ ] Nested tuning (inner 4-fold purged blocks, LSTM 2), small grids, 3 seeds.
-- [ ] Alt-sentiment features from finbert_tone_scores.parquet: parameterize 04_sentiment_features.py (scores file, output suffix) so the primary F1 files are never overwritten.
-- [ ] XGBoost robustness runs: mask NVDA gap, exclude META, target_ret5_xs clipped at +/-5, 60-day embargo, summary_extra, finbert-tone sentiment.
-- [ ] Milestone CSV export of MLflow runs to results/.
+- [ ] 3.2 Fold-wise transformer: macro z-score on training folds, clip |z| at 5, build the 8 interactions (results/macro_recipe.json); shifted-fold test.
+- [ ] 3.3 MLflow setup: SQLite backend, tags trial_id, trial_family, counts_toward_N; log git hash and data checksums; fix seeds and splits.
+- [ ] 3.4 Run order: Ridge, XGBoost, Random Forest; same splits and seeds for all.
+- [ ] 3.4 Nested tuning (inner 4-fold purged blocks, LSTM 2), small grids, 3 seeds.
+- [ ] 3.5 LSTM F0/F1 (20-day lookback, no window needs rows before 2019-03-04).
+- [ ] 3.6 Alt-sentiment features from finbert_tone_scores.parquet: parameterize 04_sentiment_features.py (scores file, output suffix) so the primary F1 files are never overwritten.
+- [ ] 3.6 XGBoost robustness runs: mask NVDA gap, exclude META, target_ret5_xs clipped at +/-5, 60-day embargo, summary_extra, finbert-tone sentiment.
+- [ ] 3.7 Milestone CSV export of MLflow runs to results/; Phase 3 QA gate and report.
+- [ ] Optional: slim requirements.txt (it is a full pip freeze; check wrapt rc pin and the duplicate nvidia-nccl entries).
 
 ## Later
 - [ ] Phase 4: significance tests (block bootstrap, HAC DM with HLN, BH and BY), group SHAP and permutation importance, static GICS sector map (groups >= 3), Ken French factor data check for 2019-2023.
@@ -46,3 +45,8 @@ Order = priority. Move items between sections; never delete done items.
 - [x] Root README and CONTEXT.md updated to the Phase 2 complete state; closing Decision Log entry added (2026-10-20).
 - [x] Phase progress reports are kept outside the repo, not in docs/reports/ (decided 2026-10-20).
 - [x] Phase 2 closed on dev (2026-10-20).
+- [x] Tag phase2-complete on main (c80280a) (2026-10-20).
+- [x] requirements.txt with pinned versions added (d728b05, 2026-10-26).
+- [x] requirements.txt verified in a clean venv: pip install OK, pip check clean, versions match the snapshot, 07_phase2_qa.py 24/24 (2026-10-26).
+- [x] data/ backed up outside git (confirmed by the author, 2026-10-26).
+- [x] dev merged into main via PR #1, merge commit 97729b7 (2026-10-26).

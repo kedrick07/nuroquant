@@ -1,6 +1,6 @@
 # PLAN
 
-Last updated: 2026-10-20
+Last updated: 2026-10-26
 
 ## Goal
 Test, under a pre-registered design, whether FinBERT headline sentiment (H1) and macro context (H2) improve weekly cross-sectional ranking of 30 US large caps over 2019-2023.
@@ -32,12 +32,24 @@ Among 30 well-covered, 2019-era large-cap survivors over 2019-2023, does FinBERT
 | Phase | Focus | Status |
 |---|---|---|
 | 1 | Data collection and preprocessing | Done (QA 31/31) |
-| 2 | Feature engineering | Done on dev (QA 24/24); merge to main and tag pending |
-| 3 | Models, MLflow tracking | Next |
+| 2 | Feature engineering | Done (QA 24/24); merged to main, tag phase2-complete |
+| 3 | Models, MLflow tracking | In progress (3.0 done, 3.1 next) |
 | 4 | Evaluation: CPCV, IC, significance, SHAP | Planned |
 | 5 | Backtest vs equal-weight-30, F0, random, reversal | Planned |
 | 6 | Read-only dashboard (FastAPI + React, local) | Planned, built last, first to cut |
 | 7 | Cloud deployment | Cut |
+
+## Phase 3 subphases
+| Sub | Focus | Status |
+|---|---|---|
+| 3.0 | Close-out: data backup, requirements.txt verified, dev merged to main, docs | Done (2026-10-26) |
+| 3.1 | CPCV splitter (N=8, k=2, purge 5, embargo 20) and label-overlap unit test | Next |
+| 3.2 | Fold-wise transformer (macro z-score, clip, 8 interactions) and shifted-fold test | Planned |
+| 3.3 | MLflow setup (SQLite, tags, git hash, checksums), seeds and splits fixed | Planned |
+| 3.4 | Ridge F0/F1, XGBoost F0/F1/F2, Random Forest F0/F1 | Planned |
+| 3.5 | LSTM F0/F1 | Planned |
+| 3.6 | finbert-tone features and XGBoost robustness runs | Planned |
+| 3.7 | Weekly rank IC, CSV export to results/, Phase 3 QA gate and report | Planned |
 
 ## Frozen design
 Hypotheses, features, targets, CPCV (N=8, k=2), significance, costs and backtest are frozen. See ../README.md section 2 and CONTEXT.md section 6. Any change is logged in DECISION_LOG.MD as a new trial first.
@@ -45,11 +57,11 @@ Hypotheses, features, targets, CPCV (N=8, k=2), significance, costs and backtest
 ## Phase 2 exit criteria
 - [x] 07_phase2_qa.py passes 24/24 (FinBERT macro F1 >= ~0.65 or a second scorer queued; second scorer queued).
 - [x] Decision Log and README updated.
-- [ ] dev merged to main and tagged phase2-complete.
+- [x] dev merged to main and tagged phase2-complete (tag on c80280a; requirements.txt merged later via PR #1, 97729b7).
 
 ## Top risks
 - Low power (short, regime-specific sample): report nulls honestly.
 - Sentiment measurement quality: FinBERT validation F1 is below target and many headlines are off-topic (34% of the labeled sample). A null H1 has two explanations; the finbert-tone robustness run helps separate them.
 - Noisy ticker tagging in FNSPID: many headlines are about other companies or market wrap-ups.
-- Data files are git-ignored: back them up outside git.
+- Data files are git-ignored: backed up outside git (confirmed 2026-10-26); keep checksums in results/phase2_snapshot.json.
 - Time: the dashboard is capped at about 10% of project time and is cut first.

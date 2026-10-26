@@ -1,20 +1,29 @@
 # SESSIONS
 
-Last updated: 2026-10-20
+Last updated: 2026-10-26
 
 Newest first. Each entry: what was done, findings, pending items.
 
-## Active state (2026-10-20)
-- Branch dev holds all Phase 2 work (merge commit 3a9af53, 2026-10-20). main is at ae19c97 (Phase 1 close, tag phase1-complete).
-- Phase 2 is complete on dev: QA gate 24/24, docs and Decision Log up to date. Merge to main and tag phase2-complete are pending (author).
+## Active state (2026-10-26)
+- Phase 3 is in progress. 3.0 (close-out) is done; 3.1 (CPCV splitter) is next.
+- main now includes dev via PR #1 (merge commit 97729b7). Tags: phase1-complete (ae19c97), phase2-complete (c80280a). Docs commits made on dev after the merge are not yet on main.
+- requirements.txt (pinned, d728b05) verified in a clean venv. data/ backed up outside git.
 - Primary sentiment scorer: ProsusAI/finbert (validation macro F1 0.516). Robustness variant: yiyanghkust/finbert-tone, all articles scored.
 - Environment: Fedora, Python 3.14.8 (package versions unchanged from the 2026-10-15 snapshot).
-- No LSTM calendar deadline (logged 2026-10-20). data/ backup not confirmed.
+- No LSTM calendar deadline (logged 2026-10-20).
+
+## 2026-10-26 - Phase 3.0 close-out
+- Pushed requirements.txt (d728b05). Verified in a clean venv on Fedora: pip install OK, pip check found no broken requirements, torch 2.14.1+cu130 (CUDA available), transformers 5.19.0, pandas 3.0.6, xgboost 3.4.1, mlflow 3.17.1, and 07_phase2_qa.py still 24/24.
+- Opened PR #1 (dev to main) and merged it with a merge commit (97729b7). The root README on main still starts with the correct first line.
+- Backed up data/ outside git (confirmed by the author).
+- Updated PLAN, BACKLOG and SESSIONS. Pending: README status line, CONTEXT.md and a Decision Log entry for the merge (separate commit).
+- Note: requirements.txt is a full pip freeze; it could be slimmed later (rc pin on wrapt, both nvidia-nccl-cu12 and cu13 listed).
 
 ## 2026-10-20 (late) - Phase 2 close-out docs
 - Pushed SETUP.md and updated SESSIONS, BACKLOG, PLAN, AGENTS (78b6a0e). The author removed the duplicate Decision Log entries (25ac6da) and merged (3a9af53); nothing was lost in the merge.
 - Updated the root README (status, phase table, open decisions, validation result, scripts 09-12, 10-20 decision rows) and CONTEXT.md to the Phase 2 complete state; added a closing Decision Log entry.
 - Phase progress reports are kept outside the repo (no docs/reports/).
+- Merge of dev into main and tag phase2-complete: main was fast-forwarded to c80280a and tagged phase2-complete.
 
 ## 2026-10-20 - Phase 2 closed on dev
 - Hand-labeled 200 headlines (101 neutral, 67 positive, 32 negative; 68 off-topic) in results/labels/headline_sample.csv; frozen copy in headline_sample_human.csv.
