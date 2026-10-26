@@ -6,7 +6,7 @@
 
 This document is the single source of truth for project scope. When a decision changes, update it here first — everything else (code, thesis chapters, Gantt chart) should follow this file, not the other way around.
 
-**Status (2026-10-20): Phase 1 and Phase 2 complete (QA 31/31 and 24/24). FinBERT validation on 200 hand labels: macro F1 0.516, below the ~0.65 target; second scorer finbert-tone queued as a robustness variant. Evaluation design frozen (see 2.6 and Decision Log). Next: merge dev into main, then Phase 3 (models).**
+**Status (2026-10-20): Phase 1 and Phase 2 complete (QA 31/31 and 24/24). FinBERT validation on 200 hand labels: macro F1 0.516, below the ~0.65 target; second scorer finbert-tone queued as a robustness variant. Evaluation design frozen (see 2.6 and Decision Log). Merged to main (PR #1, 97729b7); tag phase2-complete. Phase 3 (models) in progress: 3.0 done, 3.1 CPCV splitter next.**
 Project docs (plan, backlog, agents, design, brand, sessions): see docs/.
 
 ---
