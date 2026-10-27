@@ -5,19 +5,26 @@ Last updated: 2026-10-27
 Newest first. Each entry: what was done, findings, pending items.
 
 ## Active state (2026-10-27)
-- Phase 3 is in progress. 3.0 (close-out) and 3.1 (CPCV splitter) are done; 3.2 (fold-wise transformer) is next.
-- Latest code commit on dev: 7676aac (models/cpcv.py, tests/test_cpcv.py, pytest pinned). main is at 97729b7 (PR #1); dev is ahead of main by docs and 3.1 commits. Tags: phase1-complete (ae19c97), phase2-complete (c80280a).
-- requirements.txt now includes pytest 9.1.1, iniconfig 2.3.1, pluggy 1.7.0. data/ backed up outside git.
+- Phase 3 is in progress. 3.0 (close-out), 3.1 (CPCV splitter) and 3.2 (fold-wise transformer) are done; 3.3 (MLflow setup) is next.
+- Latest code commit on dev: b3334ba (models/transform.py, tests/test_transform.py). Earlier: 7676aac (models/cpcv.py, tests/test_cpcv.py). main is at 97729b7 (PR #1); dev is ahead of main by docs, 3.1 and 3.2 commits. Tags: phase1-complete (ae19c97), phase2-complete (c80280a).
+- Tests: 15 pass (python -m pytest -q): 8 for the splitter, 7 for the transformer. requirements.txt includes pytest 9.1.1, iniconfig 2.3.1, pluggy 1.7.0. data/ backed up outside git.
 - Primary sentiment scorer: ProsusAI/finbert (validation macro F1 0.516). Robustness variant: yiyanghkust/finbert-tone, all articles scored.
 - Environment: Fedora, Python 3.14.8 (package versions unchanged from the 2026-10-15 snapshot).
 - No LSTM calendar deadline (logged 2026-10-20).
+
+## 2026-10-27 - Phase 3.2 fold-wise macro transformer
+- Built models/transform.py and tests/test_transform.py (b3334ba). FoldMacroTransformer(macro, recipe): fit(train_dates) computes the mean and std (ddof=0, zero std replaced by 1) on training dates only; transform_macro() scales all 1,217 dates and clips |z| at 5; transform(panel) returns date, ticker, 10 z_<macro> columns and 8 ix_<macro>__<stock> interactions (36,510 x 20). F2 therefore has 12 + 6 + 10 + 8 = 36 features.
+- Inputs checked: recipe (10 macro features, 8 interactions: 4 macro x {beta60, vol20}), macro file 1,217 x 10, no NaN, dates identical to the panel calendar.
+- Findings from two example splits: in split (3,4) d_unrate_21 has std 1.70 and 21 clipped dates; in split (1,2), where 2020 is held out, its std is 0.16, the May 2020 value reaches z = 64 before the clip, and 125 dates are clipped. wti_chg_20 clips on 2 dates in both (largest z 8.4 and 8.9 on 2020-05-18). Max |z| after clip is 5.0; max |interaction| 2.417 (bound 2.5).
+- Tests: 7 passed (15 total). They check the fit against a manual calculation and sklearn StandardScaler, that changing test-period values leaves the stats and training z-scores unchanged, that a shifted fold changes the stats, that a leaky all-dates fit would be caught, the clip, the interactions and shapes, and the zero-std guard. Tests use synthetic data, so they run without data/. The transform.py module does not import features.config (that file reads ohlcv_daily.csv at import time).
+- Pending: Decision Log entry for 3.2 (separate commit, author appends locally). 3.3 next: MLflow setup.
 
 ## 2026-10-27 - Phase 3.1 CPCV splitter
 - Built models/cpcv.py and tests/test_cpcv.py (7676aac). Functions: load_calendar (1,217 panel dates; 1,193 model rows at positions 19-1211, contiguous), make_groups (8 contiguous blocks: one of 150, seven of 149), make_combos (28 test-group pairs, each group tested 7 times), split_positions (purge 5 before and embargo 20 after each test position, on the trading-date index), assign_paths (7 paths, 56 split-group pairs each used once).
 - Sample train sizes: split (0,1) 874 rows, (3,4) 870, (0,7) 869; test sizes 299, 298, 299.
 - Tests: 8 passed in 0.51 s, including two mutation tests (a splitter with no purge, or no embargo, must be caught by the checks). Tests use a synthetic calendar of the same shape, so they run without data/. Run with: python -m pytest -q tests/test_cpcv.py.
 - Implementation choices inside the frozen design: positions on the full panel calendar rather than calendar days; closed-interval (conservative) purge, so a training window that touches a test date at its endpoint is removed; embargo applied after test blocks only; path j uses the j-th split containing each group.
-- Pending: Decision Log entry for these implementation details (separate commit, author appends locally). 3.2 next: fold-wise transformer and shifted-fold test.
+- Docs and the Decision Log entry for these choices were pushed (001cfbe, e081814).
 
 ## 2026-10-26 - Phase 3.0 close-out
 - Pushed requirements.txt (d728b05). Verified in a clean venv on Fedora: pip install OK, pip check found no broken requirements, torch 2.14.1+cu130 (CUDA available), transformers 5.19.0, pandas 3.0.6, xgboost 3.4.1, mlflow 3.17.1, and 07_phase2_qa.py still 24/24.
