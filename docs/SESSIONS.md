@@ -1,22 +1,29 @@
 # SESSIONS
 
-Last updated: 2026-10-26
+Last updated: 2026-10-27
 
 Newest first. Each entry: what was done, findings, pending items.
 
-## Active state (2026-10-26)
-- Phase 3 is in progress. 3.0 (close-out) is done; 3.1 (CPCV splitter) is next.
-- main now includes dev via PR #1 (merge commit 97729b7). Tags: phase1-complete (ae19c97), phase2-complete (c80280a). Docs commits made on dev after the merge are not yet on main.
-- requirements.txt (pinned, d728b05) verified in a clean venv. data/ backed up outside git.
+## Active state (2026-10-27)
+- Phase 3 is in progress. 3.0 (close-out) and 3.1 (CPCV splitter) are done; 3.2 (fold-wise transformer) is next.
+- Latest code commit on dev: 7676aac (models/cpcv.py, tests/test_cpcv.py, pytest pinned). main is at 97729b7 (PR #1); dev is ahead of main by docs and 3.1 commits. Tags: phase1-complete (ae19c97), phase2-complete (c80280a).
+- requirements.txt now includes pytest 9.1.1, iniconfig 2.3.1, pluggy 1.7.0. data/ backed up outside git.
 - Primary sentiment scorer: ProsusAI/finbert (validation macro F1 0.516). Robustness variant: yiyanghkust/finbert-tone, all articles scored.
 - Environment: Fedora, Python 3.14.8 (package versions unchanged from the 2026-10-15 snapshot).
 - No LSTM calendar deadline (logged 2026-10-20).
+
+## 2026-10-27 - Phase 3.1 CPCV splitter
+- Built models/cpcv.py and tests/test_cpcv.py (7676aac). Functions: load_calendar (1,217 panel dates; 1,193 model rows at positions 19-1211, contiguous), make_groups (8 contiguous blocks: one of 150, seven of 149), make_combos (28 test-group pairs, each group tested 7 times), split_positions (purge 5 before and embargo 20 after each test position, on the trading-date index), assign_paths (7 paths, 56 split-group pairs each used once).
+- Sample train sizes: split (0,1) 874 rows, (3,4) 870, (0,7) 869; test sizes 299, 298, 299.
+- Tests: 8 passed in 0.51 s, including two mutation tests (a splitter with no purge, or no embargo, must be caught by the checks). Tests use a synthetic calendar of the same shape, so they run without data/. Run with: python -m pytest -q tests/test_cpcv.py.
+- Implementation choices inside the frozen design: positions on the full panel calendar rather than calendar days; closed-interval (conservative) purge, so a training window that touches a test date at its endpoint is removed; embargo applied after test blocks only; path j uses the j-th split containing each group.
+- Pending: Decision Log entry for these implementation details (separate commit, author appends locally). 3.2 next: fold-wise transformer and shifted-fold test.
 
 ## 2026-10-26 - Phase 3.0 close-out
 - Pushed requirements.txt (d728b05). Verified in a clean venv on Fedora: pip install OK, pip check found no broken requirements, torch 2.14.1+cu130 (CUDA available), transformers 5.19.0, pandas 3.0.6, xgboost 3.4.1, mlflow 3.17.1, and 07_phase2_qa.py still 24/24.
 - Opened PR #1 (dev to main) and merged it with a merge commit (97729b7). The root README on main still starts with the correct first line.
 - Backed up data/ outside git (confirmed by the author).
-- Updated PLAN, BACKLOG and SESSIONS. Pending: README status line, CONTEXT.md and a Decision Log entry for the merge (separate commit).
+- Updated PLAN, BACKLOG and SESSIONS (f7ffb4a); README status line and Decision Log entry (85ac10a); CONTEXT.md (8b0bb84).
 - Note: requirements.txt is a full pip freeze; it could be slimmed later (rc pin on wrapt, both nvidia-nccl-cu12 and cu13 listed).
 
 ## 2026-10-20 (late) - Phase 2 close-out docs

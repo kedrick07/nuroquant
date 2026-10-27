@@ -1,6 +1,6 @@
 # PLAN
 
-Last updated: 2026-10-26
+Last updated: 2026-10-27
 
 ## Goal
 Test, under a pre-registered design, whether FinBERT headline sentiment (H1) and macro context (H2) improve weekly cross-sectional ranking of 30 US large caps over 2019-2023.
@@ -33,7 +33,7 @@ Among 30 well-covered, 2019-era large-cap survivors over 2019-2023, does FinBERT
 |---|---|---|
 | 1 | Data collection and preprocessing | Done (QA 31/31) |
 | 2 | Feature engineering | Done (QA 24/24); merged to main, tag phase2-complete |
-| 3 | Models, MLflow tracking | In progress (3.0 done, 3.1 next) |
+| 3 | Models, MLflow tracking | In progress (3.0 and 3.1 done, 3.2 next) |
 | 4 | Evaluation: CPCV, IC, significance, SHAP | Planned |
 | 5 | Backtest vs equal-weight-30, F0, random, reversal | Planned |
 | 6 | Read-only dashboard (FastAPI + React, local) | Planned, built last, first to cut |
@@ -43,8 +43,8 @@ Among 30 well-covered, 2019-era large-cap survivors over 2019-2023, does FinBERT
 | Sub | Focus | Status |
 |---|---|---|
 | 3.0 | Close-out: data backup, requirements.txt verified, dev merged to main, docs | Done (2026-10-26) |
-| 3.1 | CPCV splitter (N=8, k=2, purge 5, embargo 20) and label-overlap unit test | Next |
-| 3.2 | Fold-wise transformer (macro z-score, clip, 8 interactions) and shifted-fold test | Planned |
+| 3.1 | CPCV splitter (N=8, k=2, purge 5, embargo 20), 7 paths, label-overlap unit tests | Done (2026-10-27, 7676aac; models/cpcv.py, tests/test_cpcv.py, 8 tests pass) |
+| 3.2 | Fold-wise transformer (macro z-score, clip, 8 interactions) and shifted-fold test | Next |
 | 3.3 | MLflow setup (SQLite, tags, git hash, checksums), seeds and splits fixed | Planned |
 | 3.4 | Ridge F0/F1, XGBoost F0/F1/F2, Random Forest F0/F1 | Planned |
 | 3.5 | LSTM F0/F1 | Planned |

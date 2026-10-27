@@ -1,14 +1,13 @@
 # BACKLOG
 
-Last updated: 2026-10-26
+Last updated: 2026-10-27
 
 Order = priority. Move items between sections; never delete done items.
 
-## Now (3.1)
-- [ ] CPCV splitter (N=8, k=2, purge 5, embargo 20) with a unit test for label-window overlap.
+## Now (3.2)
+- [ ] 3.2 Fold-wise transformer: macro z-score on training folds, clip |z| at 5, build the 8 interactions (results/macro_recipe.json); shifted-fold test. Use the splits from models/cpcv.py.
 
 ## Next (Phase 3)
-- [ ] 3.2 Fold-wise transformer: macro z-score on training folds, clip |z| at 5, build the 8 interactions (results/macro_recipe.json); shifted-fold test.
 - [ ] 3.3 MLflow setup: SQLite backend, tags trial_id, trial_family, counts_toward_N; log git hash and data checksums; fix seeds and splits.
 - [ ] 3.4 Run order: Ridge, XGBoost, Random Forest; same splits and seeds for all.
 - [ ] 3.4 Nested tuning (inner 4-fold purged blocks, LSTM 2), small grids, 3 seeds.
@@ -17,6 +16,8 @@ Order = priority. Move items between sections; never delete done items.
 - [ ] 3.6 XGBoost robustness runs: mask NVDA gap, exclude META, target_ret5_xs clipped at +/-5, 60-day embargo, summary_extra, finbert-tone sentiment.
 - [ ] 3.7 Milestone CSV export of MLflow runs to results/; Phase 3 QA gate and report.
 - [ ] Optional: slim requirements.txt (it is a full pip freeze; check wrapt rc pin and the duplicate nvidia-nccl entries).
+- [ ] Decision Log entry for the 3.1 implementation details (separate commit, author appends locally).
+- [ ] 3.4 note: the inner 4-fold purged blocks for nested tuning need their own purge and embargo; reuse the same rule as models/cpcv.py.
 
 ## Later
 - [ ] Phase 4: significance tests (block bootstrap, HAC DM with HLN, BH and BY), group SHAP and permutation importance, static GICS sector map (groups >= 3), Ken French factor data check for 2019-2023.
@@ -50,3 +51,5 @@ Order = priority. Move items between sections; never delete done items.
 - [x] requirements.txt verified in a clean venv: pip install OK, pip check clean, versions match the snapshot, 07_phase2_qa.py 24/24 (2026-10-26).
 - [x] data/ backed up outside git (confirmed by the author, 2026-10-26).
 - [x] dev merged into main via PR #1, merge commit 97729b7 (2026-10-26).
+- [x] 3.0 docs synced: PLAN, BACKLOG, SESSIONS (f7ffb4a), README and Decision Log (85ac10a), CONTEXT.md (8b0bb84) (2026-10-26).
+- [x] 3.1 CPCV splitter: models/cpcv.py (8 contiguous groups, 28 splits, purge 5 before, embargo 20 after, 7 paths) and tests/test_cpcv.py (8 tests pass, incl. two mutation tests); pytest 9.1.1 pinned (7676aac, 2026-10-27).
