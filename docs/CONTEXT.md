@@ -8,7 +8,7 @@
 > 4. Do not change the frozen design (Section 6). Any change = new logged trial.
 > 5. Style: user (Kedrick) wants short, simple, practical answers; he writes code himself, so guide and explain rather than dump full solutions unless asked.
 
-Last synced: 2026-10-20 (Phase 2 complete on dev). Sources: SESSIONS.md and DECISION_LOG.MD.
+Last synced: 2026-10-26 (Phase 3.0 close-out; Phase 2 merged to main). Sources: SESSIONS.md and DECISION_LOG.MD.
 Update this file at the end of every phase.
 
 ---
@@ -22,16 +22,17 @@ Update this file at the end of every phase.
 
 ## 2. Current Status
 - Phase 1 (data): complete. QA `16_phase1_qa.py` = 31/31 pass. Tag `phase1-complete` exists on `ae19c97`.
-- Phase 2 (features): complete on `dev` (2026-10-20). QA gate `07_phase2_qa.py` = 24/24. FinBERT validation on 200 hand labels: macro F1 0.516 (95% bootstrap CI 0.44-0.59), below the ~0.65 target; second scorer `yiyanghkust/finbert-tone` queued as a robustness variant (all articles scored). Merge to `main` and tag `phase2-complete` pending.
-- Branches: main = ae19c97 (Phase 1 close); dev holds Phase 2 work and the docs/ folder.
-- Phase 3 (models) is next.
+- Phase 2 (features): complete and merged to `main` (2026-10-20; tag `phase2-complete` on `c80280a`). QA gate `07_phase2_qa.py` = 24/24. FinBERT validation on 200 hand labels: macro F1 0.516 (95% bootstrap CI 0.44-0.59), below the ~0.65 target; second scorer `yiyanghkust/finbert-tone` queued as a robustness variant (all articles scored).
+- Branches: `main` = 97729b7 (PR #1 merge of dev, adds requirements.txt); `dev` holds later docs commits (f7ffb4a) and Phase 3 work.
+- Phase 3 (models) is in progress. 3.0 close-out is done: data/ backed up, requirements.txt verified in a clean venv, dev merged to main. Next: 3.1 CPCV splitter.
+- Phase 3 subphases: 3.0 close-out; 3.1 CPCV splitter; 3.2 fold-wise transformer; 3.3 MLflow and run harness; 3.4 Ridge/XGBoost/RF; 3.5 LSTM; 3.6 finbert-tone robustness; 3.7 gate and report.
 
 ## 3. Phase Plan
 | Phase | Focus | Status |
 |---|---|---|
 | 1 | Data collection & preprocessing | Done |
-| 2 | Feature engineering (technical, FinBERT sentiment, macro) | Done on dev (QA 24/24); merge and tag pending |
-| 3 | Models (ablation matrix, MLflow) | Next |
+| 2 | Feature engineering (technical, FinBERT sentiment, macro) | Done (QA 24/24); merged to main, tag phase2-complete |
+| 3 | Models (ablation matrix, MLflow) | In progress (3.0 done, 3.1 next) |
 | 4 | Evaluation (CPCV, IC, SHAP, significance) | Planned |
 | 5 | Backtesting (long-short vs baselines) | Planned |
 | 6 | Read-only results dashboard (FastAPI + React, local) | Planned, built last, first to cut |
@@ -95,7 +96,7 @@ python features/11_compare_scorers.py
 python features/12_score_finbert_tone.py
 ```
 
-Python/package versions and data checksums: `results/phase2_snapshot.json` (2026-10-20, Python 3.14.8); the original (2026-10-15, Python 3.12.9) is `results/phase2_snapshot_2026-10-15.json`. Package versions are unchanged between the two.
+Python/package versions and data checksums: `results/phase2_snapshot.json` (2026-10-20, Python 3.14.8); the original (2026-10-15, Python 3.12.9) is `results/phase2_snapshot_2026-10-15.json`. Package versions are unchanged between the two. `requirements.txt` (pinned, full pip freeze) is in the repo root and was verified in a clean venv on 2026-10-26.
 
 ## 6. FROZEN Design (do not change without logging a new trial)
 
@@ -167,16 +168,15 @@ Tuning: nested, inner 4-fold purged blocks (LSTM: 2), metric = weekly rank IC, i
 - All tiers filtered to the same dates from `FIRST_MODEL_DATE`.
 
 ## 8. Phase 2 Build Summary
-- Phase 2 is complete on `dev`: scripts 00-12, FinBERT and finbert-tone scoring, F0/F1/F2 features, targets, panel, QA gate (24/24), power simulation and the 200-headline validation.
+- Phase 2 is complete (merged to `main`): scripts 00-12, FinBERT and finbert-tone scoring, F0/F1/F2 features, targets, panel, QA gate (24/24), power simulation and the 200-headline validation.
 - The panel has 35,790 model rows over 1,193 model dates, or about 239 weekly cross-sections.
 - `FIRST_MODEL_DATE` is 2019-03-29; `FIRST_LSTM_INPUT_DATE` is 2019-03-04.
 - The 80% power simulation needs an IC gain of about 0.015-0.032.
 - FinBERT validation macro F1 0.516 (below target); second scorer finbert-tone (F1 0.581) scored on all articles for the robustness run.
 
 Open items, matching `BACKLOG.md`:
-- Back up `data/` outside git.
-- Merge `dev` into `main` and tag `phase2-complete`.
-- Phase 3 first steps: `requirements.txt`, CPCV splitter with unit test, fold-wise macro transformer, MLflow setup.
+- Done 2026-10-26: `data/` backed up; `requirements.txt` verified; `dev` merged to `main`.
+- Phase 3 next steps: CPCV splitter with unit test (3.1), fold-wise macro transformer (3.2), MLflow setup (3.3).
 - Build the alt-sentiment (finbert-tone) features for the robustness run without overwriting the primary F1 files.
 
 ## 9. DO-NOT-DO List
@@ -215,11 +215,12 @@ Survivorship; news ~98% FNSPID (say "headline sentiment from FNSPID"); universe 
 - 2026-10-15: Phase 2 build (WTI 20-day dollar change; target_ret5_xs clipped at +/-5 for the robustness run; about 239 weekly cross-sections; power simulation 0.015-0.032; NYT scores more negative than FNSPID).
 - 2026-10-19: docs/ restructure (CONTEXT.md and DECISION_LOG.MD moved into docs/; project docs added).
 - 2026-10-20: 200 hand labels; FinBERT macro F1 0.516 (below target); second scorer finbert-tone chosen as robustness variant; QA acceptance rule implemented (24/24); environment changed to Python 3.14.8; no LSTM calendar deadline; Phase 2 closed on dev.
+- 2026-10-26: Phase 3.0 close-out: requirements.txt verified in a clean venv; dev merged to main via PR #1 (97729b7); data/ backed up.
 Full log: `DECISION_LOG.MD`.
 
 ## 13. Repo and Process
 - Tracked: `fetch_and_validate/`, `features/`, `results/`, `README.md`, `docs/`, `.gitignore`. Ignored: `data/`.
-- Branches: `main`, `dev`. Key commits: `fbfc6d2` (data scripts pushed), `81743819`, `2d00696`, `920979b` (README rebuild/restores), `68341ea`, `e1e9cc4`, `ae19c97` (Phase 1 close); Phase 2: `ae44484` (build pushed 2026-10-16), `71d4388` (hand labels), `168badc` and `285ae20` (validation, second scorer, QA rule), `3a9af53` (merge on dev).
+- Branches: `main`, `dev`. Key commits: `fbfc6d2` (data scripts pushed), `81743819`, `2d00696`, `920979b` (README rebuild/restores), `68341ea`, `e1e9cc4`, `ae19c97` (Phase 1 close); Phase 2: `ae44484` (build pushed 2026-10-16), `71d4388` (hand labels), `168badc` and `285ae20` (validation, second scorer, QA rule), `3a9af53` (merge on dev), `c80280a` (tag `phase2-complete`); Phase 3.0: `d728b05` (requirements.txt), `97729b7` (PR #1 merge into main), `f7ffb4a` (docs close-out on dev).
 - README incident (E14): reverted twice via stale copy and patch overwrite. The README update patch was merged and deleted.
 - Phase reports (kept outside the repo) have 14 sections (0–13): header, summary, objectives, deliverables, scope changes, errors, quality, limitations, open decisions, hand-off, reproducibility, timeline, repo notes, sign-off. Write "None" rather than deleting a section.
 
