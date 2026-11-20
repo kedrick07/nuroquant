@@ -98,3 +98,23 @@
 2026-10-27 | Phase 3.2 fold-wise macro transformer implemented (models/transform.py, tests/test_transform.py, b3334ba), inside the frozen design (macro_recipe.json: fit z-score on the training fold only, clip |z| at 5, build products after scaling). Implementation choices: (1) mean and std are fit on the training dates of each CPCV split only, with ddof=0 to match sklearn StandardScaler, and a zero std is replaced by 1; (2) the fit uses unclipped values and the clip is applied after scaling; (3) the transformer scales all 1,217 dates and the 8 interactions multiply the scaled macro value by the rank-normalized beta60 or vol20 from the panel; (4) F2 is 36 features (12 F0 + 6 F1 + 10 scaled macro + 8 interactions). Observation: when 2020 is held out (split (1,2)), d_unrate_21 has training std 0.16, the May 2020 value reaches z = 64 before the clip, and 125 dates are clipped (21 in split (3,4) where 2020 is in training); this is reported in the Phase 3 report and read alongside H2. Unit tests: 7 passed (15 total), including a leaky all-dates fit that the checks must catch. No design change.
 
 2026-11-03 | Phase 3.3 MLflow tracking implemented (models/tracking.py, tests/test_tracking.py, 668271f), inside the frozen design (README 2.7: MLflow only, SQLite backend, parent run per model x tier x variant, child run per CPCV split, tags trial_id / trial_family / counts_toward_N, git hash and data checksums logged). Implementation choices: (1) every parent run carries trial_id = model_tier_variant, trial_family (core, robustness, tuning, cost_grid, smoke), counts_toward_N, git_commit, git_dirty, data_snapshot_sha256, splits_sha256, seeds and the six data checksums as data_sha_<file>, and stores results/phase2_snapshot.json as an artifact; (2) N for the deflated Sharpe is the number of distinct trial_id values with counts_toward_N = true (core and robustness), so reruns of one configuration do not inflate N and tuning and cost-grid runs are excluded; (3) child runs carry only split_idx and test_groups and run sequentially because SQLite can lock under concurrent writers; (4) seeds are fixed at (42, 43, 44) and the splits hash b53636f3906a is pinned by a test, so any change to the purge, embargo or grouping fails the suite; (5) tests use a temporary database, so the real mlflow.db is never touched. Unit tests: 10 passed (25 total). No design change.
+
+### 2026-11-20 — Weekly evaluation schedule implementation
+
+Pinned the previously unspecified sampling anchor to offset 0 from the
+first model date, 2019-03-29, selecting every fifth trading day globally.
+This gives 239 evaluation dates through 2023-12-19. Fold evaluation uses
+the intersection with this global schedule; the schedule never restarts
+inside a fold.
+
+Timing: implemented and tested after viewing daily smoke-test ICs, but
+before calculating the weekly smoke-test ICs. No alternative offsets
+were evaluated in this workflow.
+
+Verification: 11 runner metric/schedule tests pass; full suite 36 passed,
+1 existing MLflow/SQLAlchemy deprecation warning.
+
+One-split fixed-alpha Ridge diagnostics, split (3, 4):
+F0 weekly IC -0.002818; F1 weekly IC 0.011057; paired difference +0.013875
+over 60 dates. Diagnostic only; no hypothesis conclusion or design
+selection based on these values.

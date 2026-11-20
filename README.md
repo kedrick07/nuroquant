@@ -208,6 +208,7 @@ Two independent axes — feature tier (what information is available) and model 
 **Metrics**
 - Primary: weekly rank IC. Secondary: ICIR, IC hit rate, quintile returns and spread, OOS R2 on target_rank, net Sharpe (bootstrap CI), max drawdown, Calmar, turnover, break-even cost, beta/alpha vs equal-weight. Directional accuracy dropped (pairwise accuracy optional).
 - Interpretability: group-level SHAP shares plus group permutation importance.
+- Weekly IC sampling convention: use every fifth trading day, anchored at the first model date (2019-03-29; offset 0). Construct the schedule globally before selecting any outer or inner validation dates; never restart it within a fold or disconnected test block. The current panel gives 239 evaluation dates, ending 2023-12-19. Use identical dates for all models and tiers.
 
 **Backtest**
 - Weekly (5-day) rebalance, 5 staggered start offsets averaged. Main: dollar-neutral long-short, top/bottom quintile (6/6, equal weight). Secondary: long-only top quintile vs equal-weight 30; rank-weighted dollar-neutral. Entry at close t; 1-day-delay sensitivity. Run per CPCV path (7); report median and range.
