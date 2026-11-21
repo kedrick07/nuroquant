@@ -118,3 +118,12 @@ One-split fixed-alpha Ridge diagnostics, split (3, 4):
 F0 weekly IC -0.002818; F1 weekly IC 0.011057; paired difference +0.013875
 over 60 dates. Diagnostic only; no hypothesis conclusion or design
 selection based on these values.
+
+### 2026-11-21 — Ridge tuning protocol
+
+Inner folds: 4 chronological blocks of each outer training set, with
+purge 5 / embargo 20, as in models/tuning.py. Grid for both F0 and F1:
+alpha in (1, 10, 100, 1000, 10000, 100000). Selection metric: mean weekly
+rank IC over the inner validation dates on the global schedule,
+averaged across the 4 inner folds. Ties go to the larger alpha.
+No outer test results are used in selection.
