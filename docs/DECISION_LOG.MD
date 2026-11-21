@@ -127,3 +127,19 @@ alpha in (1, 10, 100, 1000, 10000, 100000). Selection metric: mean weekly
 rank IC over the inner validation dates on the global schedule,
 averaged across the 4 inner folds. Ties go to the larger alpha.
 No outer test results are used in selection.
+
+### 2026-11-21 — Ridge core runs (F0, F1)
+
+Ran tuned Ridge F0 and F1 as core trials across all 28 CPCV splits, at
+code commit 9fd7e04 with a clean tree. Parent runs: F0 8054a55e618243589403b90f947af2ae,
+F1 34814df7be4449919f7043cfaae61043. N is now 2. Splits hash b53636f3906a.
+
+Protocol exactly as pre-registered in the Ridge tuning protocol entry:
+grid 1 to 100000, 4 inner purged folds, mean weekly rank IC, ties to the
+larger alpha. No design changes made after viewing results.
+
+Observations only, no hypothesis test: mean split weekly IC F0 -0.01903,
+F1 -0.01771 (raw average over splits, not the path-level paired test).
+Selected alpha was spread across the grid; it hit the lower edge (1) in 7
+(F0) and 6 (F1) splits and the upper edge (100000) in 4 (F0) and 7 (F1).
+Grid left unchanged. Reported for the Phase 3 report.

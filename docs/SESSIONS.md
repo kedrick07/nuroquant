@@ -82,15 +82,17 @@ Newest first. Each entry: what was done, findings, pending items.
 
 - Committed and pushed checkpoint: 467c693.
 - Ridge F0/F1 fixed-alpha smoke runs completed on CPCV split (3, 4).
-- Verified FINISHED parent/child runs and retrieved prediction artifacts:
-  8,940 rows per tier, finite predictions, unique date–ticker keys.
+- Verified FINISHED parent/child runs and retrieved prediction artifacts: 8,940 rows per tier, finite predictions, unique date–ticker keys.
 - Pinned weekly IC schedule to offset 0 from 2019-03-29:
   239 global evaluation dates through 2023-12-19.
-- Verified 60 paired weekly cross-sections in split (3, 4),
-  with 30 stocks per date and identical realised targets across tiers.
-- Weekly diagnostic IC: F0 -0.002818; F1 0.011057;
-  paired mean difference +0.013875. Diagnostic only, not an H1 result.
-- Tests: 11 new metric/schedule tests; full suite 36 passed,
-  1 MLflow/SQLAlchemy deprecation warning.
-- Next: implement and test inner four-fold purged tuning within each
-  outer training set before running tuned Ridge across all 28 splits.
+- Verified 60 paired weekly cross-sections in split (3, 4), with 30 stocks per date and identical realised targets across tiers.
+- Weekly diagnostic IC: F0 -0.002818; F1 0.011057; paired mean difference +0.013875. Diagnostic only, not an H1 result.
+- Tests: 11 new metric/schedule tests; full suite 36 passed, 1 MLflow/SQLAlchemy deprecation warning.
+- Next: implement and test inner four-fold purged tuning within each outer training set before running tuned Ridge across all 28 splits.
+
+  ## 2026-11-21 — Ridge tuned core runs
+
+- Added models/tuning.py (inner purged splitter, Ridge alpha selection) and models/run_ridge.py; 15 new tests, full suite 51 passed.
+- Ran Ridge F0 and F1 core across all 28 splits, verified from MLflow: 28 FINISHED children each, artifacts and weekly coverage checks passed, git_dirty false, splits hash matches pin. N = 2.
+- MLflow store backed up (mlflow.db sha256 a09ae9b7e228, plus mlruns archive).
+- Next: XGBoost F0/F1/F2 (one tier at a time).
