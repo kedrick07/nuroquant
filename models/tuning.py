@@ -1,9 +1,41 @@
 """Inner purged folds for nested model selection."""
 
 import numpy as np
+import pandas as pd
+from sklearn.linear_model import Ridge
 
 from models.cpcv import split_positions
+from models.runner import rank_ic_by_date, TARGET, RET
 
+RIDGE_GRID = (1.0, 10.0, 100.0, 1_000.0, 10_000.0, 100_000.0)
+
+def select_ridge_alpha(mr, calendar, outer_train_pos, features,
+                       weekly_dates, grid=RIDGE_GRID):
+    """Pick alpha by mean weekly rank IC over the inner validation folds."""
+    folds = inner_splits(outer_train_pos, len(calendar))
+    weekly_dates = pd.DatetimeIndex(weekly_dates)
+    rows = []
+
+    for k, (tr_pos, va_pos) in enumerate(folds):
+        tr = mr[mr["date"].isin(calendar[tr_pos])]
+        va = mr[
+            mr["date"].isin(calendar[va_pos])
+            & mr["date"].isin(weekly_dates)
+        ]
+        for alpha in grid:
+            model = Ridge(alpha=alpha, solver="svd")
+            model.fit(tr[features], tr[TARGET])
+            scored = va[["date", RET]].copy()
+            scored["pred"] = model.predict(va[features])
+            rows.append({
+                "fold": k,
+                "alpha": alpha,
+                "ic": rank_ic_by_date(scored).mean(),
+            })
+
+    mean_ic = pd.DataFrame(rows).groupby("alpha")["ic"].mean()
+    best = mean_ic.index[mean_ic >= mean_ic.max() - 1e-12].max()
+    return float(best), mean_ic
 
 def inner_splits(
     outer_train_pos,
