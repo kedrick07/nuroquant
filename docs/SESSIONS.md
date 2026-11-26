@@ -1,8 +1,14 @@
 # SESSIONS
 
-Last updated: 2026-11-03
+Last updated: 2026-11-26
 
 Newest first. Each entry: what was done, findings, pending items.
+
+## 2026-11-26 - XGBoost design and docs refresh
+
+- Pre-registered the XGBoost tuning protocol in the Decision Log (8-config grid, seeds 42-44, no early stopping, same budget for F0/F1/F2).
+- Reordered these notes newest first (d7eb152) and refreshed the Active state section.
+- Next: implement and test XGBoost tuning, dry-run in the smoke family, then F0 and F1 core runs one tier at a time.
 
 ## 2026-11-21 — Ridge tuned core runs
 
@@ -23,14 +29,15 @@ Newest first. Each entry: what was done, findings, pending items.
 - Tests: 11 new metric/schedule tests; full suite 36 passed, 1 MLflow/SQLAlchemy deprecation warning.
 - Next: implement and test inner four-fold purged tuning within each outer training set before running tuned Ridge across all 28 splits.
 
-## Active state (2026-11-03)
-- Phase 3 is in progress. 3.0 (close-out), 3.1 (CPCV splitter), 3.2 (fold-wise transformer) and 3.3 (MLflow tracking) are done; 3.4 (Ridge, XGBoost, Random Forest) is next.
-- Latest code commit on dev: 668271f (models/tracking.py, tests/test_tracking.py). Earlier: b3334ba (models/transform.py), 7676aac (models/cpcv.py). main is at 97729b7 (PR #1); dev is ahead of main by docs and Phase 3 code commits. Tags: phase1-complete (ae19c97), phase2-complete (c80280a).
-- Tests: 25 pass (python -m pytest -q): 8 splitter, 7 transformer, 10 tracking. requirements.txt includes pytest 9.1.1, iniconfig 2.3.1, pluggy 1.7.0. data/ backed up outside git.
-- Fixed references: seeds (42, 43, 44) in models/tracking.py; splits hash b53636f3906a (pinned by a test); snapshot results/phase2_snapshot.json (data checksums, package versions).
+## Active state (2026-11-26)
+- Phase 3 is in progress. 3.0 to 3.3 are done. 3.4: Ridge F0 and F1 core runs are done and verified from MLflow (parents 8054a55e618243589403b90f947af2ae and 34814df7be4449919f7043cfaae61043; N = 2). XGBoost F0/F1/F2 is next, then Random Forest F0/F1.
+- Latest code on dev: 9fd7e04 (models/run_ridge.py), c69a46b (Ridge alpha selection in models/tuning.py), 40e3b3f (inner purged splitter), 467c693 (weekly IC schedule and runner). Docs: b31dbaa, d7eb152. main is at 97729b7 (PR #1). Tags: phase1-complete (ae19c97), phase2-complete (c80280a).
+- Tests: 51 pass (python -m pytest -q), 1 MLflow/SQLAlchemy deprecation warning. data/ and the MLflow store (mlflow.db sha256 a09ae9b7e228, backed up 2026-11-21 in ~/nuroquant_backups) are backed up outside git.
+- Fixed references: seeds (42, 43, 44) in models/tracking.py; splits hash b53636f3906a; weekly IC schedule = every 5th trading day anchored at 2019-03-29 (239 dates, last 2023-12-19); Ridge grid 1 to 100000; XGBoost grid pre-registered 2026-11-26.
 - Primary sentiment scorer: ProsusAI/finbert (validation macro F1 0.516). Robustness variant: yiyanghkust/finbert-tone, all articles scored.
-- Environment: Fedora, Python 3.14.8, mlflow 3.17.1 (package versions unchanged from the 2026-10-15 snapshot).
+- Environment: Fedora, Python 3.14.8, mlflow 3.17.1, xgboost 3.4.1.
 - No LSTM calendar deadline (logged 2026-10-20).
+- docs/CONTEXT.md was last synced 2026-10-26; update it at the Phase 3 close-out.
 
 ## 2026-11-03 - Phase 3.3 MLflow tracking
 - Built models/tracking.py and tests/test_tracking.py (668271f; code written 2026-10-28, committed 2026-11-03). Helpers: git_info (commit and dirty flag), file_sha256, data_checksums (six 12-character checksums from results/phase2_snapshot.json), splits_sha256 (one hash over all 28 splits). MLflow: setup (SQLite file mlflow.db and an artifacts folder, both git-ignored), parent_run (context manager), child_run (nested), count_trials.

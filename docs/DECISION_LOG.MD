@@ -143,3 +143,31 @@ F1 -0.01771 (raw average over splits, not the path-level paired test).
 Selected alpha was spread across the grid; it hit the lower edge (1) in 7
 (F0) and 6 (F1) splits and the upper edge (100000) in 4 (F0) and 7 (F1).
 Grid left unchanged. Reported for the Phase 3 report.
+
+### 2026-11-26 — XGBoost tuning protocol
+
+Written before any XGBoost run; no XGBoost results exist yet. The frozen
+design fixes the nested protocol but not the grid, so this grid is chosen
+here and applied identically to F0, F1 and F2. It is small and heavily
+regularized because the Ridge core runs often selected strong shrinkage
+(weak signal); that general observation is the only Ridge information used.
+
+Fixed settings: xgboost 3.4.1, objective reg:squarederror on target_rank,
+learning_rate 0.03, subsample 0.8, colsample_bytree 0.8, reg_lambda 10,
+tree_method hist, no early stopping.
+
+Grid: max_depth {2, 3} x n_estimators {100, 300} x min_child_weight
+{50, 200} = 8 configurations, the same for every tier.
+
+Seeds 42, 43, 44. Inner validation IC is the mean over seeds; final test
+predictions are the mean of the three seeds' predictions.
+
+Inner folds and metric: as for Ridge (4 purged blocks, purge 5 / embargo
+20, mean weekly rank IC on the global schedule). Ties go to the simpler
+config: fewer trees, then shallower, then larger min_child_weight.
+
+F2: the macro transformer is fit on each training set, including every
+inner training fold, never on validation or test dates.
+
+No change to this protocol after viewing XGBoost results; any change is
+logged as a new trial first.
