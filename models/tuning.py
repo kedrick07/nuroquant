@@ -3,7 +3,8 @@
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import Ridge
-
+from itertools import product
+from xgboost import XGBRegressor
 from models.cpcv import split_positions
 from models.runner import rank_ic_by_date, TARGET, RET
 
@@ -82,3 +83,57 @@ def inner_splits(
         folds.append((train_pos, valid_pos))
 
     return folds
+
+XGB_FIXED = dict(
+    objective="reg:squarederror",
+    learning_rate=0.03,
+    subsample=0.8,
+    colsample_bytree=0.8,
+    reg_lambda=10.0,
+    tree_method="hist",
+)
+XGB_SEEDS = (42, 43, 44)
+XGB_GRID = [
+    {"max_depth": d, "n_estimators": n, "min_child_weight": w}
+    for d, n, w in product((2, 3), (100, 300), (50, 200))
+]
+
+
+def xgb_model(config, seed):
+    return XGBRegressor(**XGB_FIXED, **config, random_state=seed)
+
+
+def xgb_complexity(config):
+    """Sort key for ties: fewer trees, then shallower, then larger min_child_weight."""
+    return (config["n_estimators"], config["max_depth"],
+            -config["min_child_weight"])
+
+
+def select_xgb_config(mr, calendar, outer_train_pos, features,
+                      weekly_dates, grid=XGB_GRID, seeds=XGB_SEEDS):
+    """Pick the config with the best mean weekly rank IC over inner folds and seeds."""
+    folds = inner_splits(outer_train_pos, len(calendar))
+    weekly_dates = pd.DatetimeIndex(weekly_dates)
+    rows = []
+
+    for k, (tr_pos, va_pos) in enumerate(folds):
+        tr = mr[mr["date"].isin(calendar[tr_pos])]
+        va = mr[
+            mr["date"].isin(calendar[va_pos])
+            & mr["date"].isin(weekly_dates)
+        ]
+        for i, config in enumerate(grid):
+            for seed in seeds:
+                model = xgb_model(config, seed)
+                model.fit(tr[features], tr[TARGET])
+                scored = va[["date", RET]].copy()
+                scored["pred"] = model.predict(va[features])
+                rows.append({
+                    "fold": k, "config": i, "seed": seed,
+                    "ic": rank_ic_by_date(scored).mean(),
+                })
+
+    mean_ic = pd.DataFrame(rows).groupby("config")["ic"].mean()
+    tied = mean_ic.index[mean_ic >= mean_ic.max() - 1e-12]
+    best = min(tied, key=lambda i: xgb_complexity(grid[i]))
+    return grid[best], mean_ic
