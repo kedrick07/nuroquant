@@ -4,6 +4,25 @@ Last updated: 2026-11-03
 
 Newest first. Each entry: what was done, findings, pending items.
 
+## 2026-11-21 — Ridge tuned core runs
+
+- Added models/tuning.py (inner purged splitter, Ridge alpha selection) and models/run_ridge.py; 15 new tests, full suite 51 passed.
+- Ran Ridge F0 and F1 core across all 28 splits, verified from MLflow: 28 FINISHED children each, artifacts and weekly coverage checks passed, git_dirty false, splits hash matches pin. N = 2.
+- MLflow store backed up (mlflow.db sha256 a09ae9b7e228, plus mlruns archive).
+- Next: XGBoost F0/F1/F2 (one tier at a time).
+
+## 2026-11-20 — Ridge smoke test and weekly evaluation checkpoint
+
+- Committed and pushed checkpoint: 467c693.
+- Ridge F0/F1 fixed-alpha smoke runs completed on CPCV split (3, 4).
+- Verified FINISHED parent/child runs and retrieved prediction artifacts: 8,940 rows per tier, finite predictions, unique date–ticker keys.
+- Pinned weekly IC schedule to offset 0 from 2019-03-29:
+  239 global evaluation dates through 2023-12-19.
+- Verified 60 paired weekly cross-sections in split (3, 4), with 30 stocks per date and identical realised targets across tiers.
+- Weekly diagnostic IC: F0 -0.002818; F1 0.011057; paired mean difference +0.013875. Diagnostic only, not an H1 result.
+- Tests: 11 new metric/schedule tests; full suite 36 passed, 1 MLflow/SQLAlchemy deprecation warning.
+- Next: implement and test inner four-fold purged tuning within each outer training set before running tuned Ridge across all 28 splits.
+
 ## Active state (2026-11-03)
 - Phase 3 is in progress. 3.0 (close-out), 3.1 (CPCV splitter), 3.2 (fold-wise transformer) and 3.3 (MLflow tracking) are done; 3.4 (Ridge, XGBoost, Random Forest) is next.
 - Latest code commit on dev: 668271f (models/tracking.py, tests/test_tracking.py). Earlier: b3334ba (models/transform.py), 7676aac (models/cpcv.py). main is at 97729b7 (PR #1); dev is ahead of main by docs and Phase 3 code commits. Tags: phase1-complete (ae19c97), phase2-complete (c80280a).
@@ -77,22 +96,3 @@ Newest first. Each entry: what was done, findings, pending items.
 - 2026-10-14: Phase 1 closed; warm-up data verified; dev merged to main; tag phase1-complete.
 - 2026-10-13: evaluation design frozen; README rebuilt (see DECISION_LOG.MD).
 - 2026-09-26 to 2026-10-07: scope reset, universe locked, data pipeline built.
-
-## 2026-11-20 — Ridge smoke test and weekly evaluation checkpoint
-
-- Committed and pushed checkpoint: 467c693.
-- Ridge F0/F1 fixed-alpha smoke runs completed on CPCV split (3, 4).
-- Verified FINISHED parent/child runs and retrieved prediction artifacts: 8,940 rows per tier, finite predictions, unique date–ticker keys.
-- Pinned weekly IC schedule to offset 0 from 2019-03-29:
-  239 global evaluation dates through 2023-12-19.
-- Verified 60 paired weekly cross-sections in split (3, 4), with 30 stocks per date and identical realised targets across tiers.
-- Weekly diagnostic IC: F0 -0.002818; F1 0.011057; paired mean difference +0.013875. Diagnostic only, not an H1 result.
-- Tests: 11 new metric/schedule tests; full suite 36 passed, 1 MLflow/SQLAlchemy deprecation warning.
-- Next: implement and test inner four-fold purged tuning within each outer training set before running tuned Ridge across all 28 splits.
-
-  ## 2026-11-21 — Ridge tuned core runs
-
-- Added models/tuning.py (inner purged splitter, Ridge alpha selection) and models/run_ridge.py; 15 new tests, full suite 51 passed.
-- Ran Ridge F0 and F1 core across all 28 splits, verified from MLflow: 28 FINISHED children each, artifacts and weekly coverage checks passed, git_dirty false, splits hash matches pin. N = 2.
-- MLflow store backed up (mlflow.db sha256 a09ae9b7e228, plus mlruns archive).
-- Next: XGBoost F0/F1/F2 (one tier at a time).
